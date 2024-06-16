@@ -23,7 +23,7 @@ additional_links:
 
 # About Section
 # about_title: About Me
-about_profile_image: images/profile.jpg
+about_profile_image: images/profile.png
 about_content: |
   Hello, my name is Roel. I'm a 34-year-old Engineer based in the Netherlands, with a wide array of interests in technology. 
   Over the years, I've progressed from a helpdesk employee to a system engineer, and now, a Cloud Engineer. 
@@ -46,12 +46,15 @@ content:
         description: |
           As a Cloud Engineer at Simac IT|NL, I primarily focus on automating and enhancing Simac's Private Cloud stack (Cloud|NEXT), within an Agile team using Scrum(ban). 
           I led the implementation of the Ansible Automation Platform in our environment, significantly improving our control over the automation landscape. 
+
           I also trained our team on using Ansible (Automation Platform), ensuring its successful adoption and led the migration from Powershell based scheduled tasks on Windows servers to Ansible playbooks ran on Ansible Automation Platform. 
 
           Currently, I'm working on introducing Terraform and further adopting Infrastructure as Code within our team and other teams within the organization under the Simac Automation Framework umbrella (see below). 
+
           I personally developed a full set of Terraform modules that are used to completely manage customer tenants on our Cloud|NEXT platform. 
           Besides automation, I also support the day-to-day operations needed to run our platform, including incident management or performing changes. 
           This also helps me in identifying toil that could be automated away. 
+
           The day-to-day operations consist of system administration (VMware, Windows, Linux), patch management, security management, lifecycle management, active directory/DNS, 
           light network management using VMWare NSX-T, backup & restore, monitoring & reporting, and the creation & maintenance of documentation.
 
@@ -77,6 +80,7 @@ content:
         caption: October 2023 - Present
         description: |
           Simac is an organization aiming to mature its automation processes. We have formed a small internal team to design, implement, and support a company-wide automation platform. We make use of self-hosted agents in both Azure and on-premises on a Kubernetes stack.
+
           From an engineering standpoint, I have developed the Docker and Azure Virtual Machine images using Packer and Ansible, containing all the required tooling and supported my colleagues on both the Azure and Kubernetes implementations.
 
           Besides the engineering part of this project, a major part is ensuring adoption and usage of the product we have (and are) creating. Helping teams that are not yet familiar with automation and infrastructure as code to get up to speed and ensuring management stays focused on the importance of automation.
