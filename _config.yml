@@ -9,7 +9,7 @@ version: 2
 name: Roel de Cort
 title: Cloud Engineer
 email: roel@decort.tech
-website: github.com/dc-tec/portfolio
+website: decort.tech
 
 # Dark Mode (true/false/never)
 darkmode: true
