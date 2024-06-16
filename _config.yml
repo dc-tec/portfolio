@@ -9,7 +9,7 @@ version: 2
 name: Roel de Cort
 title: Cloud Engineer
 email: roel@decort.tech
-website: github.com/dc-tec/portfolio
+website: decort.tech
 
 # Dark Mode (true/false/never)
 darkmode: true
@@ -38,7 +38,7 @@ content:
   - title: Current Role
     layout: list
     content:
-      - layout: left
+      - layout: top-middle
         title: Simac IT|NL
         link: simac.com
         sub_title: Cloud Engineer
@@ -61,7 +61,7 @@ content:
   - title: Previous Role
     layout: list
     content:
-      - layout: left
+      - layout: top-middle
         title: Simac IT|NL
         link: simac.com
         sub_title: System Engineer
