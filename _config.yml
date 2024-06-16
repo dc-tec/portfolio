@@ -130,7 +130,7 @@ content:
         description: |
           I served 4 years in the Dutch Army. The time serving has immensely helped me in shaping who I am today.
 
-footer_show_references: true
+footer_show_references: false
 
 remote_theme: sproogen/resume-theme
 
