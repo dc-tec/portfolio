@@ -38,7 +38,7 @@ content:
   - title: Current Role
     layout: list
     content:
-      - layout: left
+      - layout: top-middle
         title: Simac IT|NL
         link: simac.com
         sub_title: Cloud Engineer
@@ -61,7 +61,7 @@ content:
   - title: Previous Role
     layout: list
     content:
-      - layout: left
+      - layout: top-middle
         title: Simac IT|NL
         link: simac.com
         sub_title: System Engineer
