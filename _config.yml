@@ -21,7 +21,7 @@ linkedin_username: roel-de-cort
 # Additional icon links
 additional_links:
   - title: Download CV as PDF
-    icon: fa-solid fa-file-pdf
+    icon: fas fa-file-pdf
     url: https://github.com/dc-tec/portfolio/releases/download/20241606/roelc-cv.pdf
 
 # About Section
