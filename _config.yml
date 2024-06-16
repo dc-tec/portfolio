@@ -27,11 +27,10 @@ about_profile_image: images/profile.jpg
 about_content: |
   Hello, my name is Roel. I'm a 34-year-old Engineer based in the Netherlands, with a wide array of interests in technology. Over the years, I've progressed from a helpdesk employee to a system engineer, and now, a Cloud Engineer. During the day, I divide my time between automating and managing my company's private cloud stack, based on VMWare (Cloud Director & NSX), primarily using Ansible and Terraform, and implementing a company-wide automation platform using Azure (DevOps), Kubernetes, Terraform, Ansible, and Packer.
 
-
   In the evenings, I tinker with my Kubernetes homelab, NixOS config, Terraform, and other projects that spark my curiosity. This tinkering has led me to where I am today. Visit my Github to see what I'm currently working on. Apart from my passion for technology, I have a wonderful family with two children and a third on the way.
 
 content:
-  - title: Relevant Experience
+  - title: Current Role
     layout: list
     content:
       - layout: left
@@ -40,8 +39,12 @@ content:
         sub_title: Cloud Engineer
         caption: February 2020 - Present
         description: |
-          As a Cloud Engineer at Simac IT|NL, I primarily focus on automating and enhancing Simac's Private Cloud stack (Cloud|NEXT), within an Agile team using Scrum(ban). I led the implementation of the Ansible Automation Platform in our environment, significantly improving our control over the automation landscape. I also trained our team on using Ansible (Automation Platform), ensuring its successful adoption and led the migration from Powershell based scheduled tasks on Windows servers to Ansible playbooks ran on Ansible Automation Platform. Currently, I'm working on introducing Terraform and further adopting Infrastructure as Code within our team and other teams within the organization under the Simac Automation Framework umbrella (see below). I personally developed a full set of Terraform modules that are used to completely manage customer tenants on our Cloud|NEXT platform. Besides automation, I also support the day-to-day operations needed to run our platform, including incident management or performing changes. This also helps me in identifying toil that could be automated away. The day-to-day operations consist of system administration (VMware, Windows, Linux), patch management, security management, lifecycle management, active directory/DNS, light network management using VMWare NSX-T, backup & restore, monitoring & reporting, and the creation & maintenance of documentation.
+          As a Cloud Engineer at Simac IT|NL, I primarily focus on automating and enhancing Simac's Private Cloud stack (Cloud|NEXT), within an Agile team using Scrum(ban). I led the implementation of the Ansible Automation Platform in our environment, significantly improving our control over the automation landscape. I also trained our team on using Ansible (Automation Platform), ensuring its successful adoption and led the migration from Powershell based scheduled tasks on Windows servers to Ansible playbooks ran on Ansible Automation Platform. 
+          Currently, I'm working on introducing Terraform and further adopting Infrastructure as Code within our team and other teams within the organization under the Simac Automation Framework umbrella (see below). I personally developed a full set of Terraform modules that are used to completely manage customer tenants on our Cloud|NEXT platform. Besides automation, I also support the day-to-day operations needed to run our platform, including incident management or performing changes. This also helps me in identifying toil that could be automated away. The day-to-day operations consist of system administration (VMware, Windows, Linux), patch management, security management, lifecycle management, active directory/DNS, light network management using VMWare NSX-T, backup & restore, monitoring & reporting, and the creation & maintenance of documentation.
 
+  - title: Previous Role
+    layout: list
+    content:
       - layout: left
         title: Simac IT|NL
         link: simac.com
