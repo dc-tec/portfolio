@@ -9,7 +9,7 @@
 .post-category {
   display: inline-block; /* Force inline-block instead of block/flex */
   background-color: var(--accent-color); 
-  color: var(--bg-color-secondary);
+  color: #000000; /* Changed to black */
   padding: 0.2rem 0.6rem; /* Even smaller padding */
   border-radius: 12px; /* Slightly reduced border-radius */
   font-size: 0.75rem; /* Reduced font size */

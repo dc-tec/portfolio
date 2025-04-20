@@ -9,7 +9,7 @@ website_title: deCort.tech
 
 # Personal info
 name: Roel
-title: DevOps Engineer
+title: deCort.tech
 email: roel@decort.tech
 website: decort.tech
 
@@ -35,16 +35,6 @@ collections:
   posts:
     output: true
     permalink: /blog/:year/:month/:day/:title/
-  portfolio_sections:
-    output: false
-    order:
-      - about.md
-      - current_role.md
-      - previous_role.md
-      - projects.md
-      - education.md
-      - certifications.md
-      - other_experience.md
 
 footer_show_references: false
 

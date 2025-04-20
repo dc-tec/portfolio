@@ -2,87 +2,286 @@
 layout: default
 ---
 
-<div class="portfolio">
-  <section class="about-section">
+<div class="{% if page.page_type == 'blog-home' %}blog-home{% else %}home-container{% endif %}">
+  <!-- Hero Section -->
+  <section class="hero-section">
     <div class="container">
-      <div class="profile-header">
-        {% if site.about_profile_image %}
-        <div class="profile-image">
-          <img src="{{ site.about_profile_image | relative_url }}" alt="{{ site.name }}" />
-        </div>
+      <div class="hero-content">
+        {% if page.page_type == 'blog-home' %}
+          <!-- Blog Home Terminal Display -->
+          <div class="hero-image terminal-container">
+            <div class="terminal-header">
+              <div class="terminal-controls">
+                <span class="terminal-button"></span>
+                <span class="terminal-button"></span>
+                <span class="terminal-button"></span>
+              </div>
+              <div class="terminal-title">~</div>
+              <div></div>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-line">blog on (main) | took 3s</div>
+              <div class="terminal-line">> neofetch</div>
+              <div class="terminal-content">
+                <pre class="terminal-neofetch">
+<span class="neofetch-left">                     'c.           </span><span class="neofetch-right">roelc@darwin</span>
+<span class="neofetch-left">                 ,xNMM.            </span><span class="neofetch-right">-----------</span>
+<span class="neofetch-left">               .OMMMMo             </span><span class="neofetch-right">OS: macOS 15.3.2 24D81 arm64</span>
+<span class="neofetch-left">               OMMM0,              </span><span class="neofetch-right">Host: Mac16,8</span>
+<span class="neofetch-left">     .;loddo:' loolloddol;.        </span><span class="neofetch-right">Kernel: 24.3.0</span>
+<span class="neofetch-left">   cKMMMMMMMMMMNWMMMMMMMMMM0:      </span><span class="neofetch-right">Uptime: 2 days, 17 hours, 40 mins</span>
+<span class="neofetch-left"> .KMMMMMMMMMMMMMMMMMMMMMMMWd.      </span><span class="neofetch-right">Packages: 206 (brew), 173 (nix-system)</span>
+<span class="neofetch-left"> XMMMMMMMMMMMMMMMMMMMMMMMX.        </span><span class="neofetch-right">Shell: zsh 5.9</span>
+<span class="neofetch-left">;MMMMMMMMMMMMMMMMMMMMMMMM:         </span><span class="neofetch-right">Resolution: 1800x1169</span>
+<span class="neofetch-left">:MMMMMMMMMMMMMMMMMMMMMMMM:         </span><span class="neofetch-right">DE: Aqua</span>
+<span class="neofetch-left">.MMMMMMMMMMMMMMMMMMMMMMMMX.        </span><span class="neofetch-right">WM: yabai</span>
+<span class="neofetch-left"> kMMMMMMMMMMMMMMMMMMMMMMMMWd.      </span><span class="neofetch-right">Terminal: kitty</span>
+<span class="neofetch-left"> .XMMMMMMMMMMMMMMMMMMMMMMMMMMk     </span><span class="neofetch-right">CPU: Apple M4 Pro</span>
+<span class="neofetch-left">  .XMMMMMMMMMMMMMMMMMMMMMMMMK.     </span><span class="neofetch-right">GPU: Apple M4 Pro</span>
+<span class="neofetch-left">    kMMMMMMMMMMMMMMMMMMMMMMd       </span><span class="neofetch-right">Memory: 6270MiB / 49152MiB</span>
+<span class="neofetch-left">     ;KMMMMMMMWXXWMMMMMMMk.        </span>
+<span class="neofetch-left">       .cooc,.    .,coo:.          </span>
+                </pre>
+                <br>
+                <div class="terminal-line cursor-line">></div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-info">
+            <div class="profile-header">
+              <div class="profile-image-container">
+                <img src="{{ site.baseurl }}/assets/images/profile.png" alt="{{ site.name }}" class="profile-image">
+              </div>
+              <div class="profile-title">
+                <h1>Hi! I'm {{ site.name }} <span class="wave">👋</span></h1>
+                <p class="subtitle">A {{ site.title }} and tech enthusiast</p>
+              </div>
+            </div>
+            
+            <div class="hero-bio">
+              <p>I'm a {{ site.title }} and tech enthusiast. I'm passionate about infrastructure automation, GitLab, GitOps, OpenBao, and making complex systems simpler. I help teams build secure, scalable platforms using open-source tools — with a sprinkle of Kubernetes and a strong focus on Infra as Code.</p>
+            </div>
+            
+            <a href="{{ site.baseurl }}/blog" class="cta-button">Read my blog!</a>
+          </div>
+        {% else %}
+          <!-- Regular Home Profile Display -->
+          <div class="hero-grid">
+            <div class="hero-profile">
+              {% if site.about_profile_image %}
+              <div class="profile-image">
+                <img src="{{ site.about_profile_image | relative_url }}" alt="{{ site.name }}" />
+              </div>
+              {% endif %}
+              <div class="profile-info">
+                <h1 class="hero-title">Hi! I'm {{ site.name }} <span class="wave">👋</span></h1>
+                <h2 class="hero-subtitle">{{ site.title }}</h2>
+                <p class="hero-description">{{ site.description }}</p>
+              </div>
+            </div>
+
+            <!-- Terminal Display for Home -->
+            <div class="terminal-container">
+              <div class="terminal-header">
+                <div class="terminal-controls">
+                  <span class="terminal-button"></span>
+                  <span class="terminal-button"></span>
+                  <span class="terminal-button"></span>
+                </div>
+                <div class="terminal-title">neofetch</div>
+              </div>
+              <div class="terminal-body">
+                <div class="terminal-neofetch">
+                  <div class="neofetch-left">{{ site.terminal_art }}</div>
+                  <div class="neofetch-right">
+                    <strong>{{ site.name }}</strong>@<strong>{{ site.hostname }}</strong>
+                    ------------------------
+                    <strong>OS:</strong> {{ site.os }}
+                    <strong>Host:</strong> {{ site.host }}
+                    <strong>Kernel:</strong> {{ site.kernel }}
+                    <strong>Shell:</strong> {{ site.shell }}
+                    <strong>Terminal:</strong> {{ site.terminal }}
+                    <strong>Editor:</strong> {{ site.editor }}
+                    <strong>Languages:</strong> {{ site.languages }}
+                    <strong>Interests:</strong> {{ site.interests }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         {% endif %}
-        <div class="profile-title">
-          <h1>Hi! I'm {{ site.name }} <span class="wave">👋</span></h1>
-          <h2>{{ site.title }}</h2>
-        </div>
-      </div>
-      
-      <div class="profile-content">
-        <div class="bio">
-          {% assign about_section = site.portfolio_sections | where: "name", "about" | first %}
-          {{ about_section.content | markdownify }}
-        </div>
       </div>
     </div>
   </section>
-  
-  {% assign ordered_sections = site.portfolio_sections | sort: "order" %}
-  {% for section in ordered_sections %}
-    {% if section.name != "about" %}
-      <section class="content-section collapsible-section">
-        <div class="container">
-          <details>
-            <summary class="section-title">
-              {{ section.title }}
-              <span class="toggle-icon">+</span>
-            </summary>
-            
-            <div class="section-content-wrapper">
-              {% if section.name == "certifications" %}
-                <div class="certifications-list">
-                  {% for item in section.items %}
-                    <div class="certification-item">
-                      <h3>{{ item.title }}</h3>
-                      <div class="badge-embed">
-                        {{ item.badge_embed }}
-                      </div>
-                    </div>
-                  {% endfor %}
-                </div>
-              {% elsif section.layout_type == "list" %}
-                <div class="list-content">
-                  {% for item in section.items %}
-                    <div class="list-item">
-                      <div class="item-header">
-                        <h3>
-                          {% if item.link %}
-                            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-                          {% else %}
-                            {{ item.title }}
-                          {% endif %}
-                        </h3>
-                        {% if item.sub_title %}
-                          <h4>{{ item.sub_title }}</h4>
-                        {% endif %}
-                        {% if item.caption %}
-                          <p class="caption">{{ item.caption }}</p>
-                        {% endif %}
-                      </div>
-                      <div class="item-content">
-                        {{ item.description | markdownify }}
-                      </div>
-                    </div>
-                  {% endfor %}
-                </div>
+
+  <!-- Latest Post Section -->
+  <section class="{% if page.page_type == 'blog-home' %}latest-post-section{% else %}latest-post{% endif %}">
+    <div class="container">
+      <h2 class="section-title">Latest Post</h2>
+      {% assign latest_post = site.posts.first %}
+      
+      {% if page.page_type == 'blog-home' %}
+        <div class="latest-post-container">
+          <div class="latest-post-image">
+            <a href="{{ latest_post.url | relative_url }}">
+              {% if latest_post.image %}
+                <img src="{{ latest_post.image | relative_url }}" alt="{{ latest_post.title }}">
+              {% elsif latest_post.featured_image %}
+                <img src="{{ latest_post.featured_image | relative_url }}" alt="{{ latest_post.title }}">
               {% else %}
-                <div class="section-content">
-                  {{ section.content | markdownify }}
-                </div>
+                <img src="{{ site.baseurl }}/assets/images/default-post.png" alt="{{ latest_post.title }}">
+              {% endif %}
+            </a>
+            {% if latest_post.category %}
+              <span class="post-category">{{ latest_post.category }}</span>
+            {% endif %}
+          </div>
+          <div class="latest-post-content">
+            <div class="post-meta">
+              <span class="post-date">
+                <i class="far fa-calendar"></i>
+                {{ latest_post.date | date: "%B %d, %Y" }}
+              </span>
+              {% if latest_post.author %}
+                <span class="post-author">
+                  <i class="far fa-user"></i>
+                  {{ latest_post.author }}
+                </span>
               {% endif %}
             </div>
-          </details>
+            <h3 class="post-title"><a href="{{ latest_post.url | relative_url }}">{{ latest_post.title }}</a></h3>
+            <p class="post-excerpt">{{ latest_post.excerpt | strip_html | truncatewords: 50 }}</p>
+            <a href="{{ latest_post.url | relative_url }}" class="read-more-btn">Read Full Post</a>
+          </div>
         </div>
-      </section>
-    {% endif %}
-  {% endfor %}
+      {% else %}
+        {% if latest_post %}
+          <time class="post-date" datetime="{{ latest_post.date | date_to_xmlschema }}">
+            {{ latest_post.date | date: "%B %d, %Y" }}
+          </time>
+          <h3 class="post-title">
+            <a href="{{ latest_post.url | relative_url }}">{{ latest_post.title }}</a>
+          </h3>
+          <p class="post-excerpt">{{ latest_post.excerpt | strip_html | truncatewords: 50 }}</p>
+          <a href="{{ latest_post.url | relative_url }}" class="read-more-btn">Read Full Post</a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </section>
+
+  {% if page.page_type == 'blog-home' %}
+    <!-- Featured Posts Section (Blog Home only) -->
+    <section class="featured-section journal">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Featured</h2>
+          <a href="#" class="view-all">
+            <i class="fas fa-th"></i>
+          </a>
+        </div>
+        
+        <div class="featured-posts">
+          {% assign featured_posts = site.posts | where: "featured", true | limit: 3 %}
+          {% for post in featured_posts %}
+            <div class="featured-post">
+              <div class="post-image">
+                <a href="{{ post.url | relative_url }}">
+                  <img src="{{ post.image | default: site.baseurl | append: '/assets/images/default-post.png' }}" alt="{{ post.title }}">
+                </a>
+                {% if post.category %}
+                  <span class="post-category">{{ post.category }}</span>
+                {% endif %}
+              </div>
+              <div class="post-content">
+                <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                <a href="{{ post.url | relative_url }}" class="read-more">+ Read More</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Tags Section (Blog Home only) -->
+    <section class="tags-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Browse by Topic</h2>
+          <a href="{{ site.baseurl }}/blog/tags/" class="view-all">
+            View All Topics
+          </a>
+        </div>
+        
+        <div class="tag-cloud">
+          {% assign tags = site.tags | sort %}
+          {% for tag in tags limit:10 %}
+            {% assign tag_name = tag[0] %}
+            {% assign posts = tag[1] %}
+            <a href="{{ site.baseurl }}/blog/tags/#{{ tag_name | slugify }}" class="tag-bubble">
+              <span class="tag-name">{{ tag_name }}</span>
+              <span class="tag-count">{{ posts.size }}</span>
+            </a>
+          {% endfor %}
+          
+          {% if site.tags.size > 10 %}
+          <a href="{{ site.baseurl }}/blog/tags/" class="tag-bubble see-more">
+            <span class="tag-name">See All Topics</span>
+            <span class="tag-count">{{ site.tags.size }}</span>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Animate tag bubbles with staggered delay
+        const tagBubbles = document.querySelectorAll('.tag-bubble');
+        tagBubbles.forEach((bubble, index) => {
+          bubble.style.animationDelay = `${index * 0.05}s`;
+          bubble.classList.add('animate-in');
+        });
+      });
+    </script>
+  {% else %}
+    <!-- Navigation Section instead of Portfolio Sections -->
+    <section class="navigation-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Explore</h2>
+        </div>
+        <div class="navigation-grid">
+          <a href="{{ site.baseurl }}/about/" class="nav-card">
+            <div class="nav-icon">
+              <i class="fas fa-user"></i>
+            </div>
+            <h3>About Me</h3>
+            <p>Learn more about my background, skills, and experience</p>
+          </a>
+          <a href="{{ site.baseurl }}/blog/" class="nav-card">
+            <div class="nav-icon">
+              <i class="fas fa-blog"></i>
+            </div>
+            <h3>Blog</h3>
+            <p>Read my latest thoughts and technical articles</p>
+          </a>
+          <a href="https://github.com/{{ site.github_username }}" target="_blank" class="nav-card">
+            <div class="nav-icon">
+              <i class="fab fa-github"></i>
+            </div>
+            <h3>Projects</h3>
+            <p>Check out my open source work and personal projects</p>
+          </a>
+          <a href="mailto:{{ site.email }}" class="nav-card">
+            <div class="nav-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h3>Contact</h3>
+            <p>Get in touch for collaborations or opportunities</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  {% endif %}
 </div> 

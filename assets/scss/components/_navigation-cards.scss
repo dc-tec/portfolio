@@ -1,0 +1,59 @@
+/* Navigation Cards for Home Page
+-------------------------------------------------- */
+
+.navigation-section {
+  padding: 3rem 0;
+  background-color: var(--content-bg);
+}
+
+.navigation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.nav-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+  color: var(--text-color);
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: var(--heading-color);
+  }
+  
+  p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-light);
+  }
+}
+
+.nav-icon {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-hover-bg);
+  border-radius: 50%;
+  margin-bottom: 1.25rem;
+} 

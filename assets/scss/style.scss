@@ -1,5 +1,7 @@
 ---
+# This is a Jekyll front matter block
 ---
+
 /* Abstract imports */
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
@@ -23,10 +25,12 @@
 @import 'components/terminal';
 @import 'components/latest-post';
 @import 'components/post-category';
+@import 'components/navigation-cards';
 
 /* Page imports */
 @import 'pages/portfolio';
 @import 'pages/blog';
+@import 'pages/about';
 
 /* Any additional styles can go here */
 /* The partials above contain all necessary styles */

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title | default: site.title }}</title>
-  <!-- Prevent theme flicker by immediately applying theme before page renders -->
+  <!-- Prevent theme flicker -->
   <script>
     (function() {
       const currentTheme = localStorage.getItem('theme') || 'dark-mode';
@@ -13,109 +13,142 @@
       }
     })();
   </script>
+  <!-- Fonts and Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@3.1.1/patched-fonts/JetBrainsMono/Web/jetbrainsmono-nerdfont-complete.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="{{ '/assets/scss/style.css' | relative_url }}">
 </head>
 <body>
-  <header>
+  <!-- Header -->
+  <header class="site-header">
     <div class="header-container">
-      <a href="{{ site.baseurl }}/" class="logo">{{ site.website_title }}</a>
+      <div class="site-branding">
+        <a href="{{ site.baseurl }}/" class="site-logo">
+          <img src="{{ site.logo | default: '/assets/images/logo.png' | relative_url }}" alt="{{ site.name }}">
+        </a>
+        <a href="{{ site.baseurl }}/" class="site-title">{{ site.website_title }}</a>
+      </div>
       
-      <button class="mobile-menu-button">
-        <i class="fas fa-bars"></i>
-      </button>
-      
-      <nav class="nav-links">
-        <a href="{{ site.baseurl }}/" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
-        <a href="{{ site.baseurl }}/blog" {% if page.url contains '/blog' %}class="active"{% endif %}>Blog</a>
-        <a href="{{ site.baseurl }}/about" {% if page.url contains '/about' %}class="active"{% endif %}>About</a>
-        <button class="theme-toggle">
+      <nav class="site-nav">
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+        <div class="nav-menu">
+          <div class="nav-item">
+            <a href="{{ site.baseurl }}/" class="nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
+          </div>
+          <div class="nav-item">
+            <a href="{{ site.baseurl }}/blog" class="nav-link {% if page.url contains '/blog' %}active{% endif %}">Blog</a>
+          </div>
+          <div class="nav-item">
+            <a href="{{ site.baseurl }}/about" class="nav-link {% if page.url contains '/about' %}active{% endif %}">About</a>
+          </div>
+        </div>
+        
+        <button class="theme-toggle" aria-label="Toggle theme">
           <i class="fas fa-moon"></i>
         </button>
       </nav>
     </div>
   </header>
-  
-  <main>
+
+  <!-- Main Content -->
+  <main class="site-main">
     {{ content }}
   </main>
-  
-  <footer>
+
+  <!-- Footer -->
+  <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-content">
         <div class="footer-about">
-          <a href="{{ site.baseurl }}/" class="footer-logo">{{ site.name | default: "Portfolio" }}</a>
-          <p>A digital explorer, coder, and tech enthusiast sharing discoveries and information about technology.</p>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="{{ site.baseurl }}/" class="footer-logo">
+            <img src="{{ site.logo | default: '/assets/images/logo.png' | relative_url }}" alt="{{ site.name }}">
+          </a>
+          <p class="footer-description">{{ site.description }}</p>
+          <div class="footer-social">
+            {% if site.github_username %}
+            <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+            {% endif %}
+            {% if site.twitter_username %}
+            <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+            {% endif %}
+            {% if site.linkedin_username %}
+            <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            {% endif %}
           </div>
         </div>
-        
-        <div class="footer-links">
-          <h3>Navigation</h3>
-          <ul>
-            <li><a href="{{ site.baseurl }}/">Home</a></li>
-            <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
-            <li><a href="{{ site.baseurl }}/about">About</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-links">
-          <h3>Categories</h3>
-          <ul>
-            <li><a href="#">Security</a></li>
-            <li><a href="#">Development</a></li>
-            <li><a href="#">Automation</a></li>
-            <li><a href="#">Tech Tips</a></li>
-          </ul>
-        </div>
+
+        <nav class="footer-nav">
+          <div class="footer-nav-section">
+            <h3>Navigation</h3>
+            <ul>
+              <li><a href="{{ site.baseurl }}/">Home</a></li>
+              <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
+              <li><a href="{{ site.baseurl }}/about">About</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-nav-section">
+            <h3>Categories</h3>
+            <ul>
+              {% for category in site.categories limit:4 %}
+              <li><a href="{{ site.baseurl }}/categories/{{ category[0] | slugify }}">{{ category[0] }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="footer-nav-section">
+            <h3>Connect</h3>
+            <ul>
+              <li><a href="{{ site.baseurl }}/feed.xml">RSS Feed</a></li>
+              <li><a href="mailto:{{ site.email }}">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
       </div>
-      
+
       <div class="footer-bottom">
-        <p class="copyright">&copy; {{ site.time | date: '%Y' }} {{ site.name | default: "Portfolio" }}. All rights reserved.</p>
-        <div class="social-links">
-          <a href="#"><i class="fas fa-rss"></i></a>
-          <a href="#"><i class="fas fa-envelope"></i></a>
-        </div>
+        <p class="footer-copyright">&copy; {{ site.time | date: '%Y' }} {{ site.name }}. All rights reserved.</p>
       </div>
     </div>
   </footer>
-  
+
+  <!-- Scripts -->
   <script>
     // Mobile Menu Toggle
-    document.querySelector('.mobile-menu-button').addEventListener('click', function() {
-      const navLinks = document.querySelector('.nav-links');
-      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      this.classList.toggle('active');
+      document.querySelector('.nav-menu').classList.toggle('active');
     });
-    
-    // Theme Toggle with class change and LocalStorage persistence
+
+    // Theme Toggle
     document.addEventListener('DOMContentLoaded', function() {
-      // Check for saved theme preference or use default
-      const currentTheme = localStorage.getItem('theme') || 'dark-mode';
+      const themeToggle = document.querySelector('.theme-toggle');
+      const icon = themeToggle.querySelector('i');
       
-      // Apply the theme class to both html and body elements
-      if (currentTheme === 'dark-mode') {
-        document.documentElement.classList.add('dark-mode');
-        document.body.classList.add('dark-mode');
-        document.querySelector('.theme-toggle i').classList.remove('fa-moon');
-        document.querySelector('.theme-toggle i').classList.add('fa-sun');
+      // Set initial icon based on theme
+      if (document.documentElement.classList.contains('dark-mode')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
       }
       
-      // Set up the toggle button
-      document.querySelector('.theme-toggle').addEventListener('click', function() {
-        // Toggle the dark-mode class on both html and body
+      themeToggle.addEventListener('click', function() {
         document.documentElement.classList.toggle('dark-mode');
-        document.body.classList.toggle('dark-mode');
         
-        // Update the icon
-        const icon = this.querySelector('i');
-        const isDarkMode = document.documentElement.classList.contains('dark-mode');
-        
-        if (isDarkMode) {
+        if (document.documentElement.classList.contains('dark-mode')) {
           icon.classList.remove('fa-moon');
           icon.classList.add('fa-sun');
           localStorage.setItem('theme', 'dark-mode');
@@ -125,6 +158,34 @@
           localStorage.setItem('theme', 'light-mode');
         }
       });
+      
+      // Header Scroll Effect
+      const header = document.querySelector('.site-header');
+      let lastScrollY = window.scrollY;
+      
+      // Function to update header on scroll
+      function updateHeaderOnScroll() {
+        // At top of page - more transparent
+        if (window.scrollY < 10) {
+          header.style.backgroundColor = 'rgba(var(--header-bg-rgb), 0.5)';
+          header.style.backdropFilter = 'blur(7px)';
+          header.style.boxShadow = 'none';
+        } 
+        // Scrolled down - more opaque
+        else {
+          header.style.backgroundColor = 'rgba(var(--header-bg-rgb), 0.85)';
+          header.style.backdropFilter = 'blur(15px)';
+          header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+        }
+        
+        lastScrollY = window.scrollY;
+      }
+      
+      // Initial call
+      updateHeaderOnScroll();
+      
+      // Add scroll event listener
+      window.addEventListener('scroll', updateHeaderOnScroll);
     });
   </script>
 </body>
