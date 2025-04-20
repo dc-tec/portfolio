@@ -1,0 +1,138 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+.latest-post,
+.latest-post-section {
+  padding: 4rem 0;
+  
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 60px;
+      height: 3px;
+      background-color: var(--accent-color);
+    }
+  }
+
+  .latest-post-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .latest-post-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+
+    .post-category {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background-color: var(--accent-color);
+      color: var(--bg-color-secondary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+  }
+
+  .latest-post-content {
+    .post-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+
+      i {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+  
+  .post-date {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .post-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    
+    a {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: var(--accent-color);
+      }
+    }
+  }
+  
+  .post-excerpt {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  
+  .read-more-btn,
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    background-color: var(--accent-color);
+    color: var(--bg-color-secondary);
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    
+    &:hover {
+      filter: brightness(90%);
+      color: var(--bg-color-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(var(--accent-color-rgb, 255, 165, 0), 0.3);
+    }
+    
+    &::after {
+      content: '→';
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover::after {
+      transform: translateX(4px);
+    }
+  }
+} 

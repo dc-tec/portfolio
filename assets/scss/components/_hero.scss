@@ -1,0 +1,65 @@
+.hero-section {
+  padding: 4rem 0;
+  
+  .hero-content {
+    width: 100%;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hero-profile {
+    .profile-image {
+      margin-bottom: 1.5rem;
+      
+      img {
+        max-width: 200px;
+        border-radius: 50%;
+      }
+    }
+
+    .profile-info {
+      .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        
+        .wave {
+          display: inline-block;
+          animation: wave 2.5s infinite;
+          transform-origin: 70% 70%;
+        }
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-secondary);
+      }
+
+      .hero-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: var(--text-secondary);
+      }
+    }
+  }
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+} 

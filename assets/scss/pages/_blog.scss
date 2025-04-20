@@ -1,3 +1,6 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
 /* Wave animation keyframes */
 @keyframes wave {
   0% { transform: rotate(0deg); }
@@ -911,106 +914,232 @@
 
 // Blog Index Page
 .blog-index {
-  background-color: var(--bg-color);
-  min-height: 100vh;
-  padding: 60px 0;
+  padding: map-get($spacing-scale, '2xl') 0;
+}
 
-  .section-title {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 40px;
-    color: var(--text-color);
-    text-align: center;
-  }
+// Blog grid layout
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: map-get($spacing-scale, 'xl');
+  margin-top: map-get($spacing-scale, 'xl');
+}
+
+// Blog card
+.blog-card {
+  @extend .card;
   
-  .tags-container {
-    margin: 0 0 40px;
-  }
-  
-  .blog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 30px;
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .blog-card {
-    background-color: var(--card-bg);
-    border-radius: 12px;
+  .post-image {
+    position: relative;
+    height: 200px;
     overflow: hidden;
-    transition: transform 0.3s;
-
-    &:hover {
-      transform: translateY(-5px);
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
     }
-
-    .post-content {
-      padding: 20px;
+    
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+  
+  .post-content {
+    padding: map-get($spacing-scale, 'lg');
+  }
+  
+  .post-date {
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+    margin-bottom: map-get($spacing-scale, 'xs');
+  }
+  
+  .post-title {
+    @include font-size('xl');
+    margin-bottom: map-get($spacing-scale, 'sm');
+    
+    a {
       color: var(--text-color);
-
-      .post-date {
-        font-size: 14px;
-        color: var(--secondary-color);
-        margin-bottom: 10px;
-      }
-
-      .post-title {
-        font-size: 20px;
-        margin-bottom: 10px;
-
-        a {
-          color: var(--text-color);
-          text-decoration: none;
-
-          &:hover {
-            color: var(--accent-color);
-          }
-        }
-      }
+      text-decoration: none;
       
-      .post-mini-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-        margin-bottom: 15px;
-        
-        .post-mini-tag {
-          color: var(--secondary-color);
-          font-size: 0.7rem;
-          padding: 2px 8px;
-          border-radius: 20px;
-          background-color: var(--bg-color-secondary);
-          text-decoration: none;
-          transition: all 0.3s ease;
-          
-          &:hover {
-            background-color: var(--accent-color);
-            color: white;
-          }
-        }
-      }
-
-      .post-excerpt {
-        color: var(--secondary-color);
-        font-size: 14px;
-        margin-bottom: 15px;
-        line-height: 1.5;
-      }
-
-      .read-more {
+      &:hover {
         color: var(--accent-color);
-        font-weight: 600;
-        text-decoration: none;
-        font-size: 14px;
-
-        &:hover {
-          text-decoration: underline;
-        }
       }
     }
+  }
+  
+  .post-excerpt {
+    color: var(--secondary-color);
+    margin-bottom: map-get($spacing-scale, 'md');
+  }
+  
+  .read-more {
+    color: var(--accent-color);
+    font-weight: 500;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Post category badge
+.post-category {
+  position: absolute;
+  top: map-get($spacing-scale, 'sm');
+  right: map-get($spacing-scale, 'sm');
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: map-get($border-radius, 'full');
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+// Tags styling
+.tags-container {
+  margin: map-get($spacing-scale, 'xl') 0;
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: map-get($spacing-scale, 'sm');
+}
+
+.tag-bubble {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(
+    to right,
+    rgba(var(--accent-color-rgb), 0.1),
+    rgba(var(--accent-color-rgb), 0.05)
+  );
+  border: 1px solid rgba(var(--accent-color-rgb), 0.2);
+  border-radius: map-get($border-radius, 'full');
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+  
+  &.animate-in {
+    animation: fadeInUp 0.5s ease forwards;
+  }
+  
+  &:hover {
+    background: linear-gradient(
+      to right,
+      rgba(var(--accent-color-rgb), 0.2),
+      rgba(var(--accent-color-rgb), 0.1)
+    );
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+  
+  &.active {
+    background-color: var(--accent-color);
+    color: white;
+  }
+  
+  .tag-name {
+    margin-right: 0.5rem;
+  }
+  
+  .tag-count {
+    background-color: rgba(var(--bg-color-rgb), 0.3);
+    padding: 0.125rem 0.375rem;
+    border-radius: map-get($border-radius, 'full');
+    font-size: 0.75rem;
+  }
+}
+
+// Post mini tags
+.post-mini-tags {
+  display: flex;
+  gap: map-get($spacing-scale, 'xs');
+  margin: map-get($spacing-scale, 'xs') 0;
+}
+
+.post-mini-tag {
+  font-size: 0.75rem;
+  color: var(--secondary-color);
+  text-decoration: none;
+  
+  &:hover {
+    color: var(--accent-color);
+  }
+  
+  &:not(:last-child)::after {
+    content: "•";
+    margin-left: map-get($spacing-scale, 'xs');
+    color: var(--secondary-color);
+  }
+}
+
+// Tags page specific styles
+.tags-page {
+  padding: map-get($spacing-scale, '2xl') 0;
+  
+  .back-to-all {
+    display: inline-block;
+    margin-bottom: map-get($spacing-scale, 'lg');
+    color: var(--secondary-color);
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
+}
+
+.tag-group {
+  display: none;
+  margin-top: map-get($spacing-scale, 'xl');
+  
+  &.selected-tag-group {
+    animation: fadeIn 0.5s ease;
+  }
+}
+
+.tag-title {
+  @include font-size('2xl');
+  margin-bottom: map-get($spacing-scale, 'sm');
+}
+
+.tag-description {
+  color: var(--secondary-color);
+  margin-bottom: map-get($spacing-scale, 'lg');
+}
+
+.tag-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: map-get($spacing-scale, 'lg');
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

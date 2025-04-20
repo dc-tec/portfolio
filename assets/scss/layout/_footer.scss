@@ -1,0 +1,209 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+.site-footer {
+  background-color: var(--footer-bg);
+  color: var(--text-color);
+  padding: map-get($spacing-scale, '2xl') 0 map-get($spacing-scale, 'xl');
+  position: relative;
+  overflow: hidden;
+  
+  // Footer container
+  .footer-container {
+    @include container;
+  }
+  
+  // Footer content grid
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: map-get($spacing-scale, 'xl');
+    margin-bottom: map-get($spacing-scale, 'xl');
+    
+    @media (max-width: (map-get($breakpoints, 'lg') - 1)) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    
+    @media (max-width: (map-get($breakpoints, 'md') - 1)) {
+      grid-template-columns: 1fr;
+      gap: map-get($spacing-scale, 'lg');
+    }
+  }
+  
+  // Footer about section
+  .footer-about {
+    grid-column: span 4;
+    
+    @media (max-width: (map-get($breakpoints, 'md') - 1)) {
+      grid-column: 1 / -1;
+    }
+    
+    .footer-logo {
+      display: inline-block;
+      margin-bottom: map-get($spacing-scale, 'md');
+      
+      img {
+        height: 40px;
+        width: auto;
+      }
+    }
+    
+    .footer-description {
+      color: var(--secondary-color);
+      margin-bottom: map-get($spacing-scale, 'lg');
+    }
+  }
+  
+  // Footer navigation
+  .footer-nav {
+    grid-column: 5 / span 8;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: map-get($spacing-scale, 'xl');
+    
+    @media (max-width: (map-get($breakpoints, 'lg') - 1)) {
+      grid-column: 1 / -1;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (max-width: (map-get($breakpoints, 'sm') - 1)) {
+      grid-template-columns: 1fr;
+    }
+    
+    .footer-nav-section {
+      h3 {
+        @include font-size('lg');
+        color: var(--text-color);
+        margin-bottom: map-get($spacing-scale, 'md');
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      li {
+        margin-bottom: map-get($spacing-scale, 'sm');
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      
+      a {
+        color: var(--secondary-color);
+        @include transition(color);
+        
+        &:hover {
+          color: var(--accent-color);
+        }
+      }
+    }
+  }
+  
+  // Footer bottom
+  .footer-bottom {
+    padding-top: map-get($spacing-scale, 'lg');
+    border-top: 1px solid rgba(var(--border-color), 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    @media (max-width: (map-get($breakpoints, 'md') - 1)) {
+      flex-direction: column;
+      gap: map-get($spacing-scale, 'md');
+      text-align: center;
+    }
+    
+    .footer-copyright {
+      color: var(--secondary-color);
+      @include font-size('sm');
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: map-get($spacing-scale, 'md');
+      
+      a {
+        color: var(--secondary-color);
+        @include transition(color, transform);
+        
+        &:hover {
+          color: var(--accent-color);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+  
+  // Footer background decoration
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--accent-color),
+      transparent
+    );
+    opacity: 0.2;
+  }
+  
+  // Footer newsletter
+  .footer-newsletter {
+    grid-column: 1 / -1;
+    background-color: rgba(var(--bg-color-secondary-rgb), 0.3);
+    padding: map-get($spacing-scale, 'xl');
+    border-radius: map-get($border-radius, 'lg');
+    text-align: center;
+    margin-bottom: map-get($spacing-scale, 'xl');
+    
+    h2 {
+      @include font-size('2xl');
+      margin-bottom: map-get($spacing-scale, 'md');
+    }
+    
+    p {
+      color: var(--secondary-color);
+      margin-bottom: map-get($spacing-scale, 'lg');
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    form {
+      display: flex;
+      gap: map-get($spacing-scale, 'sm');
+      max-width: 500px;
+      margin: 0 auto;
+      
+      @media (max-width: (map-get($breakpoints, 'sm') - 1)) {
+        flex-direction: column;
+      }
+      
+      input[type="email"] {
+        flex: 1;
+        padding: map-get($spacing-scale, 'sm') map-get($spacing-scale, 'md');
+        border: 1px solid var(--border-color);
+        border-radius: map-get($border-radius, 'md');
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        
+        &::placeholder {
+          color: var(--secondary-color);
+        }
+      }
+      
+      button {
+        @extend .btn;
+        @extend .btn-primary;
+        white-space: nowrap;
+      }
+    }
+  }
+} 

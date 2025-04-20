@@ -1,0 +1,179 @@
+// Modern CSS Reset
+
+// Box sizing rules
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Remove default margin and padding
+body,
+h1, h2, h3, h4, h5, h6,
+p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+// Set core body defaults
+html {
+  scroll-behavior: smooth;
+  min-height: 100%;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  background-color: var(--bg-color);
+  background: linear-gradient(
+    to right,
+    var(--bg-color) 0%,
+    rgba(var(--bg-color-secondary-rgb), 0.7) 100%
+  );
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  overflow-x: hidden;
+}
+
+html::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: 
+    radial-gradient(circle at 15% 50%, 
+      rgba(var(--accent-color-rgb), 0.08) 0%, 
+      transparent 25%),
+    radial-gradient(circle at 85% 30%, 
+      rgba(var(--info-color-rgb), 0.08) 0%, 
+      transparent 30%);
+  opacity: 0.7;
+}
+
+html::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+html.dark-mode,
+.dark-mode {
+  background: linear-gradient(
+    to right,
+    var(--bg-color) 0%,
+    rgba(var(--bg-color-secondary-rgb), 0.8) 100%
+  );
+}
+
+html.dark-mode::after {
+  opacity: 0.15;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 16px;
+  overflow-x: hidden;
+  background-color: transparent;
+}
+
+// Container base
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+// Remove list styles
+ul, ol {
+  list-style: none;
+}
+
+// Make images easier to work with
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// Inherit fonts for inputs and buttons
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+// Remove all animations and transitions for people that prefer not to see them
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Remove text decoration from links
+a {
+  text-decoration: none;
+  color: var(--accent-color);
+  transition: color 0.3s ease;
+  
+  &:hover {
+    text-decoration: none;
+    color: var(--accent-color);
+    opacity: 0.9;
+  }
+}
+
+// Make sure textareas without a rows attribute are not tiny
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+// Improve media defaults
+iframe, video, audio {
+  max-width: 100%;
+  display: block;
+}
+
+// Remove all button styles
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+// Tables
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+// Forms
+input,
+textarea {
+  &::placeholder {
+    opacity: 1;
+    color: inherit;
+  }
+} 

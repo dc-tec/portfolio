@@ -1,0 +1,124 @@
+// Transitions
+@mixin transition($properties...) {
+  $transitions: ();
+  @each $prop in $properties {
+    $transitions: append($transitions, $prop 0.3s ease, comma);
+  }
+  transition: $transitions;
+}
+
+// Gradient Overlays
+@mixin gradient-overlay($direction: to right, $start-color: var(--bg-color-rgb), $end-color: var(--bg-color-secondary-rgb), $opacity: 0.7) {
+  position: relative;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      #{$direction},
+      rgba(#{$start-color}, #{$opacity}) 0%,
+      rgba(#{$end-color}, #{$opacity}) 100%
+    );
+    z-index: 0;
+  }
+}
+
+// Backdrop Blur
+@mixin backdrop-blur($amount: 15px) {
+  backdrop-filter: blur($amount);
+  -webkit-backdrop-filter: blur($amount);
+}
+
+// Breakpoints
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px
+);
+
+@mixin breakpoint($size) {
+  @if map-has-key($breakpoints, $size) {
+    @media (min-width: map-get($breakpoints, $size)) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint `#{$size}`. Available breakpoints are: #{map-keys($breakpoints)}";
+  }
+}
+
+// Typography Scale
+@mixin font-size($size) {
+  $scale: (
+    'xs': 0.75rem,
+    'sm': 0.875rem,
+    'base': 1rem,
+    'lg': 1.125rem,
+    'xl': 1.25rem,
+    '2xl': 1.5rem,
+    '3xl': 1.875rem,
+    '4xl': 2.25rem,
+    '5xl': 3rem,
+    '6xl': 3.75rem,
+    '7xl': 4.5rem
+  );
+  
+  @if map-has-key($scale, $size) {
+    font-size: map-get($scale, $size);
+  } @else {
+    @warn "Unknown font size `#{$size}`. Available sizes are: #{map-keys($scale)}";
+  }
+}
+
+// Flex Center
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Card Base
+@mixin card-base {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(var(--border-color), 0.1);
+  @include transition(transform, box-shadow);
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Section Base
+@mixin section-base {
+  position: relative;
+  padding: 2rem 0;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: var(--accent-line-color);
+    border-radius: 3px;
+  }
+}
+
+// Container
+@mixin container($max-width: var(--container-width)) {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+} 

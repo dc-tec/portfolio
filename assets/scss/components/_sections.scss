@@ -1,0 +1,77 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+// Base section styles
+.section {
+  position: relative;
+  padding: 2rem 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: var(--accent-line-color);
+    border-radius: 3px;
+  }
+}
+
+// Content section variants
+.content-section {
+  position: relative;
+  padding: 60px 30px;
+  margin: 50px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  
+  &.primary-section {
+    background: linear-gradient(
+      to right,
+      rgba(var(--bg-color-rgb), 0.9) 0%,
+      rgba(var(--accent-color-rgb), 0.05) 100%
+    );
+    border: 1px solid rgba(var(--accent-color-rgb), 0.1);
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 60%;
+      height: 100%;
+      background: radial-gradient(
+        circle,
+        rgba(var(--accent-color-rgb), 0.15) 0%,
+        transparent 70%
+      );
+      border-radius: 50%;
+    }
+  }
+  
+  &.info-section {
+    background: linear-gradient(
+      to right,
+      rgba(var(--bg-color-rgb), 0.9) 0%,
+      rgba(var(--info-color-rgb), 0.05) 100%
+    );
+    border: 1px solid rgba(var(--info-color-rgb), 0.1);
+    
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -30%;
+      left: -20%;
+      width: 60%;
+      height: 100%;
+      background: radial-gradient(
+        circle,
+        rgba(var(--info-color-rgb), 0.15) 0%,
+        transparent 70%
+      );
+      border-radius: 50%;
+    }
+  }
+} 

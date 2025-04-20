@@ -1,0 +1,29 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+/*
+ * Post Category Styling
+ * This file contains global styles for post category tags throughout the site
+ */
+
+.post-category {
+  display: inline-block; /* Force inline-block instead of block/flex */
+  background-color: var(--accent-color); 
+  color: var(--bg-color-secondary);
+  padding: 0.2rem 0.6rem; /* Even smaller padding */
+  border-radius: 12px; /* Slightly reduced border-radius */
+  font-size: 0.75rem; /* Reduced font size */
+  font-weight: 500;
+  text-transform: lowercase; /* Make lowercase for a more subtle look */
+  opacity: 0.85; /* Slightly transparent */
+  
+  /* Add max-width to prevent full-width stretching */
+  max-width: fit-content;
+  
+  /* Optional: add a subtle transition on hover */
+  transition: all 0.2s ease;
+  
+  &:hover {
+    opacity: 1;
+  }
+} 

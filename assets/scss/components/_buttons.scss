@@ -1,0 +1,143 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+// Base button styles
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: map-get($border-radius, 'md');
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  @include transition(background-color, color, transform, box-shadow);
+  
+  // Icon spacing
+  .icon {
+    margin-right: 0.5rem;
+    
+    &:last-child:not(:first-child) {
+      margin-right: 0;
+      margin-left: 0.5rem;
+    }
+  }
+  
+  // Hover and focus states
+  &:hover {
+    transform: translateY(-1px);
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.4);
+  }
+  
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+// Button variants
+.btn-primary {
+  background-color: var(--accent-color);
+  color: white;
+  
+  &:hover {
+    background-color: var(--accent-color);
+    filter: brightness(0.9);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--bg-color-secondary);
+  color: var(--text-color);
+  
+  &:hover {
+    background-color: var(--border-color);
+  }
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  
+  &:hover {
+    background-color: var(--accent-color);
+    color: white;
+  }
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-color);
+  
+  &:hover {
+    background-color: var(--bg-color-secondary);
+  }
+}
+
+// Button sizes
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+}
+
+// Button states
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.6s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-disabled,
+.btn[disabled] {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+// Button group
+.btn-group {
+  display: inline-flex;
+  
+  .btn {
+    border-radius: 0;
+    
+    &:first-child {
+      border-top-left-radius: map-get($border-radius, 'md');
+      border-bottom-left-radius: map-get($border-radius, 'md');
+    }
+    
+    &:last-child {
+      border-top-right-radius: map-get($border-radius, 'md');
+      border-bottom-right-radius: map-get($border-radius, 'md');
+    }
+    
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
+  }
+} 

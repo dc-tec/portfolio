@@ -1,5 +1,5 @@
+// Light Theme (Catppuccin Latte)
 :root {
-  /* Catppuccin Latte Colors (Light Theme) */
   --bg-color: #eff1f5;          /* Base */
   --bg-color-rgb: 239, 241, 245; /* RGB values for Base */
   --bg-color-secondary: #e6e9ef; /* Mantle */
@@ -12,7 +12,6 @@
   --header-bg: rgba(239, 241, 245, 0.8); /* Base with transparency */
   --header-bg-rgb: 239, 241, 245; /* RGB values for header background */
   --footer-bg: #dce0e8;         /* Crust */
-  --container-width: 1140px;
   --accent-line-color: #fe640b; /* Peach */
   --card-bg: #e6e9ef;           /* Mantle */
   --code-bg: #ccd0da;           /* Surface0 */
@@ -23,9 +22,9 @@
   --info-color-rgb: 30, 102, 245; /* RGB values for Blue */
 }
 
+// Dark Theme (Catppuccin Macchiato)
 html.dark-mode,
 .dark-mode {
-  /* Catppuccin Macchiato Colors */
   --bg-color: #24273a;          /* Base */
   --bg-color-rgb: 36, 39, 58;    /* RGB values for Base */
   --bg-color-secondary: #1e2030; /* Mantle */
