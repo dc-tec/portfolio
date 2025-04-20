@@ -38,19 +38,11 @@
 }
 
 // Blog post previews
-.posts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
-  margin-bottom: 40px;
-}
+// Using the posts-grid component defined in _cards.scss
 
+// Using card component as a base for post previews
 .post-preview {
-  background-color: var(--card-bg);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  @extend .card;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -155,10 +147,8 @@
 
 // Single post
 .post {
-  background-color: var(--card-bg);
-  border-radius: 12px;
+  @extend .card;
   padding: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .post-header {
@@ -399,10 +389,6 @@
 }
 
 @media (max-width: 768px) {
-  .posts-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .post-header h1 {
     font-size: 1.8rem;
   }

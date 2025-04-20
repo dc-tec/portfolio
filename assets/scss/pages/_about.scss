@@ -71,8 +71,7 @@
 }
 
 .contact-info {
-  background-color: var(--card-bg);
-  border-radius: 8px;
+  @extend .card;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   
@@ -105,8 +104,7 @@
 }
 
 .skills-section {
-  background-color: var(--card-bg);
-  border-radius: 8px;
+  @extend .card;
   padding: 1.5rem;
   
   .skill-category {
@@ -135,11 +133,9 @@
 }
 
 .certification-item {
-  background-color: var(--card-bg);
-  border-radius: 8px;
+  @extend .card;
   padding: 1.5rem;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   
   h3 {
     font-size: 1.1rem;
@@ -153,11 +149,9 @@
 }
 
 .education-item {
-  background-color: var(--card-bg);
-  border-radius: 8px;
+  @extend .card;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   
   &:last-child {
     margin-bottom: 0;

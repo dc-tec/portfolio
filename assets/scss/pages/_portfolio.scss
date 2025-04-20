@@ -3,11 +3,9 @@
 }
 
 .about-section {
+  @extend .card;
   margin-bottom: 60px;
   padding: 40px;
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
 /* Profile Header - New Style */
@@ -110,11 +108,9 @@
 }
 
 .list-item {
-  background-color: var(--card-bg);
-  border-radius: 12px;
+  @extend .card;
   padding: 24px;
   position: relative;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   border-left: 4px solid var(--accent-color);
   transition: transform 0.2s ease;
   
@@ -191,15 +187,12 @@
 
 /* Certifications Section */
 .certifications-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
+  @extend .card-grid;
 }
 
 .certification-item {
-  background-color: var(--card-bg);
+  @extend .card;
   padding: 20px;
-  border-radius: 12px;
   text-align: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;

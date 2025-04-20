@@ -117,11 +117,15 @@
   }
 }
 
+// Post Grid - For displaying post cards in a grid layout
+.posts-grid {
+  @include responsive-grid(auto-fill, 300px, 24px);
+  margin-bottom: 40px;
+}
+
 // Card grid
 .card-grid {
-  display: grid;
-  gap: map-get($spacing-scale, 'md');
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  @include responsive-grid(auto-fit, 300px, map-get($spacing-scale, 'md'));
 }
 
 // Card with overlay
