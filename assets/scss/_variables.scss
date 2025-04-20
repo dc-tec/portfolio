@@ -1,0 +1,49 @@
+:root {
+  /* Catppuccin Latte Colors (Light Theme) */
+  --bg-color: #eff1f5;          /* Base */
+  --bg-color-rgb: 239, 241, 245; /* RGB values for Base */
+  --bg-color-secondary: #e6e9ef; /* Mantle */
+  --bg-color-secondary-rgb: 230, 233, 239; /* RGB values for Mantle */
+  --text-color: #4c4f69;        /* Text */
+  --accent-color: #fe640b;      /* Peach */
+  --accent-color-rgb: 254, 100, 11; /* RGB values for Peach */
+  --secondary-color: #6c6f85;   /* Subtext0 */
+  --border-color: #ccd0da;      /* Surface0 */
+  --header-bg: rgba(239, 241, 245, 0.8); /* Base with transparency */
+  --header-bg-rgb: 239, 241, 245; /* RGB values for header background */
+  --footer-bg: #dce0e8;         /* Crust */
+  --container-width: 1140px;
+  --accent-line-color: #fe640b; /* Peach */
+  --card-bg: #e6e9ef;           /* Mantle */
+  --code-bg: #ccd0da;           /* Surface0 */
+  --success-color: #40a02b;     /* Green */
+  --warning-color: #df8e1d;     /* Yellow */
+  --danger-color: #d20f39;      /* Red */
+  --info-color: #1e66f5;        /* Blue */
+  --info-color-rgb: 30, 102, 245; /* RGB values for Blue */
+}
+
+html.dark-mode,
+.dark-mode {
+  /* Catppuccin Macchiato Colors */
+  --bg-color: #24273a;          /* Base */
+  --bg-color-rgb: 36, 39, 58;    /* RGB values for Base */
+  --bg-color-secondary: #1e2030; /* Mantle */
+  --bg-color-secondary-rgb: 30, 32, 48; /* RGB values for Mantle */
+  --text-color: #cad3f5;        /* Text */
+  --accent-color: #f5a97f;      /* Peach */
+  --accent-color-rgb: 245, 169, 127; /* RGB values for Peach */
+  --secondary-color: #a5adcb;   /* Subtext0 */
+  --border-color: #363a4f;      /* Surface0 */
+  --header-bg: rgba(36, 39, 58, 0.8); /* Base with transparency */
+  --header-bg-rgb: 36, 39, 58; /* RGB values for header background */
+  --footer-bg: #181926;         /* Crust */
+  --accent-line-color: #f5a97f; /* Peach */
+  --card-bg: #1e2030;           /* Mantle */
+  --code-bg: #363a4f;           /* Surface0 */
+  --success-color: #a6da95;     /* Green */
+  --warning-color: #eed49f;     /* Yellow */
+  --danger-color: #ed8796;      /* Red */
+  --info-color: #8aadf4;        /* Blue */
+  --info-color-rgb: 138, 173, 244; /* RGB values for Blue */
+} 

@@ -1,0 +1,88 @@
+---
+layout: default
+---
+
+<div class="portfolio">
+  <section class="about-section">
+    <div class="container">
+      <div class="profile-header">
+        {% if site.about_profile_image %}
+        <div class="profile-image">
+          <img src="{{ site.about_profile_image | relative_url }}" alt="{{ site.name }}" />
+        </div>
+        {% endif %}
+        <div class="profile-title">
+          <h1>Hi! I'm {{ site.name }} <span class="wave">👋</span></h1>
+          <h2>{{ site.title }}</h2>
+        </div>
+      </div>
+      
+      <div class="profile-content">
+        <div class="bio">
+          {% assign about_section = site.portfolio_sections | where: "name", "about" | first %}
+          {{ about_section.content | markdownify }}
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  {% assign ordered_sections = site.portfolio_sections | sort: "order" %}
+  {% for section in ordered_sections %}
+    {% if section.name != "about" %}
+      <section class="content-section collapsible-section">
+        <div class="container">
+          <details>
+            <summary class="section-title">
+              {{ section.title }}
+              <span class="toggle-icon">+</span>
+            </summary>
+            
+            <div class="section-content-wrapper">
+              {% if section.name == "certifications" %}
+                <div class="certifications-list">
+                  {% for item in section.items %}
+                    <div class="certification-item">
+                      <h3>{{ item.title }}</h3>
+                      <div class="badge-embed">
+                        {{ item.badge_embed }}
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% elsif section.layout_type == "list" %}
+                <div class="list-content">
+                  {% for item in section.items %}
+                    <div class="list-item">
+                      <div class="item-header">
+                        <h3>
+                          {% if item.link %}
+                            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                          {% else %}
+                            {{ item.title }}
+                          {% endif %}
+                        </h3>
+                        {% if item.sub_title %}
+                          <h4>{{ item.sub_title }}</h4>
+                        {% endif %}
+                        {% if item.caption %}
+                          <p class="caption">{{ item.caption }}</p>
+                        {% endif %}
+                      </div>
+                      <div class="item-content">
+                        {{ item.description | markdownify }}
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <div class="section-content">
+                  {{ section.content | markdownify }}
+                </div>
+              {% endif %}
+            </div>
+          </details>
+        </div>
+      </section>
+    {% endif %}
+  {% endfor %}
+</div> 

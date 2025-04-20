@@ -1,0 +1,144 @@
+---
+layout: default
+title: Tags
+permalink: /blog/tags/
+---
+
+<div class="tags-page">
+  <div class="container">
+    <h1 class="section-title">Explore Topics</h1>
+    <div id="filtered-tag-heading" style="display: none;">
+      <a href="{{ site.baseurl }}/blog/tags/" class="back-to-all">← Explore All Topics</a>
+    </div>
+    
+    <div class="tags-container">
+      <div class="tag-cloud">
+        {% assign tags = site.tags | sort %}
+        {% for tag in tags %}
+          {% assign tag_name = tag[0] %}
+          {% assign posts = tag[1] %}
+          {% assign font_size = posts.size | times: 0.3 | plus: 0.9 %}
+          <a href="#{{ tag_name | slugify }}" class="tag-bubble" style="font-size: {{ font_size }}em;" data-tag="{{ tag_name | slugify }}" data-count="{{ posts.size }}">
+            <span class="tag-name">{{ tag_name }}</span>
+            <span class="tag-count">{{ posts.size }}</span>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <div class="tag-results">
+      <div class="tag-intro" id="tag-intro">
+        <h2>Select a topic to explore related posts</h2>
+        <p>Browse the tags above to filter posts by topic</p>
+      </div>
+      
+      <div class="tag-groups">
+        {% for tag in tags %}
+          <div class="tag-group" id="{{ tag[0] | slugify }}" data-tag="{{ tag[0] | slugify }}">
+            <h2 class="tag-title">{{ tag[0] }}</h2>
+            <p class="tag-description">Exploring {{ tag[1].size }} post{% if tag[1].size > 1 %}s{% endif %} about {{ tag[0] }}</p>
+            
+            <div class="tag-posts-grid">
+              {% for post in tag[1] %}
+                <div class="post-card">
+                  <div class="post-card-image">
+                    <a href="{{ post.url | relative_url }}">
+                      <img src="{{ post.image | default: site.baseurl | append: '/assets/images/default-post.jpg' }}" alt="{{ post.title }}">
+                    </a>
+                    {% if post.category %}
+                      <span class="post-category">{{ post.category }}</span>
+                    {% endif %}
+                  </div>
+                  <div class="post-card-content">
+                    <div class="post-meta">
+                      <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+                      {% if post.tags %}
+                        <div class="post-mini-tags">
+                          {% for post_tag in post.tags limit:2 %}
+                            {% if post_tag != tag[0] %}
+                              <a href="{{ site.baseurl }}/blog/tags/#{{ post_tag | slugify }}" class="post-mini-tag">{{ post_tag }}</a>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+                    <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                    <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
+                    <a href="{{ post.url | relative_url }}" class="post-read-more">Read Article →</a>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add animation classes to the tag bubbles
+    const tagBubbles = document.querySelectorAll('.tag-bubble');
+    tagBubbles.forEach((tag, index) => {
+      // Add staggered animation delay
+      tag.style.animationDelay = `${index * 0.05}s`;
+      tag.classList.add('animate-in');
+    });
+    
+    function processHash() {
+      const hash = window.location.hash;
+      if (!hash) return;
+      
+      const tagSlug = hash.substring(1); // Remove the # character
+      
+      // Show the back button
+      const filteredHeading = document.getElementById('filtered-tag-heading');
+      if (filteredHeading) {
+        filteredHeading.style.display = 'block';
+      }
+      
+      // Hide the intro section
+      const tagIntro = document.getElementById('tag-intro');
+      if (tagIntro) {
+        tagIntro.style.display = 'none';
+      }
+      
+      // Hide all tag groups
+      const tagGroups = document.querySelectorAll('.tag-group');
+      tagGroups.forEach(group => {
+        group.style.display = 'none';
+      });
+      
+      // Show the selected tag's posts
+      const selectedGroup = document.getElementById(tagSlug);
+      if (selectedGroup) {
+        selectedGroup.style.display = 'block';
+        selectedGroup.classList.add('selected-tag-group');
+        
+        // Highlight the active tag
+        tagBubbles.forEach(bubble => {
+          bubble.classList.remove('active');
+          if (bubble.getAttribute('data-tag') === tagSlug) {
+            bubble.classList.add('active');
+          }
+        });
+        
+        // Update page title
+        const tagTitle = selectedGroup.querySelector('.tag-title').textContent;
+        document.title = `${tagTitle} - Topic | {{ site.title }}`;
+        
+        // Scroll to results
+        setTimeout(() => {
+          selectedGroup.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+    
+    // Process hash on page load
+    processHash();
+    
+    // Process hash on hash change (when a tag is clicked)
+    window.addEventListener('hashchange', processHash);
+  });
+</script> 

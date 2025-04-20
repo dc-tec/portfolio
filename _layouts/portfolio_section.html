@@ -1,0 +1,39 @@
+---
+layout: none
+---
+<section class="content-section">
+  <div class="container">
+    <h2 class="section-title">{{ page.title }}</h2>
+    
+    {% if page.layout_type == "list" %}
+      <div class="list-content">
+        {% for item in page.items %}
+          <div class="list-item">
+            <div class="item-header">
+              <h3>
+                {% if item.link %}
+                  <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                {% else %}
+                  {{ item.title }}
+                {% endif %}
+              </h3>
+              {% if item.sub_title %}
+                <h4>{{ item.sub_title }}</h4>
+              {% endif %}
+              {% if item.caption %}
+                <p class="caption">{{ item.caption }}</p>
+              {% endif %}
+            </div>
+            <div class="item-content">
+              {{ item.description | markdownify }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="section-content">
+        {{ content }}
+      </div>
+    {% endif %}
+  </div>
+</section> 
