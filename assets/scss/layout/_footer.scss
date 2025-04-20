@@ -4,7 +4,7 @@
 .site-footer {
   background-color: var(--footer-bg);
   color: var(--text-color);
-  padding: map-get($spacing-scale, '2xl') 0 map-get($spacing-scale, 'xl');
+  padding: map-get($spacing-scale, '2xl') 0 map-get($spacing-scale, 'lg');
   position: relative;
   overflow: hidden;
   
@@ -15,125 +15,137 @@
   
   // Footer content grid
   .footer-content {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: map-get($spacing-scale, 'xl');
-    margin-bottom: map-get($spacing-scale, 'xl');
-    
-    @media (max-width: (map-get($breakpoints, 'lg') - 1)) {
-      grid-template-columns: repeat(6, 1fr);
-    }
-    
-    @media (max-width: (map-get($breakpoints, 'md') - 1)) {
-      grid-template-columns: 1fr;
-      gap: map-get($spacing-scale, 'lg');
-    }
+    margin-bottom: map-get($spacing-scale, 'lg');
+    text-align: center;
   }
   
   // Footer about section
   .footer-about {
-    grid-column: span 4;
-    
-    @media (max-width: (map-get($breakpoints, 'md') - 1)) {
-      grid-column: 1 / -1;
-    }
+    max-width: 600px;
+    margin: 0 auto;
     
     .footer-logo {
       display: inline-block;
       margin-bottom: map-get($spacing-scale, 'md');
       
       img {
-        height: 80px;
+        height: 60px;
         width: auto;
+      }
+    }
+    
+    h3 {
+      margin-bottom: map-get($spacing-scale, 'sm');
+      @include font-size('lg');
+      
+      .accent-color {
+        color: var(--accent-color);
       }
     }
     
     .footer-description {
       color: var(--secondary-color);
-      margin-bottom: map-get($spacing-scale, 'lg');
+      margin-bottom: map-get($spacing-scale, 'md');
     }
   }
   
-  // Footer navigation
-  .footer-nav {
-    grid-column: 5 / span 8;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  // Footer links and connect sections
+  .footer-links,
+  .footer-connect {
+    h3 {
+      @include font-size('lg');
+      color: var(--text-color);
+      margin-bottom: map-get($spacing-scale, 'md');
+      position: relative;
+      
+      &:after {
+        content: '';
+        display: block;
+        width: 30px;
+        height: 2px;
+        background-color: var(--accent-color);
+        margin-top: 8px;
+      }
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    li {
+      margin-bottom: map-get($spacing-scale, 'md');
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    a {
+      color: var(--secondary-color);
+      @include transition(color);
+      display: flex;
+      align-items: center;
+      
+      i {
+        margin-right: 10px;
+        color: var(--accent-color);
+        opacity: 0.8;
+        width: 16px;
+        text-align: center;
+      }
+      
+      &:hover {
+        color: var(--accent-color);
+        
+        i {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  
+  // All footer links 
+  a, a:hover, h3 a, h3 a:hover, h3 i, h3 i:hover {
+    text-decoration: none;
+  }
+  
+  // Social Media Bar
+  .footer-social-bar {
+    display: flex;
+    justify-content: center;
     gap: map-get($spacing-scale, 'xl');
+    margin-bottom: map-get($spacing-scale, 'lg');
+    padding: map-get($spacing-scale, 'md') 0;
+    border-top: 1px solid rgba(var(--border-color-rgb), 0.1);
+    border-bottom: 1px solid rgba(var(--border-color-rgb), 0.1);
     
-    @media (max-width: (map-get($breakpoints, 'lg') - 1)) {
-      grid-column: 1 / -1;
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    @media (max-width: (map-get($breakpoints, 'sm') - 1)) {
-      grid-template-columns: 1fr;
-    }
-    
-    .footer-nav-section {
-      h3 {
-        @include font-size('lg');
-        color: var(--text-color);
-        margin-bottom: map-get($spacing-scale, 'md');
+    a {
+      color: var(--text-color);
+      @include transition(color, transform);
+      
+      i {
+        font-size: 1.8rem;
       }
       
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      
-      li {
-        margin-bottom: map-get($spacing-scale, 'sm');
-        
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-      
-      a {
-        color: var(--secondary-color);
-        @include transition(color);
-        
-        &:hover {
-          color: var(--accent-color);
-        }
+      &:hover {
+        color: var(--accent-color);
+        transform: translateY(-3px);
       }
     }
   }
   
   // Footer bottom
   .footer-bottom {
-    padding-top: map-get($spacing-scale, 'lg');
-    border-top: 1px solid rgba(var(--border-color), 0.1);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    
-    @media (max-width: (map-get($breakpoints, 'md') - 1)) {
-      flex-direction: column;
-      gap: map-get($spacing-scale, 'md');
-      text-align: center;
-    }
     
     .footer-copyright {
       color: var(--secondary-color);
       @include font-size('sm');
-    }
-    
-    .footer-social {
-      display: flex;
-      gap: map-get($spacing-scale, 'md');
-      
-      a {
-        color: var(--secondary-color);
-        @include transition(color, transform);
-        
-        &:hover {
-          color: var(--accent-color);
-          transform: translateY(-2px);
-        }
-      }
+      text-align: center;
     }
   }
   

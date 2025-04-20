@@ -52,6 +52,7 @@
       @include font-size('xl');
       font-weight: 700;
       color: var(--text-color);
+      text-decoration: none;
       letter-spacing: -0.5px;
       
       &:hover {

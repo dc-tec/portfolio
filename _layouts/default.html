@@ -67,57 +67,35 @@
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-content">
+        <!-- About Section -->
         <div class="footer-about">
           <a href="{{ site.baseurl }}/" class="footer-logo">
             <img src="{{ site.logo | default: '/assets/images/logo.png' | relative_url }}" alt="{{ site.name }}">
           </a>
+          <h3>Created with <i class="fas fa-mug-hot accent-color"></i> by {{ site.name }}</h3>
           <p class="footer-description">{{ site.description }}</p>
-          <div class="footer-social">
-            {% if site.github_username %}
-            <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">
-              <i class="fab fa-github"></i>
-            </a>
-            {% endif %}
-            {% if site.twitter_username %}
-            <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noopener">
-              <i class="fab fa-twitter"></i>
-            </a>
-            {% endif %}
-            {% if site.linkedin_username %}
-            <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener">
-              <i class="fab fa-linkedin"></i>
-            </a>
-            {% endif %}
-          </div>
         </div>
+      </div>
 
-        <nav class="footer-nav">
-          <div class="footer-nav-section">
-            <h3>Navigation</h3>
-            <ul>
-              <li><a href="{{ site.baseurl }}/">Home</a></li>
-              <li><a href="{{ site.baseurl }}/blog">Blog</a></li>
-              <li><a href="{{ site.baseurl }}/about">About</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-nav-section">
-            <h3>Categories</h3>
-            <ul>
-              {% for category in site.categories limit:4 %}
-              <li><a href="{{ site.baseurl }}/categories/{{ category[0] | slugify }}">{{ category[0] }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-
-          <div class="footer-nav-section">
-            <h3>Connect</h3>
-            <ul>
-              <li><a href="{{ site.baseurl }}/feed.xml">RSS Feed</a></li>
-              <li><a href="mailto:{{ site.email }}">Contact</a></li>
-            </ul>
-          </div>
-        </nav>
+      <!-- Social Media Bar -->
+      <div class="footer-social-bar">
+        {% if site.github_username %}
+        <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        {% endif %}
+        
+        {% if site.gitlab_username %}
+        <a href="https://gitlab.com/{{ site.gitlab_username }}" target="_blank" rel="noopener" aria-label="GitLab">
+          <i class="fab fa-gitlab"></i>
+        </a>
+        {% endif %}
+        
+        {% if site.linkedin_username %}
+        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        {% endif %}
       </div>
 
       <div class="footer-bottom">

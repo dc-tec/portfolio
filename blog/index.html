@@ -27,10 +27,9 @@ title: Blog
     <div class="blog-grid">
       {% for post in site.posts %}
         <div class="blog-card">
+          <a href="{{ post.url | relative_url }}" class="card-link" aria-label="Read {{ post.title }}"></a>
           <div class="post-image">
-            <a href="{{ post.url | relative_url }}">
-              <img src="{{ post.image | default: site.baseurl | append: '/assets/images/default-post.jpg' }}" alt="{{ post.title }}">
-            </a>
+            <img src="{{ post.image | default: site.baseurl | append: '/assets/images/default-post.png' }}" alt="{{ post.title }}">
             {% if post.category %}
               <span class="post-category">{{ post.category }}</span>
             {% endif %}
