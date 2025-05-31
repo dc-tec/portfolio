@@ -1,16 +1,18 @@
+@use 'sass:map';
 @use '../abstracts/mixins' as *;
 @use '../abstracts/variables' as *;
 
-// Base button styles
-.btn {
+// Placeholder for base button styles
+%btn-base-styles {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.5rem 1rem;
-  border-radius: map-get($border-radius, 'md');
+  border-radius: map.get($border-radius, 'md');
   font-weight: 500;
   text-align: center;
   cursor: pointer;
+
   @include transition(background-color, color, transform, box-shadow);
   
   // Icon spacing
@@ -30,7 +32,7 @@
   
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.4);
+    box-shadow: 0 0 0 3px rgb(var(--accent-color-rgb) / 40%);
   }
   
   &:active {
@@ -38,8 +40,13 @@
   }
 }
 
-// Button variants
-.btn-primary {
+// Base button styles
+.btn {
+  @extend %btn-base-styles;
+}
+
+// Placeholder for primary button styles
+%btn-primary-styles {
   background-color: var(--accent-color);
   color: white;
   
@@ -47,6 +54,12 @@
     background-color: var(--accent-color);
     filter: brightness(0.9);
   }
+}
+
+// Button variants
+.btn-primary {
+  @extend %btn-base-styles; // Ensure primary buttons also get base styles
+  @extend %btn-primary-styles;
 }
 
 .btn-secondary {
@@ -100,7 +113,7 @@
     position: absolute;
     width: 1em;
     height: 1em;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgb(255 255 255 / 30%);
     border-radius: 50%;
     border-top-color: white;
     animation: spin 0.6s linear infinite;
@@ -127,17 +140,82 @@
     border-radius: 0;
     
     &:first-child {
-      border-top-left-radius: map-get($border-radius, 'md');
-      border-bottom-left-radius: map-get($border-radius, 'md');
+      border-top-left-radius: map.get($border-radius, 'md');
+      border-bottom-left-radius: map.get($border-radius, 'md');
     }
     
     &:last-child {
-      border-top-right-radius: map-get($border-radius, 'md');
-      border-bottom-right-radius: map-get($border-radius, 'md');
+      border-top-right-radius: map.get($border-radius, 'md');
+      border-bottom-right-radius: map.get($border-radius, 'md');
     }
     
     &:not(:first-child) {
       margin-left: -1px;
+    }
+  }
+}
+
+// Placeholder for CTA button base styles
+%cta-button-base-styles {
+  display: inline-flex; // Base display type
+  align-items: center; // Vertically align icon and text if present
+  padding: 0.8rem 1.2rem;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  i {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover,
+  &:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 20%); // Standard hover shadow
+    color: var(--bg-color); // Ensure text color remains on hover
+    text-decoration: none;
+
+    i {
+      transform: translateX(3px);
+    }
+  }
+}
+
+.cta-button {
+  @extend %cta-button-base-styles;
+
+  // Modifier for hero section variant
+  &--hero {
+    display: inline-block; // Override display for hero
+    padding: 12px 24px; // Specific padding for hero
+    border-radius: 8px; // Specific border-radius for hero
+
+    @media (width <= 480px) {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 0.9; // Specific hover for hero
+      transform: translateY(-3px); // Specific hover transform for hero
+      box-shadow: none; // Remove base shadow if not desired for hero variant
+
+      i {
+        transform: none; // Reset icon transform if not applicable
+      }
+    }
+    
+    // If hero button doesn't have an icon, ensure no extra margin for i
+    i {
+      margin-left: 0; 
     }
   }
 } 

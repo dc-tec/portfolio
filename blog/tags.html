@@ -17,8 +17,7 @@ permalink: /blog/tags/
         {% for tag in tags %}
           {% assign tag_name = tag[0] %}
           {% assign posts = tag[1] %}
-          {% assign font_size = posts.size | times: 0.3 | plus: 0.9 %}
-          <a href="#{{ tag_name | slugify }}" class="tag-bubble" style="font-size: {{ font_size }}em;" data-tag="{{ tag_name | slugify }}" data-count="{{ posts.size }}">
+          <a href="#{{ tag_name | slugify }}" class="tag-bubble" data-tag="{{ tag_name | slugify }}" data-count="{{ posts.size }}">
             <span class="tag-name">{{ tag_name }}</span>
             <span class="tag-count">{{ posts.size }}</span>
           </a>
@@ -43,7 +42,8 @@ permalink: /blog/tags/
                 <div class="post-card">
                   <div class="post-card-image">
                     <a href="{{ post.url | relative_url }}">
-                      <img src="{{ post.image | default: site.baseurl | append: '/assets/images/default-post.png' }}" alt="{{ post.title }}">
+                      {% assign tag_post_image = post.image | default: "assets/images/default-post.png" %}
+                      {% include responsive-image.html src=tag_post_image alt=post.title loading="lazy" %}
                     </a>
                     {% if post.category %}
                       <span class="post-category">{{ post.category }}</span>
@@ -64,7 +64,7 @@ permalink: /blog/tags/
                     </div>
                     <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                     <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
-                    <a href="{{ post.url | relative_url }}" class="post-read-more">Read Article →</a>
+                    <a href="{{ post.url | relative_url }}" class="post-read-more">Read Full Post</a>
                   </div>
                 </div>
               {% endfor %}

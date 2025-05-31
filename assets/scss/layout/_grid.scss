@@ -1,15 +1,16 @@
+@use 'sass:map';
 @use '../abstracts/mixins' as *;
-@use '../abstracts/variables' as *;
+@use '../abstracts/variables' as vars;
 
 // Container
 .container {
-  @include container();
+  @include container;
 }
 
 // Grid System
 .grid {
   display: grid;
-  gap: map-get($spacing-scale, 'md');
+  gap: map.get(vars.$spacing-scale, 'md');
   
   // Grid columns
   @for $i from 1 through 12 {
@@ -19,8 +20,8 @@
   }
   
   // Responsive grid columns
-  @each $breakpoint, $width in $breakpoints {
-    @include breakpoint($breakpoint) {
+  @each $breakpoint, $width in vars.$breakpoints {
+    @include respond-to($breakpoint) {
       @for $i from 1 through 12 {
         &.cols-#{$breakpoint}-#{$i} {
           grid-template-columns: repeat($i, 1fr);
@@ -34,11 +35,11 @@
 .flex-grid {
   display: flex;
   flex-wrap: wrap;
-  margin: calc(-1 * map-get($spacing-scale, 'md'));
+  margin: calc(-1 * map.get(vars.$spacing-scale, 'md'));
   
   > * {
     flex: 1 1 300px;
-    margin: map-get($spacing-scale, 'md');
+    margin: map.get(vars.$spacing-scale, 'md');
   }
   
   // Flex basis variations
@@ -56,7 +57,7 @@
   gap: 0;
 }
 
-@each $name, $size in $spacing-scale {
+@each $name, $size in vars.$spacing-scale {
   .gap-#{$name} {
     gap: $size;
   }
@@ -79,5 +80,5 @@
 .auto-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--min-column-size, 250px), 1fr));
-  gap: map-get($spacing-scale, 'md');
+  gap: map.get(vars.$spacing-scale, 'md');
 } 

@@ -9,7 +9,7 @@
   --accent-color-rgb: 254, 100, 11; /* RGB values for Peach */
   --secondary-color: #6c6f85;   /* Subtext0 */
   --border-color: #ccd0da;      /* Surface0 */
-  --header-bg: rgba(239, 241, 245, 0.8); /* Base with transparency */
+  --header-bg: rgb(239 241 245 / 80%); /* Base with transparency */
   --header-bg-rgb: 239, 241, 245; /* RGB values for header background */
   --footer-bg: #dce0e8;         /* Crust */
   --accent-line-color: #fe640b; /* Peach */
@@ -34,7 +34,7 @@ html.dark-mode,
   --accent-color-rgb: 245, 169, 127; /* RGB values for Peach */
   --secondary-color: #a5adcb;   /* Subtext0 */
   --border-color: #363a4f;      /* Surface0 */
-  --header-bg: rgba(36, 39, 58, 0.8); /* Base with transparency */
+  --header-bg: rgb(36 39 58 / 80%); /* Base with transparency */
   --header-bg-rgb: 36, 39, 58; /* RGB values for header background */
   --footer-bg: #181926;         /* Crust */
   --accent-line-color: #f5a97f; /* Peach */

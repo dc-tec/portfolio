@@ -50,19 +50,19 @@ layout: default
           <div class="hero-info">
             <div class="profile-header">
               <div class="profile-image-container">
-                <img src="{{ site.baseurl }}/assets/images/profile.png" alt="{{ site.name }}" class="profile-image">
+                {% include responsive-image.html src="assets/images/profile.png" alt=site.name class="profile-image" loading="eager" %}
               </div>
               <div class="profile-title">
-                <h1>Hi! I'm {{ site.name }} <span class="wave">👋</span></h1>
-                <p class="subtitle">A {{ site.title }} and tech enthusiast</p>
+                <h1>Hi! I'm {{ site.author }} <span class="wave">👋</span></h1>
+                <p class="subtitle">A {{ site.description }} and tech enthusiast</p>
               </div>
             </div>
             
             <div class="hero-bio">
-              <p>I'm a {{ site.title }} and tech enthusiast. I'm passionate about infrastructure automation, GitLab, GitOps, OpenBao, and making complex systems simpler. I help teams build secure, scalable platforms using open-source tools — with a sprinkle of Kubernetes and a strong focus on Infra as Code.</p>
+              <p>I'm a {{ site.description }} and tech enthusiast. I'm passionate about infrastructure automation, GitLab, GitOps, OpenBao, and making complex systems simpler. I help teams build secure, scalable platforms using open-source tools — with a sprinkle of Kubernetes and a strong focus on Infra as Code.</p>
             </div>
             
-            <a href="{{ site.baseurl }}/blog" class="cta-button">Read my blog!</a>
+            <a href="{{ site.baseurl }}/blog" class="cta-button cta-button--hero">Explore My Blog</a>
           </div>
         {% else %}
           <!-- Regular Home Profile Display -->
@@ -70,12 +70,12 @@ layout: default
             <div class="hero-profile">
               {% if site.about_profile_image %}
               <div class="profile-image">
-                <img src="{{ site.about_profile_image | relative_url }}" alt="{{ site.name }}" />
+                {% include responsive-image.html src=site.about_profile_image alt=site.name loading="eager" %}
               </div>
               {% endif %}
               <div class="profile-info">
-                <h1 class="hero-title">Hi! I'm {{ site.name }} <span class="wave">👋</span></h1>
-                <h2 class="hero-subtitle">{{ site.title }}</h2>
+                <h1 class="hero-title">Hi! I'm {{ site.author }} <span class="wave">👋</span></h1>
+                <h2 class="hero-subtitle">{{ site.description }}</h2>
                 <p class="hero-description">{{ site.description }}</p>
               </div>
             </div>
@@ -125,15 +125,15 @@ layout: default
           <div class="latest-post-image">
             <a href="{{ latest_post.url | relative_url }}">
               {% if latest_post.image %}
-                <img src="{{ latest_post.image | relative_url }}" alt="{{ latest_post.title }}">
+                {% include responsive-image.html src=latest_post.image alt=latest_post.title loading="lazy" %}
               {% elsif latest_post.featured_image %}
-                <img src="{{ latest_post.featured_image | relative_url }}" alt="{{ latest_post.title }}">
+                {% include responsive-image.html src=latest_post.featured_image alt=latest_post.title loading="lazy" %}
               {% else %}
-                <img src="{{ site.baseurl }}/assets/images/default-post.png" alt="{{ latest_post.title }}">
+                {% include responsive-image.html src="assets/images/default-post.png" alt=latest_post.title loading="lazy" %}
               {% endif %}
             </a>
             {% if latest_post.category %}
-              <span class="post-category">{{ latest_post.category }}</span>
+              <span class="post-category--top-right-badge">{{ latest_post.category }}</span>
             {% endif %}
           </div>
           <div class="latest-post-content">
@@ -158,7 +158,7 @@ layout: default
               </div>
             {% endif %}
             <p class="post-excerpt">{{ latest_post.content | strip_html | truncate: 500 }}</p>
-            <a href="{{ latest_post.url | relative_url }}" class="cta-button">Read Full Post</i></a>
+            <a href="{{ latest_post.url | relative_url }}" class="cta-button">Read Full Post</a>
           </div>
         </div>
       {% else %}
@@ -192,11 +192,12 @@ layout: default
           {% for post in featured_posts %}
             <div class="featured-post">
               <div class="post-image">
+                {% assign featured_image = post.image | default: "assets/images/default-post.png" %}
                 <a href="{{ post.url | relative_url }}">
-                  <img src="{{ post.image | default: site.baseurl | append: '/assets/images/default-post.png' }}" alt="{{ post.title }}">
+                  {% include responsive-image.html src=featured_image alt=post.title loading="lazy" %}
                 </a>
                 {% if post.category %}
-                  <span class="post-category">{{ post.category }}</span>
+                  <span class="post-category--meta">{{ post.category }}</span>
                 {% endif %}
               </div>
               <div class="post-content">
@@ -209,7 +210,7 @@ layout: default
                   </div>
                 {% endif %}
                 <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
-                <a href="{{ post.url | relative_url }}" class="read-more">+ Read More</a>
+                <a href="{{ post.url | relative_url }}" class="read-more">Read Full Post</a>
               </div>
             </div>
           {% endfor %}
@@ -222,7 +223,7 @@ layout: default
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Browse by Topic</h2>
-          <a href="{{ site.baseurl }}/blog/tags/" class="view-all">
+          <a href="{{ site.baseurl }}/blog/tags/" class="read-more">
             View All Topics
           </a>
         </div>

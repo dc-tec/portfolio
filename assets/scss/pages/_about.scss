@@ -1,5 +1,6 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
+@use '../components/cards' as *;
 
 /* About Page Styles
 -------------------------------------------------- */
@@ -23,7 +24,6 @@
   
   &.gradient-text {
     background: linear-gradient(45deg, var(--accent-color), var(--info-color));
-    -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
@@ -42,7 +42,7 @@
   grid-template-columns: 1fr 3fr;
   gap: 3rem;
   
-  @media (max-width: 992px) {
+  @media (width <= 992px) {
     grid-template-columns: 1fr;
   }
 }
@@ -71,7 +71,8 @@
 }
 
 .contact-info {
-  @extend .card;
+  @extend %card-shared-styles;
+
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   
@@ -93,6 +94,7 @@
       a {
         color: var(--text-color);
         text-decoration: none;
+
         @include transition(color);
         
         &:hover {
@@ -104,7 +106,8 @@
 }
 
 .skills-section {
-  @extend .card;
+  @extend %card-shared-styles;
+
   padding: 1.5rem;
   
   .skill-category {
@@ -133,7 +136,8 @@
 }
 
 .certification-item {
-  @extend .card;
+  @extend %card-shared-styles;
+
   padding: 1.5rem;
   text-align: center;
   
@@ -149,7 +153,8 @@
 }
 
 .education-item {
-  @extend .card;
+  @extend %card-shared-styles;
+
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   
@@ -200,7 +205,6 @@
       
       &.gradient-text {
         background: linear-gradient(45deg, var(--accent-color), var(--info-color));
-        -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
         color: transparent;
@@ -215,6 +219,7 @@
     h2 {
       margin-top: 0;
     }
+
     p {
       margin-bottom: 1rem;
       line-height: 1.7;
@@ -237,7 +242,7 @@
 .timeline {
   position: relative;
   
-  &:before {
+  &::before {
     content: '';
     position: absolute;
     top: 0;

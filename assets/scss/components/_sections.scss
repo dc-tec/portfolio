@@ -19,6 +19,24 @@
   }
 }
 
+// Section title with underline
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+  }
+}
+
 // Content section variants
 .content-section {
   position: relative;

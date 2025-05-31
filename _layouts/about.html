@@ -17,7 +17,7 @@ layout: default
         {% if page.profile_image %}
         <div class="about-sidebar">
           <div class="profile-image">
-            <img src="{{ page.profile_image | relative_url }}" alt="{{ site.name }}" />
+            {% include responsive-image.html src=page.profile_image alt=site.name loading="lazy" %}
           </div>
           
           {% if page.contact_info %}

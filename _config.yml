@@ -1,46 +1,30 @@
 # Site
 repository: dc-tec/portfolio
-favicon: images/favicon.ico
+favicon: assets/images/favicon.ico
 
 # Content configuration version
 version: 2
 
-website_title: deCort.tech
-
 # Personal info
-name: Roel
 title: deCort.tech
+author: Roel de Cort
 email: roel@decort.tech
-website: decort.tech
 
-# Dark Mode (true/false/never)
-darkmode: true
+theme: null
 
 # Social links
 github_username: dc-tec
 gitlab_username: dc-tec
 linkedin_username: roel-de-cort
 
-# Additional icon links
-additional_links:
-  - title: Blog
-    icon: fas fa-blog
-    url: /blog/
-
-# Blog settings
+# Additiona# Blog settings
 show_excerpts: true
-permalink: /blog/:year/:month/:day/:title/
 
 # Collections
 collections:
   posts:
     output: true
     permalink: /blog/:year/:month/:day/:title/
-
-footer_show_references: false
-
-# Theme settings - use the GitHub Pages compatible approach
-# theme: minima # Commented out as we have a full custom theme
 
 # Build settings
 markdown: kramdown
@@ -50,7 +34,10 @@ sass:
   sass_dir: assets/scss
   style: compressed
   load_paths:
+    - .
     - assets/scss
+  sourcemap: development
+  quiet_deps: true
 
 plugins:
   - jekyll-seo-tag
@@ -58,10 +45,6 @@ plugins:
   - jekyll-paginate
 
 # Navigation
-header_pages:
-  - index.md
-  - blog/index.html
-
 defaults:
   - scope:
       path: ""
@@ -69,11 +52,6 @@ defaults:
     values:
       layout: "post"
       permalink: /blog/:year/:month/:day/:title/
-  - scope:
-      path: ""
-      type: "portfolio_sections"
-    values:
-      layout: "portfolio_section"
 
 # Blog pagination
 paginate: 9
@@ -90,3 +68,10 @@ exclude:
   - Dockerfile
   - docker-compose.yml
   - serve.sh
+  - ACTION_PLAN.md
+  - .devenv
+  - devenv.nix
+  - devenv.yaml
+  - devenv.lock
+  - .devenv.flake.nix
+  - .direnv

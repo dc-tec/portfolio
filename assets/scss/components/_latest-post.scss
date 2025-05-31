@@ -1,5 +1,7 @@
 @use '../abstracts/mixins' as *;
 @use '../abstracts/variables' as *;
+@use 'cards' as *;
+@use 'buttons' as *;
 
 .latest-post,
 .latest-post-section {
@@ -23,18 +25,30 @@
   }
 
   .latest-post-container {
+    @extend %card-shared-styles;
+
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: start;
     
-    @media (max-width: 768px) {
+    &:hover {
+      transform: none;
+      box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
+
+      &::before {
+        opacity: 0;
+      }
+    }
+    
+    @media (width <= 768px) {
       grid-template-columns: 1fr;
     }
   }
 
   .latest-post-image {
     position: relative;
+    z-index: 1;
     border-radius: 12px;
     overflow: hidden;
     
@@ -50,19 +64,14 @@
     }
 
     .post-category {
-      position: absolute;
-      top: 0.75rem;
-      left: 0.75rem;
-      background-color: var(--accent-color);
-      color: var(--bg-color-secondary);
-      padding: 0.25rem 0.75rem;
-      border-radius: 16px;
-      font-size: 0.8rem;
-      font-weight: 500;
+      @extend %post-category-latest-component-badge !optional;
     }
   }
 
   .latest-post-content {
+    position: relative;
+    z-index: 1;
+
     .post-meta {
       display: flex;
       gap: 1rem;
@@ -104,27 +113,9 @@
     margin-bottom: 2rem;
   }
   
-  .read-more-btn,
-  .cta-button {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.8rem 1.2rem;
-    background-color: var(--accent-color);
-    color: var(--bg-color-secondary);
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    
-    &:hover {
-      filter: brightness(90%);
-      color: var(--bg-color-secondary);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(var(--accent-color-rgb, 255, 165, 0), 0.3);
-    }
-    
+  .read-more-btn {
+    @extend %cta-button-base-styles;
+
     &::after {
       content: '→';
       margin-left: 8px;

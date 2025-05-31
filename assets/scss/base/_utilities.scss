@@ -1,5 +1,5 @@
-@use '../abstracts/mixins' as *;
-@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as mixins;
+@use '../abstracts/variables' as vars;
 
 // Display utilities
 .d-none { display: none !important; }
@@ -34,7 +34,7 @@
 }
 
 // Spacing utilities
-@each $name, $size in $spacing-scale {
+@each $name, $size in vars.$spacing-scale {
   .m-#{$name} { margin: $size !important; }
   .mt-#{$name} { margin-top: $size !important; }
   .mr-#{$name} { margin-right: $size !important; }
@@ -73,6 +73,7 @@
   
   &-wrap { white-space: normal !important; }
   &-nowrap { white-space: nowrap !important; }
+
   &-truncate {
     overflow: hidden !important;
     text-overflow: ellipsis !important;
@@ -81,8 +82,8 @@
 }
 
 // Font utilities
-@each $name, $size in $font-sizes {
-  .text-#{$name} { @include font-size($name); }
+@each $name, $size in vars.$font-sizes {
+  .text-#{$name} { @include mixins.font-size($name); }
 }
 
 .font {
@@ -110,7 +111,7 @@
 .bg-info { background-color: var(--info-color) !important; }
 
 // Border utilities
-@each $name, $radius in $border-radius {
+@each $name, $radius in vars.$border-radius {
   .rounded-#{$name} { border-radius: $radius !important; }
 }
 
@@ -142,13 +143,13 @@
 .overflow-scroll { overflow: scroll !important; }
 
 // Z-index utilities
-@each $name, $value in $z-index {
+@each $name, $value in vars.$z-index {
   .z-#{$name} { z-index: $value !important; }
 }
 
 // Responsive utilities
-@each $breakpoint, $width in $breakpoints {
-  @include breakpoint($breakpoint) {
+@each $breakpoint, $width in vars.$breakpoints {
+  @include mixins.respond-to($breakpoint) {
     .d-#{$breakpoint}-none { display: none !important; }
     .d-#{$breakpoint}-block { display: block !important; }
     .d-#{$breakpoint}-inline { display: inline !important; }

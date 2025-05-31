@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '../abstracts/mixins' as *;
 @use '../abstracts/variables' as *;
 
@@ -6,10 +7,10 @@
  * This file contains global styles for post category tags throughout the site
  */
 
-.post-category {
+%post-category-base {
   display: inline-block; /* Force inline-block instead of block/flex */
   background-color: var(--accent-color); 
-  color: #000000; /* Changed to black */
+  color: #000; /* Changed to black */
   padding: 0.2rem 0.6rem; /* Even smaller padding */
   border-radius: 12px; /* Slightly reduced border-radius */
   font-size: 0.75rem; /* Reduced font size */
@@ -26,4 +27,131 @@
   &:hover {
     opacity: 1;
   }
+}
+
+.post-category {
+  @extend %post-category-base;
+}
+
+.post-category--meta {
+  background-color: var(--bg-color-secondary);
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--secondary-color);
+  text-transform: none;
+  opacity: 1;
+  transition: none;
+
+  &:hover {
+    opacity: 1; 
+  }
+}
+
+%post-category-image-badge {
+  @extend %post-category-base;
+
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: var(--bg-color);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: none;
+  opacity: 1;
+  transition: none;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.post-category--image-badge {
+  @extend %post-category-image-badge;
+}
+
+.post-category--image-badge-lighttext {
+  @extend %post-category-image-badge;
+
+  color: white;
+  z-index: 2;
+}
+
+.post-category--meta-badge {
+  @extend %post-category-base; 
+
+  color: var(--bg-color);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: capitalize;
+  opacity: 1; 
+  transition: none; 
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.post-category--top-right-badge {
+  @extend %post-category-base; 
+
+  position: absolute;
+  top: map.get($spacing-scale, 'sm');
+  right: map.get($spacing-scale, 'sm');
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: map.get($border-radius, 'full');
+  font-size: 0.875rem;
+  text-transform: none; 
+  opacity: 1; 
+  transition: none; 
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.post-category--latest-post-badge {
+  @extend %post-category-base; 
+
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  text-transform: none; 
+  opacity: 1; 
+  transition: none; 
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+%post-category-latest-component-badge {
+  @extend %post-category-base;
+
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  color: var(--bg-color-secondary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  text-transform: none;
+  opacity: 1;
+  transition: none;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.post-category--latest-component-badge {
+  @extend %post-category-latest-component-badge;
 } 

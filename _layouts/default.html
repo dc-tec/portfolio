@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="{{ site.author }}" />
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}" />
   <title>{{ page.title | default: site.title }}</title>
   <!-- Prevent theme flicker -->
   <script>
@@ -19,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="{{ '/assets/scss/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
   <!-- Header -->
@@ -27,9 +29,9 @@
     <div class="header-container">
       <div class="site-branding">
         <a href="{{ site.baseurl }}/" class="site-logo">
-          <img src="{{ site.logo | default: '/assets/images/logo.png' | relative_url }}" alt="{{ site.name }}">
+          {% include responsive-image.html src="assets/images/logo.png" alt=site.author loading="eager" %}
         </a>
-        <a href="{{ site.baseurl }}/" class="site-title">{{ site.website_title }}</a>
+        <a href="{{ site.baseurl }}/" class="site-title">{{ site.title }}</a>
       </div>
       
       <nav class="site-nav">
@@ -70,9 +72,9 @@
         <!-- About Section -->
         <div class="footer-about">
           <a href="{{ site.baseurl }}/" class="footer-logo">
-            <img src="{{ site.logo | default: '/assets/images/logo.png' | relative_url }}" alt="{{ site.name }}">
+            {% include responsive-image.html src="assets/images/logo.png" alt=site.author loading="lazy" %}
           </a>
-          <h3>Created with <i class="fas fa-mug-hot accent-color"></i> by {{ site.name }}</h3>
+          <h3>Created with <i class="fas fa-mug-hot accent-color"></i> by {{ site.author }}</h3>
           <p class="footer-description">{{ site.description }}</p>
         </div>
       </div>
@@ -99,72 +101,12 @@
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copyright">&copy; {{ site.time | date: '%Y' }} {{ site.name }}. All rights reserved.</p>
+        <p class="footer-copyright">&copy; {{ site.time | date: '%Y' }} {{ site.author }}. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
-  <script>
-    // Mobile Menu Toggle
-    document.querySelector('.nav-toggle').addEventListener('click', function() {
-      this.classList.toggle('active');
-      document.querySelector('.nav-menu').classList.toggle('active');
-    });
-
-    // Theme Toggle
-    document.addEventListener('DOMContentLoaded', function() {
-      const themeToggle = document.querySelector('.theme-toggle');
-      const icon = themeToggle.querySelector('i');
-      
-      // Set initial icon based on theme
-      if (document.documentElement.classList.contains('dark-mode')) {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-      }
-      
-      themeToggle.addEventListener('click', function() {
-        document.documentElement.classList.toggle('dark-mode');
-        
-        if (document.documentElement.classList.contains('dark-mode')) {
-          icon.classList.remove('fa-moon');
-          icon.classList.add('fa-sun');
-          localStorage.setItem('theme', 'dark-mode');
-        } else {
-          icon.classList.remove('fa-sun');
-          icon.classList.add('fa-moon');
-          localStorage.setItem('theme', 'light-mode');
-        }
-      });
-      
-      // Header Scroll Effect
-      const header = document.querySelector('.site-header');
-      let lastScrollY = window.scrollY;
-      
-      // Function to update header on scroll
-      function updateHeaderOnScroll() {
-        // At top of page - more transparent
-        if (window.scrollY < 10) {
-          header.style.backgroundColor = 'rgba(var(--header-bg-rgb), 0.5)';
-          header.style.backdropFilter = 'blur(7px)';
-          header.style.boxShadow = 'none';
-        } 
-        // Scrolled down - more opaque
-        else {
-          header.style.backgroundColor = 'rgba(var(--header-bg-rgb), 0.85)';
-          header.style.backdropFilter = 'blur(15px)';
-          header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-        }
-        
-        lastScrollY = window.scrollY;
-      }
-      
-      // Initial call
-      updateHeaderOnScroll();
-      
-      // Add scroll event listener
-      window.addEventListener('scroll', updateHeaderOnScroll);
-    });
-  </script>
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>
 </html> 

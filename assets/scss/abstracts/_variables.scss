@@ -3,6 +3,15 @@ $container-width: 1140px;
 $header-height: 60px;
 $footer-height: 60px;
 
+// Breakpoints
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  'xxl': 1400px
+);
+
 // Spacing
 $spacing-scale: (
   'xs': 0.25rem,   // 4px
@@ -28,7 +37,6 @@ $font-sizes: (
   '6xl': 3.75rem,   // 60px
   '7xl': 4.5rem     // 72px
 );
-
 $font-weights: (
   'light': 300,
   'normal': 400,
@@ -72,7 +80,7 @@ $shadows: (
 :root {
   // Terminal Colors
   --terminal-bg: #1a1b26;
-  --border-color: rgba(255, 255, 255, 0.1);
+  --border-color: rgb(255 255 255 / 10%);
   --text-primary: #a9b1d6;
   --text-secondary: #787c99;
   --accent-color: #7aa2f7;

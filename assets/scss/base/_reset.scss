@@ -19,8 +19,6 @@ html {
   scroll-behavior: smooth;
   min-height: 100%;
   text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  background-color: var(--bg-color);
   background: linear-gradient(
     to right,
     var(--bg-color) 0%,
@@ -77,7 +75,7 @@ html.dark-mode::after {
 
 body {
   min-height: 100vh;
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizespeed;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

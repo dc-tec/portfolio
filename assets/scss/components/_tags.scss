@@ -1,0 +1,119 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+/* Common Tag Cloud Styles */
+.tag-cloud,
+.tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto;
+}
+
+/* Tag Bubble Component Styles - Increased specificity */
+.tag-cloud .tag-bubble,
+.tags-cloud .tag-bubble,
+.tags-section .tag-cloud .tag-bubble,
+.tags-container .tag-cloud .tag-bubble,
+.tag-bubble {
+  position: relative;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 8px 16px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid var(--border-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  box-shadow: 0 2px 10px rgb(var(--bg-color-secondary-rgb) / 30%);
+  opacity: 0;
+  transform: translateY(20px);
+  font-size: 0.9rem;
+  line-height: 1.2;
+  white-space: nowrap;
+
+  /* Show immediately if not animated or active */
+  &.active,
+  &:not(.animate-in) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .tag-name {
+    font-size: 1em;
+    margin-right: 0;
+  }
+
+  .tag-count {
+    font-size: 0.8em;
+    background-color: var(--bg-color-secondary);
+    color: var(--secondary-color);
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    font-weight: 600;
+  }
+
+  /* Hover state */
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgb(var(--accent-color-rgb) / 20%);
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+
+    .tag-count {
+      background-color: rgb(255 255 255 / 30%);
+      color: white;
+    }
+  }
+
+  /* Active state */
+  &.active {
+    background-color: var(--accent-color);
+    color: white;
+    opacity: 1;
+    transform: translateY(0);
+
+    .tag-count {
+      background-color: rgb(255 255 255 / 30%);
+      color: white;
+    }
+  }
+
+  /* See more modifier */
+  &.see-more,
+  &.tag-bubble--see-more {
+    border-style: dashed;
+
+    &:hover {
+      border-style: solid;
+    }
+  }
+
+  /* Animation entrance */
+  &.animate-in {
+    animation: bubbleIn 0.5s forwards;
+  }
+}
+
+/* Bubble in animation */
+@keyframes bubbleIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 

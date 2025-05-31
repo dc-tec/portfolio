@@ -1,7 +1,13 @@
 source "https://rubygems.org"
 
-# Use GitHub Pages
-gem "github-pages", group: :jekyll_plugins
+# Specify Jekyll version directly
+gem "jekyll", "~> 4.3" # Or your desired latest version
+
+# Modern Sass converter
+gem "jekyll-sass-converter", "~> 3.0"
+
+# Comment out or remove GitHub Pages gem if managing Jekyll version directly
+# gem "github-pages", group: :jekyll_plugins
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do

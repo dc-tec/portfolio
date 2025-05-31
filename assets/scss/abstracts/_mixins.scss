@@ -1,9 +1,16 @@
+@use "sass:map";
+@use "sass:list";
+@use "sass:string";
+@use "variables" as vars;
+
 // Transitions
 @mixin transition($properties...) {
   $transitions: ();
+
   @each $prop in $properties {
-    $transitions: append($transitions, $prop 0.3s ease, comma);
+    $transitions: list.append($transitions, string.unquote($prop + " 0.3s ease"), comma);
   }
+
   transition: $transitions;
 }
 
@@ -20,8 +27,8 @@
     height: 100%;
     background: linear-gradient(
       #{$direction},
-      rgba(#{$start-color}, #{$opacity}) 0%,
-      rgba(#{$end-color}, #{$opacity}) 100%
+      rgb(var(--start-color) / #{$opacity}) 0%,
+      rgb(var(--end-color) / #{$opacity}) 100%
     );
     z-index: 0;
   }
@@ -30,25 +37,17 @@
 // Backdrop Blur
 @mixin backdrop-blur($amount: 15px) {
   backdrop-filter: blur($amount);
-  -webkit-backdrop-filter: blur($amount);
 }
 
 // Breakpoints
-$breakpoints: (
-  'sm': 576px,
-  'md': 768px,
-  'lg': 992px,
-  'xl': 1200px,
-  'xxl': 1400px
-);
-
-@mixin breakpoint($size) {
-  @if map-has-key($breakpoints, $size) {
-    @media (min-width: map-get($breakpoints, $size)) {
+@mixin respond-to($size) {
+  @if map.has-key(vars.$breakpoints, $size) {
+    /* stylelint-disable-next-line media-feature-name-no-unknown */
+    @media (width >= map.get(vars.$breakpoints, $size)) {
       @content;
     }
   } @else {
-    @warn "Unknown breakpoint `#{$size}`. Available breakpoints are: #{map-keys($breakpoints)}";
+    @warn "Unknown breakpoint `#{$size}`. Available breakpoints are: #{map.keys(vars.$breakpoints)}";
   }
 }
 
@@ -68,10 +67,10 @@ $breakpoints: (
     '7xl': 4.5rem
   );
   
-  @if map-has-key($scale, $size) {
-    font-size: map-get($scale, $size);
+  @if map.has-key($scale, $size) {
+    font-size: map.get($scale, $size);
   } @else {
-    @warn "Unknown font size `#{$size}`. Available sizes are: #{map-keys($scale)}";
+    @warn "Unknown font size `#{$size}`. Available sizes are: #{map.keys($scale)}";
   }
 }
 
@@ -87,13 +86,14 @@ $breakpoints: (
   background-color: var(--card-bg);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(var(--border-color), 0.1);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
+  border: 1px solid rgb(var(--border-color) / 10%);
+
   @include transition(transform, box-shadow);
   
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 30px rgb(0 0 0 / 10%);
   }
 }
 
@@ -121,7 +121,7 @@ $breakpoints: (
   grid-template-columns: repeat($columns-desktop, minmax($min-width, 1fr));
   gap: $gap;
   
-  @media (max-width: map-get($breakpoints, 'md')) {
+  @media (max-width: map.get(vars.$breakpoints, 'md')) {
     grid-template-columns: 1fr;
   }
 }

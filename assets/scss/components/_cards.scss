@@ -1,16 +1,27 @@
+@use 'sass:map';
 @use '../abstracts/mixins' as *;
 @use '../abstracts/variables' as *;
 
-// Card component
-.card {
+// Placeholder for shared card styles
+%card-shared-styles {
   background-color: var(--card-bg);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-bottom: 24px;
-  border: 1px solid rgba(var(--border-color), 0.1);
+  border: 1px solid rgb(var(--border-color) / 10%);
   position: relative;
+  
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgb(0 0 0 / 10%);
+  }
+}
+
+// Card component
+.card {
+  @extend %card-shared-styles;
   
   &::before {
     content: "";
@@ -29,13 +40,9 @@
     z-index: 0;
   }
   
-  &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    
-    &::before {
-      opacity: 0.5;
-    }
+  // Hover for the ::before pseudo-element, distinct from card's own hover
+  &:hover::before {
+    opacity: 0.5;
   }
   
   .card-header {
@@ -43,9 +50,8 @@
     border-bottom: 1px solid var(--border-color);
     position: relative;
     z-index: 1;
-    background: rgba(var(--bg-color-rgb), 0.7);
+    background: rgb(var(--bg-color-rgb) / 70%);
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
   }
   
   .card-body {
@@ -59,9 +65,8 @@
     border-top: 1px solid var(--border-color);
     position: relative;
     z-index: 1;
-    background: rgba(var(--bg-color-rgb), 0.5);
+    background: rgb(var(--bg-color-rgb) / 50%);
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
   }
   
   // Card media
@@ -83,7 +88,7 @@
   
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 30px rgb(0 0 0 / 10%);
   }
 }
 
@@ -105,7 +110,7 @@
   .card-header,
   .card-body,
   .card-footer {
-    padding: map-get($spacing-scale, 'sm');
+    padding: map.get($spacing-scale, 'sm');
   }
 }
 
@@ -113,19 +118,19 @@
   .card-header,
   .card-body,
   .card-footer {
-    padding: map-get($spacing-scale, 'lg');
+    padding: map.get($spacing-scale, 'lg');
   }
 }
 
 // Post Grid - For displaying post cards in a grid layout
 .posts-grid {
-  @include responsive-grid(auto-fill, 300px, 24px);
   margin-bottom: 40px;
+  @include responsive-grid(auto-fill, 300px, 24px);
 }
 
 // Card grid
 .card-grid {
-  @include responsive-grid(auto-fit, 300px, map-get($spacing-scale, 'md'));
+  @include responsive-grid(auto-fit, 300px, map.get($spacing-scale, 'md'));
 }
 
 // Card with overlay
@@ -142,11 +147,11 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: map-get($spacing-scale, 'md');
+    padding: map.get($spacing-scale, 'md');
     background: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.8),
-      rgba(0, 0, 0, 0)
+      rgb(0 0 0 / 80%),
+      rgb(0 0 0 / 0%)
     );
     color: white;
   }
@@ -155,16 +160,17 @@
 // Interactive cards
 .card-interactive {
   cursor: pointer;
+
   @include transition(transform, box-shadow);
   
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 24px rgb(0 0 0 / 15%);
   }
   
   &:active {
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgb(0 0 0 / 10%);
   }
 }
 
@@ -174,12 +180,12 @@
   
   .badge {
     position: absolute;
-    top: map-get($spacing-scale, 'sm');
-    right: map-get($spacing-scale, 'sm');
+    top: map.get($spacing-scale, 'sm');
+    right: map.get($spacing-scale, 'sm');
     padding: 0.25rem 0.5rem;
     background-color: var(--accent-color);
     color: white;
-    border-radius: map-get($border-radius, 'sm');
+    border-radius: map.get($border-radius, 'sm');
     font-size: 0.875rem;
     font-weight: 500;
   }

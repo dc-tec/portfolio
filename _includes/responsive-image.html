@@ -1,0 +1,19 @@
+{% comment %}
+  Responsive image include with WebP support
+  
+  Usage:
+  {% include responsive-image.html src="assets/images/profile.png" alt="Profile image" class="profile-image" loading="lazy" %}
+{% endcomment %}
+
+{% assign webp_path = include.src | replace: '.png', '.webp' | replace: '.jpg', '.webp' | replace: '.jpeg', '.webp' %}
+
+<picture>
+  <source srcset="{{ webp_path | relative_url }}" type="image/webp">
+  <img 
+    src="{{ include.src | relative_url }}" 
+    alt="{{ include.alt | default: '' }}"
+    {% if include.class %}class="{{ include.class }}"{% endif %}
+    {% if include.width %}width="{{ include.width }}"{% endif %}
+    {% if include.height %}height="{{ include.height }}"{% endif %}
+    {% if include.loading %}loading="{{ include.loading }}"{% else %}loading="lazy"{% endif %}>
+</picture> 
