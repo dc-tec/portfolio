@@ -77,7 +77,6 @@ title: Blog
   </div>
 </div>
 
-<script src="{{ site.baseurl }}/assets/js/simple-jekyll-search.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Add animation to tag bubbles
@@ -87,49 +86,8 @@ title: Blog
       bubble.classList.add('animate-in');
     });
     
-    // Search functionality
-    SimpleJekyllSearch({
-      searchInput: document.getElementById('search-input'),
-      resultsContainer: document.getElementById('search-results'),
-      json: '{{ site.baseurl }}/search.json',
-      searchResultTemplate: '<div class="search-result-item"><h4><a href="{url}">{title}</a></h4><p>{excerpt}</p><span class="search-date">{date}</span></div>',
-      noResultsText: '<div class="no-search-results">No results found</div>',
-      limit: 10,
-      fuzzy: false,
-      exclude: ['Welcome']
-    });
-    
-    const searchInput = document.getElementById('search-input');
-    const searchResults = document.getElementById('search-results');
-    const clearButton = document.getElementById('clear-search');
-    const blogGrid = document.getElementById('blog-grid');
-    const noResults = document.getElementById('no-results');
-    
-    // Show/hide search results and clear button
-    searchInput.addEventListener('input', function() {
-      const query = this.value.trim();
-      
-      if (query.length > 0) {
-        clearButton.style.display = 'block';
-        searchResults.style.display = 'block';
-        blogGrid.style.display = 'none';
-      } else {
-        clearButton.style.display = 'none';
-        searchResults.style.display = 'none';
-        blogGrid.style.display = 'grid';
-        noResults.style.display = 'none';
-      }
-    });
-    
-    // Clear search
-    clearButton.addEventListener('click', function() {
-      searchInput.value = '';
-      searchInput.focus();
-      clearButton.style.display = 'none';
-      searchResults.style.display = 'none';
-      blogGrid.style.display = 'grid';
-      noResults.style.display = 'none';
-    });
+    // Initialize blog search functionality
+    initializeBlogSearch();
     
     // Check if coming from a tag page and highlight that tag
     const referrer = document.referrer;
@@ -146,4 +104,126 @@ title: Blog
       }
     }
   });
+
+  // Blog Search Implementation
+  function initializeBlogSearch() {
+    const searchInput = document.getElementById('search-input');
+    const clearButton = document.getElementById('clear-search');
+    const searchResults = document.getElementById('search-results');
+    const blogGrid = document.getElementById('blog-grid');
+    const noResults = document.getElementById('no-results');
+    
+    if (!searchInput || !searchResults || !blogGrid) {
+      return; // Exit if elements don't exist
+    }
+    
+    let blogSearchInstance = null;
+    let originalPosts = null;
+    
+    // Initialize Simple Jekyll Search for blog
+    function initBlogSearch() {
+      if (typeof SimpleJekyllSearch !== 'undefined' && !blogSearchInstance) {
+        blogSearchInstance = SimpleJekyllSearch({
+          searchInput: searchInput,
+          resultsContainer: searchResults,
+          json: '{{ site.baseurl }}/blog/search.json',
+          searchResultTemplate: '<div class="search-result-item"><h4><a href="{url}">{title}</a></h4><p>{excerpt}</p><div class="search-date">{date}</div></div>',
+          noResultsText: '<div class="no-search-results">No results found for your search.</div>',
+          limit: 10,
+          fuzzy: false,
+          exclude: ['date']
+        });
+        
+        // Store original posts for restoration
+        if (!originalPosts) {
+          originalPosts = blogGrid.innerHTML;
+        }
+      }
+    }
+    
+    // Initialize search on first input
+    searchInput.addEventListener('focus', function() {
+      if (!blogSearchInstance) {
+        initBlogSearch();
+      }
+    });
+    
+    // Handle input changes
+    searchInput.addEventListener('input', function() {
+      const query = this.value.trim();
+      
+      if (query.length > 0) {
+        // Show clear button and search results
+        if (clearButton) {
+          clearButton.style.display = 'flex';
+        }
+        searchResults.style.display = 'block';
+        
+        // Hide original blog grid and no results
+        blogGrid.style.display = 'none';
+        noResults.style.display = 'none';
+        
+        // If we have search results, check if they're empty
+        setTimeout(() => {
+          const hasResults = searchResults.querySelector('.search-result-item');
+          const hasNoResultsMsg = searchResults.querySelector('.no-search-results');
+          
+          if (!hasResults && hasNoResultsMsg) {
+            // Show custom no results message
+            searchResults.style.display = 'none';
+            noResults.style.display = 'block';
+          }
+        }, 100);
+        
+      } else {
+        // Hide search UI and restore original view
+        if (clearButton) {
+          clearButton.style.display = 'none';
+        }
+        searchResults.style.display = 'none';
+        blogGrid.style.display = 'grid';
+        noResults.style.display = 'none';
+      }
+    });
+    
+    // Clear search functionality
+    if (clearButton) {
+      clearButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        searchInput.value = '';
+        searchResults.style.display = 'none';
+        clearButton.style.display = 'none';
+        blogGrid.style.display = 'grid';
+        noResults.style.display = 'none';
+        searchInput.focus();
+      });
+    }
+    
+    // Handle escape key
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        this.value = '';
+        searchResults.style.display = 'none';
+        if (clearButton) {
+          clearButton.style.display = 'none';
+        }
+        blogGrid.style.display = 'grid';
+        noResults.style.display = 'none';
+        this.blur();
+      }
+    });
+    
+    // Close search results when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!searchInput.contains(e.target) && 
+          !searchResults.contains(e.target) && 
+          !clearButton?.contains(e.target)) {
+        if (searchInput.value.trim() === '') {
+          searchResults.style.display = 'none';
+          blogGrid.style.display = 'grid';
+          noResults.style.display = 'none';
+        }
+      }
+    });
+  }
 </script> 
