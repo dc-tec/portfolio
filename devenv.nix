@@ -111,12 +111,22 @@
       fi
     done
     
+    # Remove original images after WebP conversion
+    echo "🗑️  Removing original images (keeping backups)..."
+    for img in assets/images/*.png assets/images/*.jpg assets/images/*.jpeg; do
+      if [ -f "$img" ]; then
+        echo "   Removing $(basename "$img")..."
+        rm "$img"
+      fi
+    done
+    
     echo "✅ Image optimization complete!"
     echo "💡 Original images backed up to assets/images/backup/"
+    echo "🚀 Only WebP versions remain in assets/images/"
     echo ""
     echo "📊 File size comparison:"
     du -sh assets/images/backup/ 2>/dev/null && echo "   Original total: $(du -sh assets/images/backup/ | cut -f1)"
-    echo "   Optimized total: $(du -sh assets/images/*.{png,jpg,jpeg,webp} 2>/dev/null | tail -1 | cut -f1)"
+    echo "   WebP total: $(du -sh assets/images/*.webp 2>/dev/null | tail -1 | cut -f1 2>/dev/null || echo '0B')"
   '';
 
   enterShell = ''
