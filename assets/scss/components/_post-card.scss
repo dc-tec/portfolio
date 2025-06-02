@@ -1,0 +1,300 @@
+@use 'sass:map';
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as *;
+@use '../components/buttons' as *;
+@use './cards' as *; // To access %card-shared-styles
+
+// Base post card style
+.post-card {
+  @extend %card-shared-styles;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%; // Ensure cards in a grid take up equal height
+
+  // Default hover from %card-shared-styles is fine for a base,
+  // variations can override if needed.
+
+  &__image {
+    position: relative;
+    overflow: hidden;
+    display: block; // Make it a block element for easier sizing
+    aspect-ratio: 16 / 9; // Adding default aspect ratio
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // Common default
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05); // Common image zoom effect
+    }
+  }
+
+  &__content {
+    padding: map.get(vars.$spacing-scale, 'md'); // Standardized base padding
+    flex-grow: 1; // Allow content to take available space
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: map.get(vars.$font-sizes, 'lg'); // A sensible default
+    margin-bottom: map.get(vars.$spacing-scale, 'xs');
+
+    a {
+      color: var(--text-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: var(--accent-color);
+      }
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: map.get(vars.$spacing-scale, 'sm');
+    color: var(--secondary-color);
+    font-size: map.get(vars.$font-sizes, 'sm');
+    margin-bottom: map.get(vars.$spacing-scale, 'xs');
+
+    &-item {
+      display: flex;
+      align-items: center;
+
+      i {
+        margin-right: map.get(vars.$spacing-scale, 'xs');
+      }
+    }
+  }
+  
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: map.get(vars.$spacing-scale, 'xs');
+    margin-bottom: map.get(vars.$spacing-scale, 'sm');
+
+    // Individual tag styling will come from the _tags.scss component
+  }
+
+  &__excerpt {
+    color: var(--secondary-color);
+    font-size: map.get(vars.$font-sizes, 'base');
+    line-height: 1.6; // vars.$line-height-base was undefined, using a common default
+    margin-bottom: map.get(vars.$spacing-scale, 'sm');
+    flex-grow: 1; // Allow excerpt to take space if title/meta are short
+  }
+
+  &__read-more {
+    @include button-link-styling; // Use a mixin if available, or define base styles
+
+    margin-top: auto; // Pushes to the bottom if card is flex column
+    align-self: flex-start;
+  }
+}
+
+// --- Variations ---
+
+// Example: Modifier for a featured card that might have a different hover or image treatment
+.post-card--featured {
+  // Specific featured styles, e.g., different shadow or border
+  // box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  border: none;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 10%); // Initial shadow for featured grid cards
+
+  // .post-card__image {
+  //   height: 250px; // Fixed height for featured image
+  //   aspect-ratio: auto;
+  // }
+}
+
+// Example: Modifier for cards used in a list view
+.post-card--list-item {
+  flex-direction: row;
+  height: auto; // Adjust height for list items
+
+  .post-card__image {
+    width: 200px; // Fixed width for image in list view
+    height: auto;
+    aspect-ratio: 4 / 3; // Or a specific aspect ratio for list view images
+    flex-shrink: 0;
+  }
+
+  .post-card__content {
+    flex: 1;
+    padding-left: map.get(vars.$spacing-scale, 'md'); // Corrected from: var(--card-padding, #{map.get(vars.$spacing-scale, 'md') * 1.5});
+  }
+
+  .post-card__excerpt {
+    // Potentially limit lines for list view
+    // @include line-clamp(3);
+  }
+}
+
+// Modifier for cards that should have a full clickable area
+.post-card--clickable {
+  cursor: pointer;
+
+  .card-link-overlay { // Assumes an <a> tag with this class wraps the card content in HTML
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; // Ensure it's above other content but below interactive elements if any
+  }
+
+  // Ensure content like titles and read-more are above the overlay if they are links themselves
+  .post-card__title a,
+  .post-card__read-more {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+// Modifier for image object-fit
+.post-card--image-contain {
+  .post-card__image img {
+    object-fit: contain;
+    padding: map.get(vars.$spacing-scale, 'sm'); // Optional padding if image is contained, to avoid touching edges
+    background-color: var(--image-contain-bg, var(--bg-color-secondary)); // Optional background for contained image
+  }
+}
+
+.post-card--image-scaledown {
+   .post-card__image img {
+    object-fit: scale-down;
+  }
+}
+
+// Modifier for fixed image heights (alternative to aspect-ratio)
+.post-card--image-fixed-sm {
+  .post-card__image {
+    height: 180px;
+    aspect-ratio: auto;
+  }
+}
+
+.post-card--image-fixed-md {
+  .post-card__image {
+    height: 200px;
+    aspect-ratio: auto;
+  }
+}
+
+.post-card--image-fixed-lg {
+  .post-card__image {
+    height: 250px;
+    aspect-ratio: auto;
+  }
+}
+
+
+// Specific hover effects (can be combined with other modifiers)
+.post-card--hover-lift {
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgb(0 0 0 / 15%);
+  }
+}
+
+.post-card--hover-shadow {
+ &:hover {
+    box-shadow: 0 15px 35px rgb(0 0 0 / 15%);
+  }
+}
+
+// Custom hover for featured grid cards
+.post-card--featured-hover {
+  // Default box-shadow can be inherited or set if different from base card
+  // box-shadow: 0 4px 15px rgb(0 0 0 / 10%); // Example initial state if needed
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgb(0 0 0 / 15%); // Specific hover shadow
+  }
+}
+
+// Custom styles for featured list items, building on .post-card--list-item
+.post-card--featured-list-item-custom {
+  // This class would be ADDED to a .post-card.post-card--list-item element
+  // It applies styles previously in .featured-posts.list-view .featured-post
+
+  .post-card__image {
+    width: 300px;
+    height: 200px;
+    aspect-ratio: auto; // Override aspect-ratio from base list-item if fixed height is desired
+
+    @media (width <= 768px) {
+      width: 250px;
+      height: 160px;
+    }
+
+    @media (width <= 640px) {
+      width: 100%; // Takes full width of the card when stacked
+      height: 200px; // Maintain a fixed height
+    }
+  }
+
+  .post-card__excerpt {
+    -webkit-line-clamp: 3;
+    display: -webkit-box; // Required for line-clamping
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (width <= 640px) {
+    // If .post-card--list-item base doesn't handle this for all cases
+    // and this specific variant needs to stack differently.
+    flex-direction: column;
+
+    .post-card__image {
+      // Ensure image specific styles for stacking are considered
+      // e.g., if margin is needed or width should be 100% (already set above for 640px)
+    }
+
+    .post-card__content {
+      padding-left: map.get(vars.$spacing-scale, 'md'); // Keep consistent padding or adjust as needed for stacked view
+    }
+  }
+}
+
+// Custom hover for blog index page cards
+.post-card--blog-hover {
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgb(0 0 0 / 15%); // Specific shadow from old .blog-card
+
+    // Note: Default image zoom and title color change on hover
+    // are already handled by base .post-card__image:hover img
+    // and .post-card__title a:hover respectively.
+    // This modifier primarily adds/overrides the card's transform and box-shadow on hover.
+  }
+}
+
+// Custom hover for tags page cards
+.post-card--tag-page-hover {
+  // Base .post-card already includes transitions for transform and box-shadow.
+  // Initial box-shadow is inherited from .post-card.
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(var(--bg-color-secondary-rgb), 0.5); // Specific hover shadow
+  }
+}
+
+// Custom background for tags page cards
+.post-card--tag-page-custom-bg {
+  background-color: var(--bg-color);
+
+  // The base .post-card (via %card-shared-styles) has a border:
+  // border: 1px solid rgb(var(--border-color) / 10%);
+  // This variant specifically needs NO border and a custom initial shadow.
+  border: none;
+  box-shadow: 0 4px 15px rgb(var(--bg-color-secondary-rgb) / 30%);
+} 

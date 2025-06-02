@@ -1,8 +1,8 @@
-/* Navigation Cards for Home Page
--------------------------------------------------- */
+@use 'sass:map';
+@use '../abstracts/variables' as vars;
 
 .navigation-section {
-  padding: 3rem 0;
+  padding: map.get(vars.$spacing-scale, '3xl') 0;
   background-color: var(--content-bg);
 }
 

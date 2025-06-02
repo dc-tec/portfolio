@@ -154,4 +154,13 @@
 
 .post-category--latest-component-badge {
   @extend %post-category-latest-component-badge;
+}
+
+.post-category--card-badge {
+  @extend .post-category--meta; // Use the base style of .post-category--meta
+
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
 } 

@@ -9,7 +9,8 @@ scss/
 ├── abstracts/
 │   ├── _variables.scss    # Global variables and settings
 │   ├── _mixins.scss      # Reusable mixins and functions
-│   └── _themes.scss      # Theme definitions (light/dark)
+│   ├── _themes.scss      # Theme definitions (light/dark)
+│   └── _animations.scss  # NEW: Centralized CSS keyframe animations
 ├── base/
 │   ├── _reset.scss       # Modern CSS reset
 │   ├── _typography.scss  # Typography rules
@@ -21,7 +22,10 @@ scss/
 │   ├── _hero.scss            # Hero section with profile and animations
 │   ├── _latest-post.scss     # Latest blog post component
 │   ├── _navigation-cards.scss # Navigation card components
+│   ├── _post-card.scss       # NEW: Unified component for blog post cards
 │   ├── _post-category.scss   # Post category display components
+│   ├── _search-form.scss     # NEW: Search input and results display component
+│   ├── _section-header.scss  # NEW: Header for sections (title + view all link)
 │   ├── _sections.scss        # General section components
 │   ├── _tags.scss            # Tag cloud and tag bubble components
 │   └── _terminal.scss        # Terminal emulator UI component
@@ -37,7 +41,7 @@ scss/
 
 **Main Stylesheet**: `assets/css/style.scss` - Imports all SCSS modules using the @use directive
 
-## Features
+## Key Features
 
 - 🎨 Modern CSS reset
 - 🌓 Light and dark theme support
@@ -46,6 +50,49 @@ scss/
 - 🛠 Utility-first classes
 - 🎯 Performance optimized
 - ♿️ Accessibility focused
+- 📏 **Enhanced spacing system** for better visual hierarchy
+- 🖼️ **Improved layout proportions** for desktop and mobile
+
+## Layout System
+
+### Container Width
+
+The container system uses a **1040px max-width** for optimal reading experience:
+
+- Desktop: Comfortable content width with generous side margins
+- Tablet: Responsive padding that adapts to screen size
+- Mobile: Optimized spacing for touch interfaces
+
+### Spacing Scale
+
+Enhanced spacing system for better visual rhythm:
+
+```scss
+$spacing-scale: (
+  "xs": 0.25rem,
+  // 4px  - Micro adjustments
+  "sm": 0.5rem,
+  // 8px  - Small gaps
+  "md": 1rem,
+  // 16px - Standard spacing
+  "lg": 1.5rem,
+  // 24px - Comfortable gaps
+  "xl": 2rem,
+  // 32px - Section separations
+  "2xl": 3rem,
+  // 48px - Major sections
+  "3xl": 4rem // 64px - Large section breaks,,,
+);
+```
+
+### Section Hierarchy
+
+Improved vertical rhythm with consistent spacing:
+
+- **Hero sections**: Enhanced breathing room between content blocks
+- **Major sections**: Clear visual separation with generous margins
+- **Content sections**: Balanced internal spacing
+- **Section separators**: Subtle visual dividers between major content areas
 
 ## Usage
 
@@ -180,6 +227,12 @@ Available sizes: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
 - `.position-{relative|absolute|fixed|sticky}`
 - `.z-{below|base|above|header|modal|tooltip|toast}`
 
+#### Section Separators
+
+- `.section-separator` - Creates visual break between major sections
+- `.section-separator--dots` - Dot-style separator
+- `.section-separator--compact` - Smaller separator for minor breaks
+
 #### Accessibility
 
 - `.sr-only` - Screen reader only
@@ -249,13 +302,14 @@ Page-specific styles for the about/CV page including:
 
 Comprehensive blog styling including:
 
-- Post listing layouts
-- Individual post formatting
+- Post listing layouts (now largely using the `_post-card.scss` component)
+- Individual post formatting (container style refined)
 - Code syntax highlighting
 - Image galleries
 - Responsive typography
 - Reading time indicators
-- Tag and category filtering
+- Tag and category filtering (tag display styles centralized in `_tags.scss`)
+- Search functionality (styles moved to `_search-form.scss` component)
 
 ### Advanced Component Usage
 
@@ -263,11 +317,53 @@ Comprehensive blog styling including:
 
 ```scss
 .hero-section {
-  .hero-title .wave {
-    // Inherits wave animation from hero component
-    animation-duration: 3s; // Customize animation timing
+  // Available variants
+  &--regular {
+    // Regular home page with profile + terminal grid layout
   }
+  &--blog {
+    // Blog home page with terminal + profile flex layout
+  }
+
+  // Enhanced features:
+  // - Subtle animated background patterns
+  // - Improved responsive design with clamp() functions
+  // - Interactive profile images with hover effects
+  // - Animated floating rings around profile images
+  // - Gradient text effects on titles
+  // - Enhanced wave emoji animation
+  // - Terminal container hover effects
+  // - Accessibility improvements (reduced motion support)
+  // - Print-friendly styling
 }
+```
+
+Advanced usage with variants:
+
+```html
+<!-- Regular Home Page -->
+<section class="hero-section hero-section--regular">
+  <div class="hero-content">
+    <div class="hero-grid">
+      <div class="hero-profile">
+        <!-- Profile content -->
+      </div>
+      <!-- Terminal or other content -->
+    </div>
+  </div>
+</section>
+
+<!-- Blog Home Page -->
+<section class="hero-section hero-section--blog">
+  <div class="hero-content">
+    <div class="hero-image">
+      <!-- Terminal container -->
+    </div>
+    <div class="hero-info">
+      <!-- Profile and bio content -->
+    </div>
+  </div>
+</section>
 ```
 
 #### Terminal Component

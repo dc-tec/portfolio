@@ -2,9 +2,24 @@
 @use '../abstracts/mixins' as *;
 @use '../abstracts/variables' as vars;
 
-// Container
+// Container with improved responsive padding
 .container {
-  @include container;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 map.get(vars.$spacing-scale, 'xl');
+  position: relative;
+  
+  @media (width <= 1200px) {
+    padding: 0 map.get(vars.$spacing-scale, 'lg');
+  }
+  
+  @media (width <= 768px) {
+    padding: 0 map.get(vars.$spacing-scale, 'md');
+  }
+  
+  @media (width <= 480px) {
+    padding: 0 map.get(vars.$spacing-scale, 'sm');
+  }
 }
 
 // Grid System

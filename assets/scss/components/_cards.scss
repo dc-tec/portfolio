@@ -3,6 +3,8 @@
 @use '../abstracts/variables' as *;
 
 // Placeholder for shared card styles
+// This placeholder defines the core visual characteristics (background, border, radius, base shadow, margin) intended to be extended by various card components.
+// It also includes a default hover effect (lift and increased shadow).
 %card-shared-styles {
   background-color: var(--card-bg);
   border-radius: 12px;
@@ -20,9 +22,14 @@
 }
 
 // Card component
+// The .card class is a general-purpose card that extends shared styles.
+// It includes structural elements like .card-header, .card-body, .card-footer, and .card-image.
 .card {
   @extend %card-shared-styles;
   
+  // This ::before pseudo-element creates a subtle gradient overlay effect that appears on hover.
+  // It's a decorative enhancement. Consider if this should be default behavior for all .card elements 
+  // or moved to a specific modifier (e.g., .card--hover-gradient-overlay) if not all cards need this effect.
   &::before {
     content: "";
     position: absolute;
@@ -83,6 +90,8 @@
 }
 
 // Card variants
+// .card-hover provides an explicit hover effect (lift and shadow), duplicating the base hover from %card-shared-styles.
+// Useful if a card doesn't extend %card-shared-styles but still needs this specific hover.
 .card-hover {
   @include transition(transform, box-shadow);
   
@@ -92,11 +101,13 @@
   }
 }
 
+// .card-flat removes the box-shadow for a flatter appearance, relying only on its border.
 .card-flat {
   box-shadow: none;
   border: 1px solid var(--border-color);
 }
 
+// .card-gradient applies a gradient overlay using a mixin.
 .card-gradient {
   @include gradient-overlay;
   
@@ -106,6 +117,7 @@
 }
 
 // Card sizes
+// .card-sm and .card-lg provide smaller or larger padding respectively for .card-header, .card-body, and .card-footer.
 .card-sm {
   .card-header,
   .card-body,
@@ -123,17 +135,23 @@
 }
 
 // Post Grid - For displaying post cards in a grid layout
+// .posts-grid is a layout utility specifically for arranging post cards (like .post-card component) in a responsive grid.
+// It uses the responsive-grid mixin.
 .posts-grid {
   margin-bottom: 40px;
+
   @include responsive-grid(auto-fill, 300px, 24px);
 }
 
 // Card grid
+// .card-grid is a generic layout utility for arranging any card-like elements in a responsive grid.
+// It uses the responsive-grid mixin with a configurable min-width for items.
 .card-grid {
   @include responsive-grid(auto-fit, 300px, map.get($spacing-scale, 'md'));
 }
 
 // Card with overlay
+// .card-overlay is designed for cards where content (like text) is displayed directly on top of an image, often with a gradient for readability.
 .card-overlay {
   position: relative;
   overflow: hidden;
@@ -158,6 +176,7 @@
 }
 
 // Interactive cards
+// .card-interactive provides enhanced visual feedback (cursor, different hover/active states) for cards that are primary clickable targets.
 .card-interactive {
   cursor: pointer;
 
@@ -175,6 +194,7 @@
 }
 
 // Card with badge
+// .card-badge is a structural class for cards that will contain an absolutely positioned badge (using a separate .badge class).
 .card-badge {
   position: relative;
   

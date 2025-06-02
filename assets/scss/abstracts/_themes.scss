@@ -1,5 +1,6 @@
 // Light Theme (Catppuccin Latte)
 :root {
+  --container-width: 1200px;        /* Container max-width */
   --bg-color: #eff1f5;          /* Base */
   --bg-color-rgb: 239, 241, 245; /* RGB values for Base */
   --bg-color-secondary: #e6e9ef; /* Mantle */
@@ -25,6 +26,7 @@
 // Dark Theme (Catppuccin Macchiato)
 html.dark-mode,
 .dark-mode {
+  --container-width: 1200px;        /* Container max-width */
   --bg-color: #24273a;          /* Base */
   --bg-color-rgb: 36, 39, 58;    /* RGB values for Base */
   --bg-color-secondary: #1e2030; /* Mantle */
@@ -45,4 +47,13 @@ html.dark-mode,
   --danger-color: #ed8796;      /* Red */
   --info-color: #8aadf4;        /* Blue */
   --info-color-rgb: 138, 173, 244; /* RGB values for Blue */
+} 
+
+:root {
+  // Terminal Colors
+  --terminal-bg: #1a1b26;
+  --border-color: rgb(255 255 255 / 10%);
+  --text-primary: #a9b1d6;
+  --text-secondary: #787c99;
+  --accent-color: #7aa2f7;
 } 

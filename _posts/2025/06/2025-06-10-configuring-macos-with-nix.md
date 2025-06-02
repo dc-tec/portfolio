@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Configuring macOS with Nix Darwin"
-date: 2025-06-10
-last_modified_date: 2025-06-10
+date: 2025-06-01
+last_modified_date: 2025-06-01
 category: nix
 tags: [nix, darwin, macos, configuration, automation, infrastructure]
 featured: true

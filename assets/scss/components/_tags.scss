@@ -1,7 +1,12 @@
+@use 'sass:map';
 @use '../abstracts/mixins' as *;
-@use '../abstracts/variables' as *;
+@use '../abstracts/variables' as vars;
+
+// File for various tag-related stylings.
 
 /* Common Tag Cloud Styles */
+// .tag-cloud (or .tags-cloud) is a flex container for displaying multiple tags (e.g., .tag-bubble).
+// It centers the tags and provides a consistent gap.
 .tag-cloud,
 .tags-cloud {
   display: flex;
@@ -12,6 +17,9 @@
 }
 
 /* Tag Bubble Component Styles - Increased specificity */
+// .tag-bubble is an interactive, pill-shaped tag, often used in tag clouds.
+// It includes an optional count, hover animations, and an active state.
+// The increased specificity in the selector helps ensure these styles apply correctly when nested.
 .tag-cloud .tag-bubble,
 .tags-cloud .tag-bubble,
 .tags-section .tag-cloud .tag-bubble,
@@ -105,15 +113,60 @@
   }
 }
 
-/* Bubble in animation */
-@keyframes bubbleIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+/* Common Tag Container Styles */
+// .tags-container is a styled wrapper for a block of tags or a tag cloud display.
+// It provides a background, padding, and shadow to visually group the tags.
+.tags-container {
+  margin: 30px 0;
+  padding: 20px;
+  background-color: var(--bg-color-secondary);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(var(--bg-color-secondary-rgb), 0.3);
+}
+
+// Simple Tag Styles
+// .tag-simple is a basic, less interactive tag style.
+// Suitable for metadata display on posts or cards where full .tag-bubble interactivity isn't needed.
+.tag-simple {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid transparent; // Default no border, can be added by variant
+  background-color: var(--bg-color-secondary);
+  color: var(--secondary-color);
+
+  &:hover {
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+// Variant of .tag-simple for post meta tags, with a border.
+.tag-simple--post {
+  color: var(--text-color);
+  border-color: var(--border-color); // As per original .post-tag
+}
+
+// Text-based list tag (e.g., for .post-mini-tags with dot separators)
+// .tag-text-list-item is for displaying tags as a simple text list, often separated by dots.
+// Useful for very compact tag displays.
+.tag-text-list-item {
+  font-size: 0.75rem;
+  color: var(--secondary-color);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--accent-color);
+    text-decoration: none;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  &:not(:last-child)::after {
+    content: "•";
+    margin-left: map.get(vars.$spacing-scale, 'xs');
+    color: var(--secondary-color);
   }
-} 
+}

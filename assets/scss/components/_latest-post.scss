@@ -1,40 +1,51 @@
+@use 'sass:map';
 @use '../abstracts/mixins' as *;
-@use '../abstracts/variables' as *;
+@use '../abstracts/variables' as vars;
 @use 'cards' as *;
 @use 'buttons' as *;
 
 .latest-post,
 .latest-post-section {
-  padding: 4rem 0;
+  padding: map.get(vars.$spacing-scale, 'sm') 0 map.get(vars.$spacing-scale, '2xl');
+  margin-bottom: map.get(vars.$spacing-scale, 'sm');
+  position: relative;
   
-  .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    position: relative;
-    display: inline-block;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -10px;
-      width: 60px;
-      height: 3px;
-      background-color: var(--accent-color);
-    }
+  @media (width <= 768px) {
+    padding: map.get(vars.$spacing-scale, 'sm') 0 map.get(vars.$spacing-scale, '2xl');
+    margin-bottom: map.get(vars.$spacing-scale, 'sm');
   }
-
+  
+  // Enhanced visual connection to previous section
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(var(--accent-color-rgb), 0.25),
+      transparent
+    );
+  }
+  
   .latest-post-container {
     @extend %card-shared-styles;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: start;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: map.get(vars.$spacing-scale, 'lg');
+    align-items: center;
+    padding: map.get(vars.$spacing-scale, 'lg');
+    margin-bottom: 0;
     
+    // Reduce the dramatic hover effect for better cohesion
     &:hover {
-      transform: none;
-      box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgb(0 0 0 / 8%);
 
       &::before {
         opacity: 0;
@@ -43,6 +54,8 @@
     
     @media (width <= 768px) {
       grid-template-columns: 1fr;
+      gap: map.get(vars.$spacing-scale, 'xl');
+      padding: map.get(vars.$spacing-scale, 'xl');
     }
   }
 
@@ -51,16 +64,23 @@
     z-index: 1;
     border-radius: 12px;
     overflow: hidden;
+    background-color: var(--bg-color);
+    aspect-ratio: 16 / 10;
+    
+    // Reduced padding for better space utilization
+    padding: map.get(vars.$spacing-scale, 'sm');
     
     img {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.3s ease;
+      border-radius: map.get(vars.$border-radius, 'md');
     }
 
     &:hover img {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
 
     .post-category {
@@ -71,12 +91,13 @@
   .latest-post-content {
     position: relative;
     z-index: 1;
+    padding: map.get(vars.$spacing-scale, 'sm');
 
     .post-meta {
       display: flex;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      color: var(--text-secondary);
+      gap: map.get(vars.$spacing-scale, 'md');
+      margin-bottom: map.get(vars.$spacing-scale, 'sm');
+      color: var(--secondary-color);
       font-size: 0.9rem;
 
       i {
@@ -86,17 +107,18 @@
   }
   
   .post-date {
-    color: var(--text-secondary);
+    color: var(--secondary-color);
     font-size: 0.9rem;
-    margin-bottom: 1rem;
+    margin-bottom: map.get(vars.$spacing-scale, 'sm');
   }
   
   .post-title {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    margin-bottom: map.get(vars.$spacing-scale, 'sm');
+    line-height: 1.3;
     
     a {
-      color: var(--text-primary);
+      color: var(--text-color);
       text-decoration: none;
       transition: color 0.3s ease;
       
@@ -107,10 +129,10 @@
   }
   
   .post-excerpt {
-    color: var(--text-secondary);
-    font-size: 1.1rem;
+    color: var(--secondary-color);
+    font-size: 1.05rem;
     line-height: 1.6;
-    margin-bottom: 2rem;
+    margin-bottom: map.get(vars.$spacing-scale, 'lg');
   }
   
   .read-more-btn {

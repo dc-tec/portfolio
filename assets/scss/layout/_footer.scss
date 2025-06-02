@@ -222,7 +222,7 @@
       }
       
       button {
-        @extend %btn-base-styles;
+        @include mixin-btn-base-styles;
         @extend %btn-primary-styles;
 
         white-space: nowrap;

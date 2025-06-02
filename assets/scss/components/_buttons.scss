@@ -3,7 +3,7 @@
 @use '../abstracts/variables' as *;
 
 // Placeholder for base button styles
-%btn-base-styles {
+@mixin mixin-btn-base-styles {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +42,7 @@
 
 // Base button styles
 .btn {
-  @extend %btn-base-styles;
+  @include mixin-btn-base-styles;
 }
 
 // Placeholder for primary button styles
@@ -58,7 +58,7 @@
 
 // Button variants
 .btn-primary {
-  @extend %btn-base-styles; // Ensure primary buttons also get base styles
+  @include mixin-btn-base-styles; // Ensure primary buttons also get base styles
   @extend %btn-primary-styles;
 }
 
@@ -217,5 +217,48 @@
     i {
       margin-left: 0; 
     }
+  }
+}
+
+@mixin button-outline-variant($color, $hover-text-color: white) {
+  background-color: transparent;
+  border: 2px solid $color;
+  color: $color;
+
+  &:hover {
+    background-color: $color;
+    color: $hover-text-color;
+  }
+}
+
+// New mixin for button-like links
+@mixin button-link-styling {
+  background-color: transparent;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 0.25rem 0.5rem; // Minimal padding, adjust as needed
+  border-radius: map.get($border-radius, 'sm'); // Subtle rounding
+  display: inline-flex; // To align with other buttons if needed
+  align-items: center;
+  cursor: pointer;
+
+  @include transition(color, background-color);
+
+  &:hover {
+    color: var(--accent-color);
+    background-color: transparent; // Ensure it stays transparent
+    text-decoration: none; // Or underline, if preferred for links
+  }
+
+  // Optional: focus state similar to other buttons but less prominent
+  &:focus {
+    outline: none;
+
+    // box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.2); 
+  }
+
+  // Optional: active state
+  &:active {
+    // color: var(--accent-color); // Or a slightly darker shade
   }
 } 
