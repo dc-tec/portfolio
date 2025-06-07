@@ -56,13 +56,13 @@ layout: default
                 {% include responsive-image.html src="assets/images/profile.png" alt=site.name class="profile-image" loading="eager" %}
               </div>
               <div class="profile-title">
-                <h1>Hi! I'm {{ site.author }} <span class="wave">👋</span></h1>
-                <p class="subtitle">A {{ site.description }} and tech enthusiast</p>
+                <h1>Hi! I'm {{ site.first_name }} <span class="wave">👋</span></h1>
+                <p class="subtitle">DevOps Engineer · Open Source Advocate · Automation Enthusiast</p>
               </div>
             </div>
             
             <div class="hero-bio">
-              <p>I'm a {{ site.description }} and tech enthusiast. I'm passionate about infrastructure automation, GitLab, GitOps, OpenBao, and making complex systems simpler. I help teams build secure, scalable platforms using open-source tools — with a sprinkle of Kubernetes and a strong focus on Infra as Code.</p>
+              <p>I specialize in infrastructure automation, GitLab, GitOps, and OpenBao, helping teams build secure, scalable platforms with a strong focus on Infrastructure as Code. I thrive on simplifying complex systems, leveraging open-source tools, and adding just the right amount of Kubernetes magic.</p>
             </div>
             
             <a href="{{ site.baseurl }}/blog" class="cta-button cta-button--hero">Explore My Blog</a>
@@ -242,7 +242,7 @@ layout: default
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Browse by Topic</h2>
-          <a href="{{ site.baseurl }}/blog/tags/" class="section-header__view-all">
+          <a href="{{ site.baseurl }}/blog/tags/" class="section-header--button">
             View All Topics
           </a>
         </div>
