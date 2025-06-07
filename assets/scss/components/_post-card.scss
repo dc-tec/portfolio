@@ -154,11 +154,6 @@
     flex: 1;
     padding-left: map.get(vars.$spacing-scale, 'md'); // Corrected from: var(--card-padding, #{map.get(vars.$spacing-scale, 'md') * 1.5});
   }
-
-  .post-card__excerpt {
-    // Potentially limit lines for list view
-    // @include line-clamp(3);
-  }
 }
 
 // Modifier for cards that should have a full clickable area

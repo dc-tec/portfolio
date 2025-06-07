@@ -27,26 +27,6 @@
 .card {
   @extend %card-shared-styles;
   
-  // This ::before pseudo-element creates a subtle gradient overlay effect that appears on hover.
-  // It's a decorative enhancement. Consider if this should be default behavior for all .card elements 
-  // or moved to a specific modifier (e.g., .card--hover-gradient-overlay) if not all cards need this effect.
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to right,
-      rgba(var(--bg-color-rgb), 0.7) 0%,
-      rgba(var(--bg-color-secondary-rgb), 0.7) 100%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 0;
-  }
-  
   // Hover for the ::before pseudo-element, distinct from card's own hover
   &:hover::before {
     opacity: 0.5;

@@ -15,23 +15,6 @@
     margin-bottom: map.get(vars.$spacing-scale, 'sm');
   }
   
-  // Enhanced visual connection to previous section
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      rgba(var(--accent-color-rgb), 0.25),
-      transparent
-    );
-  }
-  
   .latest-post-container {
     @extend %card-shared-styles;
 

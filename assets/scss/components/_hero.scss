@@ -14,17 +14,6 @@
     margin-bottom: map.get(vars.$spacing-scale, 'sm');
   }
   
-  // Simplified background pattern
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-      radial-gradient(circle at 30% 70%, rgba(var(--accent-color-rgb), 0.02) 0%, transparent 60%);
-    z-index: -1;
-    animation: subtle-float 30s ease-in-out infinite;
-  }
-
   .hero-content {
     width: 100%;
     position: relative;
@@ -310,7 +299,7 @@
       }
 
       .subtitle {
-        font-size: clamp(0.95rem, 2vw, 1.2rem);
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
         color: var(--secondary-color);
         font-weight: 500;
         margin: 0;

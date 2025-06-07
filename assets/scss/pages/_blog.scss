@@ -521,26 +521,6 @@
     padding: map.get(vars.$spacing-scale, 'xl') 0 map.get(vars.$spacing-scale, '2xl');
     margin-top: map.get(vars.$spacing-scale, 'xl');
   }
-
-  // Enhanced visual connection from previous section
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 140px;
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      rgba(var(--accent-color-rgb), 0.12),
-      transparent
-    );
-  }
-  
-  // HTML should be updated to use <div class="section-header"> <h2 class="section-title">...</h2> <a class="section-header__view-all">...</a> </div>
-  // The .section-title will be styled by the global _sections.scss component.
 }
 
 /* Common Tag Container Styles */
@@ -553,7 +533,6 @@
   box-shadow: 0 4px 20px rgba(var(--bg-color-secondary-rgb), 0.3);
 }
 
-/* Search Functionality Styles - MOVED TO assets/scss/components/_search-form.scss */
 .blog-header {
   display: flex;
   flex-direction: column;

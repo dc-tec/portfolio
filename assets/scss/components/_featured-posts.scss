@@ -16,40 +16,6 @@
       margin-bottom: map.get(vars.$spacing-scale, 'sm');
     }
 
-    // Enhanced visual connection from previous section
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        rgba(var(--accent-color-rgb), 0.2),
-        transparent
-      );
-    }
-
-    // Add subtle visual closure at the bottom
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 1px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        rgba(var(--accent-color-rgb), 0.15),
-        transparent
-      );
-    }
-
     .featured-posts {
       display: grid;
       gap: map.get(vars.$spacing-scale, 'md'); 
