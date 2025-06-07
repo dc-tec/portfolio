@@ -57,7 +57,7 @@ layout: default
               </div>
               <div class="profile-title">
                 <h1>Hi! I'm {{ site.first_name }} <span class="wave">👋</span></h1>
-                <p class="subtitle">DevOps Engineer · Open Source Advocate · Automation Enthusiast</p>
+                <p class="subtitle">DevOps · Open Source · Automation</p>
               </div>
             </div>
             
@@ -121,51 +121,66 @@ layout: default
   <!-- Latest Post Section -->
   <section class="{% if page.page_type == 'blog-home' %}latest-post-section{% else %}latest-post{% endif %}">
     <div class="container">
-      <h2 class="section-title{% if page.page_type != 'blog-home' %} section-title--centered{% endif %}">Latest Post</h2>
-      {% assign latest_post = site.posts.first %}
+      <h2 class="section-title{% if page.page_type != 'blog-home' %} section-title--centered{% endif %}">
+        {% if page.page_type == 'blog-home' %}Latest Posts{% else %}Latest Post{% endif %}
+      </h2>
       
       {% if page.page_type == 'blog-home' %}
-        <div class="latest-post-container">
-          <div class="latest-post-image">
-            <a href="{{ latest_post.url | relative_url }}">
-              {% if latest_post.image %}
-                {% include responsive-image.html src=latest_post.image alt=latest_post.title loading="lazy" %}
-              {% elsif latest_post.featured_image %}
-                {% include responsive-image.html src=latest_post.featured_image alt=latest_post.title loading="lazy" %}
-              {% else %}
-                {% include responsive-image.html src="assets/images/default-post.png" alt=latest_post.title loading="lazy" %}
-              {% endif %}
-            </a>
-            {% if latest_post.category %}
-              <span class="post-category--top-right-badge">{{ latest_post.category }}</span>
-            {% endif %}
-          </div>
-          <div class="latest-post-content">
-            <div class="post-meta">
-              <span class="post-date">
-                <i class="far fa-calendar"></i>
-                {{ latest_post.date | date: "%B %d, %Y" }}
-              </span>
-              {% if latest_post.author %}
-                <span class="post-author">
-                  <i class="far fa-user"></i>
-                  {{ latest_post.author }}
-                </span>
-              {% endif %}
+        {% assign latest_posts = site.posts | where_exp:"post", "post.published != false" | limit: 3 %}
+        <div class="latest-posts-carousel-wrapper">
+          <div class="latest-posts-carousel-viewport">
+            <div class="latest-posts-carousel">
+              {% for latest_post in latest_posts %}
+                <div class="latest-post-slide">
+                  <div class="latest-post-container">
+                    <div class="latest-post-image">
+                      <a href="{{ latest_post.url | relative_url }}">
+                        {% if latest_post.image %}
+                          {% include responsive-image.html src=latest_post.image alt=latest_post.title loading="lazy" %}
+                        {% elsif latest_post.featured_image %}
+                          {% include responsive-image.html src=latest_post.featured_image alt=latest_post.title loading="lazy" %}
+                        {% else %}
+                          {% include responsive-image.html src="assets/images/default-post.png" alt=latest_post.title loading="lazy" %}
+                        {% endif %}
+                      </a>
+                      {% if latest_post.category %}
+                        <span class="post-category--top-right-badge">{{ latest_post.category }}</span>
+                      {% endif %}
+                    </div>
+                    <div class="latest-post-content">
+                      <div class="post-meta">
+                        <span class="post-date">
+                          <i class="far fa-calendar"></i>
+                          {{ latest_post.date | date: "%B %d, %Y" }}
+                        </span>
+                        {% if latest_post.author %}
+                          <span class="post-author">
+                            <i class="far fa-user"></i>
+                            {{ latest_post.author }}
+                          </span>
+                        {% endif %}
+                      </div>
+                      <h3 class="post-title"><a href="{{ latest_post.url | relative_url }}">{{ latest_post.title }}</a></h3>
+                      {% if latest_post.tags %}
+                        <div class="post-tags">
+                          {% for tag in latest_post.tags limit:3 %}
+                            <a href="{{ site.baseurl }}/blog/tags/#{{ tag | slugify }}" class="tag-simple tag-simple--post">{{ tag }}</a>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                      <p class="post-excerpt">{{ latest_post.content | strip_html | truncate: 750 }}</p>
+                      <a href="{{ latest_post.url | relative_url }}" class="cta-button">Read Full Post</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
             </div>
-            <h3 class="post-title"><a href="{{ latest_post.url | relative_url }}">{{ latest_post.title }}</a></h3>
-            {% if latest_post.tags %}
-              <div class="post-tags">
-                {% for tag in latest_post.tags limit:3 %}
-                  <a href="{{ site.baseurl }}/blog/tags/#{{ tag | slugify }}" class="tag-simple tag-simple--post">{{ tag }}</a>
-                {% endfor %}
-              </div>
-            {% endif %}
-            <p class="post-excerpt">{{ latest_post.content | strip_html | truncate: 750 }}</p>
-            <a href="{{ latest_post.url | relative_url }}" class="cta-button">Read Full Post</a>
           </div>
+          <button class="carousel-control prev" aria-label="Previous Post" disabled>&#10094;</button>
+          <button class="carousel-control next" aria-label="Next Post">&#10095;</button>
         </div>
       {% else %}
+        {% assign latest_post = site.posts | where_exp:"post", "post.published != false" | first %}
         {% if latest_post %}
           <time class="post-date" datetime="{{ latest_post.date | date_to_xmlschema }}">
             {{ latest_post.date | date: "%B %d, %Y" }}
@@ -197,7 +212,7 @@ layout: default
         </div>
         
         <div class="featured-posts" id="featured-posts">
-          {% assign featured_posts = site.posts | where: "featured", true | limit: 3 %}
+          {% assign featured_posts = site.posts | where: "featured", true | where_exp:"post", "post.published != false" | limit: 3 %}
           {% for post in featured_posts %}
             <article class="post-card post-card--featured post-card--image-fixed-md post-card--featured-hover">
               <a href="{{ post.url | relative_url }}" class="post-card__image">
@@ -242,7 +257,7 @@ layout: default
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Browse by Topic</h2>
-          <a href="{{ site.baseurl }}/blog/tags/" class="section-header--button">
+          <a href="{{ site.baseurl }}/blog/tags/" class="section-header__view-all">
             View All Topics
           </a>
         </div>
@@ -316,6 +331,56 @@ layout: default
               listButton.classList.add('active');
               featuredPostsContainer.classList.add('list-view');
             }
+          }
+        }
+        
+        // Latest Posts Carousel
+        const carouselWrapper = document.querySelector('.latest-posts-carousel-wrapper');
+        if (carouselWrapper) {
+          const carousel = carouselWrapper.querySelector('.latest-posts-carousel');
+          const prevBtn = carouselWrapper.querySelector('.carousel-control.prev');
+          const nextBtn = carouselWrapper.querySelector('.carousel-control.next');
+          
+          if (carousel && prevBtn && nextBtn) {
+            const slides = carousel.querySelectorAll('.latest-post-slide');
+            let currentIndex = 0;
+
+            const updateCarousel = () => {
+              if (slides.length > 0) {
+                const slideWidth = slides[0].clientWidth;
+                carousel.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+              }
+              prevBtn.disabled = currentIndex === 0;
+              nextBtn.disabled = currentIndex >= slides.length - 1;
+            };
+
+            nextBtn.addEventListener('click', () => {
+              if (currentIndex < slides.length - 1) {
+                currentIndex++;
+                updateCarousel();
+              }
+            });
+
+            prevBtn.addEventListener('click', () => {
+              if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+              }
+            });
+            
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+              clearTimeout(resizeTimer);
+              resizeTimer = setTimeout(() => {
+                carousel.style.transitionDuration = '0s';
+                updateCarousel();
+                carousel.offsetHeight; // Trigger reflow to apply transform instantly
+                carousel.style.transitionDuration = ''; // Re-enable animation
+              }, 250);
+            });
+
+            // Initial setup
+            updateCarousel();
           }
         }
       });
