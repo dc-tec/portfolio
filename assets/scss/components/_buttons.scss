@@ -1,0 +1,264 @@
+@use 'sass:map';
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+// Placeholder for base button styles
+@mixin mixin-btn-base-styles {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: map.get($border-radius, 'md');
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+
+  @include transition(background-color, color, transform, box-shadow);
+  
+  // Icon spacing
+  .icon {
+    margin-right: 0.5rem;
+    
+    &:last-child:not(:first-child) {
+      margin-right: 0;
+      margin-left: 0.5rem;
+    }
+  }
+  
+  // Hover and focus states
+  &:hover {
+    transform: translateY(-1px);
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(var(--accent-color-rgb) / 40%);
+  }
+  
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+// Base button styles
+.btn {
+  @include mixin-btn-base-styles;
+}
+
+// Placeholder for primary button styles
+%btn-primary-styles {
+  background-color: var(--accent-color);
+  color: white;
+  
+  &:hover {
+    background-color: var(--accent-color);
+    filter: brightness(0.9);
+  }
+}
+
+// Button variants
+.btn-primary {
+  @include mixin-btn-base-styles; // Ensure primary buttons also get base styles
+  @extend %btn-primary-styles;
+}
+
+.btn-secondary {
+  background-color: var(--bg-color-secondary);
+  color: var(--text-color);
+  
+  &:hover {
+    background-color: var(--border-color);
+  }
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  
+  &:hover {
+    background-color: var(--accent-color);
+    color: white;
+  }
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-color);
+  
+  &:hover {
+    background-color: var(--bg-color-secondary);
+  }
+}
+
+// Button sizes
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+}
+
+// Button states
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    border: 2px solid rgb(255 255 255 / 30%);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.6s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-disabled,
+.btn[disabled] {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+// Button group
+.btn-group {
+  display: inline-flex;
+  
+  .btn {
+    border-radius: 0;
+    
+    &:first-child {
+      border-top-left-radius: map.get($border-radius, 'md');
+      border-bottom-left-radius: map.get($border-radius, 'md');
+    }
+    
+    &:last-child {
+      border-top-right-radius: map.get($border-radius, 'md');
+      border-bottom-right-radius: map.get($border-radius, 'md');
+    }
+    
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
+  }
+}
+
+// Placeholder for CTA button base styles
+%cta-button-base-styles {
+  display: inline-flex; // Base display type
+  align-items: center; // Vertically align icon and text if present
+  padding: 0.8rem 1.2rem;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  i {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover,
+  &:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 20%); // Standard hover shadow
+    color: var(--bg-color); // Ensure text color remains on hover
+    text-decoration: none;
+
+    i {
+      transform: translateX(3px);
+    }
+  }
+}
+
+.cta-button {
+  @extend %cta-button-base-styles;
+
+  // Modifier for hero section variant
+  &--hero {
+    display: inline-block; // Override display for hero
+    padding: 12px 24px; // Specific padding for hero
+    border-radius: 8px; // Specific border-radius for hero
+
+    @media (width <= 480px) {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 0.9; // Specific hover for hero
+      transform: translateY(-3px); // Specific hover transform for hero
+      box-shadow: none; // Remove base shadow if not desired for hero variant
+
+      i {
+        transform: none; // Reset icon transform if not applicable
+      }
+    }
+    
+    // If hero button doesn't have an icon, ensure no extra margin for i
+    i {
+      margin-left: 0; 
+    }
+  }
+}
+
+@mixin button-outline-variant($color, $hover-text-color: white) {
+  background-color: transparent;
+  border: 2px solid $color;
+  color: $color;
+
+  &:hover {
+    background-color: $color;
+    color: $hover-text-color;
+  }
+}
+
+// New mixin for button-like links
+@mixin button-link-styling {
+  background-color: transparent;
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 0.25rem 0.5rem; // Minimal padding, adjust as needed
+  border-radius: map.get($border-radius, 'sm'); // Subtle rounding
+  display: inline-flex; // To align with other buttons if needed
+  align-items: center;
+  cursor: pointer;
+
+  @include transition(color, background-color);
+
+  &:hover {
+    color: var(--accent-color);
+    background-color: transparent; // Ensure it stays transparent
+    text-decoration: none; // Or underline, if preferred for links
+  }
+
+  // Optional: focus state similar to other buttons but less prominent
+  &:focus {
+    outline: none;
+
+    // box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.2); 
+  }
+
+  // Optional: active state
+  &:active {
+    // color: var(--accent-color); // Or a slightly darker shade
+  }
+} 

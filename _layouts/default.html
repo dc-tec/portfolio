@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="{{ site.author }}" />
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}" />
+  <title>{{ page.title | default: site.title }}</title>
+  <!-- Prevent theme flicker -->
+  <script>
+    (function() {
+      const currentTheme = localStorage.getItem('theme') || 'dark-mode';
+      if (currentTheme === 'dark-mode') {
+        document.documentElement.classList.add('dark-mode');
+      }
+    })();
+  </script>
+  <!-- Fonts and Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="site-branding">
+        <a href="{{ site.baseurl }}/" class="site-logo">
+          {% include responsive-image.html src="assets/images/logo.png" alt=site.author loading="eager" %}
+        </a>
+        <a href="{{ site.baseurl }}/" class="site-title">{{ site.title }}</a>
+      </div>
+      
+      <nav class="site-nav">
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+        <div class="nav-menu">
+          <div class="nav-item">
+            <a href="{{ site.baseurl }}/" class="nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
+          </div>
+          <div class="nav-item">
+            <a href="{{ site.baseurl }}/blog" class="nav-link {% if page.url contains '/blog' %}active{% endif %}">Blog</a>
+          </div>
+          <div class="nav-item">
+            <a href="{{ site.baseurl }}/about" class="nav-link {% if page.url contains '/about' %}active{% endif %}">About</a>
+          </div>
+          
+          <!-- Mobile Search -->
+          <div class="nav-item mobile-search-item">
+            <div class="mobile-search">
+              <div class="mobile-search-wrapper">
+                <input type="text" id="mobile-search-input" placeholder="Search..." aria-label="Search site">
+                <i class="fas fa-search mobile-search-icon"></i>
+                <button id="mobile-clear-search" class="mobile-clear-search" aria-label="Clear search" style="display: none;">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <div id="mobile-search-results" class="mobile-search-results" style="display: none;"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Header Search -->
+        <div class="header-search">
+          <button class="search-toggle" aria-label="Toggle search">
+            <i class="fas fa-search"></i>
+          </button>
+          <div class="header-search-expandable">
+            <div class="header-search-wrapper">
+              <input type="text" id="header-search-input" placeholder="Search..." aria-label="Search site">
+              <button id="header-clear-search" class="header-clear-search" aria-label="Clear search" style="display: none;">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div id="header-search-results" class="header-search-results" style="display: none;"></div>
+          </div>
+        </div>
+        
+        <button class="theme-toggle" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="site-main">
+    {{ content }}
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <!-- About Section -->
+        <div class="footer-about">
+          <a href="{{ site.baseurl }}/" class="footer-logo">
+            {% include responsive-image.html src="assets/images/logo.png" alt=site.author loading="lazy" %}
+          </a>
+          <h3>Created with <i class="fas fa-mug-hot accent-color"></i> by {{ site.author }}</h3>
+          <p class="footer-description">{{ site.description }}</p>
+        </div>
+      </div>
+
+      <!-- Social Media Bar -->
+      <div class="footer-social-bar">
+        {% if site.github_username %}
+        <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        {% endif %}
+        
+        {% if site.gitlab_username %}
+        <a href="https://gitlab.com/{{ site.gitlab_username }}" target="_blank" rel="noopener" aria-label="GitLab">
+          <i class="fab fa-gitlab"></i>
+        </a>
+        {% endif %}
+        
+        {% if site.linkedin_username %}
+        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        {% endif %}
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; {{ site.time | date: '%Y' }} {{ site.author }}. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Make site configuration available to JavaScript
+    window.siteConfig = {
+      baseurl: '{{ site.baseurl }}'
+    };
+  </script>
+  <script src="{{ '/assets/js/simple-jekyll-search.min.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html> 

@@ -1,0 +1,176 @@
+@use 'sass:map';
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as vars;
+
+// Section separator utility
+// .section-separator creates a visual break between major page sections
+// Use this between sections that need clear visual separation
+.section-separator {
+  position: relative;
+  height: map.get(vars.$spacing-scale, 'lg');
+  margin: map.get(vars.$spacing-scale, 'xl') 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(var(--accent-color-rgb), 0.15),
+      transparent
+    );
+  }
+  
+  // Variant with dots
+  &--dots {
+    &::before {
+      content: '• • •';
+      width: auto;
+      height: auto;
+      background: none;
+      color: rgba(var(--accent-color-rgb), 0.3);
+      font-size: 1.2rem;
+      letter-spacing: 0.5rem;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  // Compact variant for smaller breaks
+  &--compact {
+    height: map.get(vars.$spacing-scale, 'lg');
+    margin: map.get(vars.$spacing-scale, 'md') 0;
+    
+    &::before {
+      width: 80px;
+    }
+  }
+}
+
+// Base section styles
+// .section is a simple structural element providing top/bottom padding and a decorative accent line.
+// It's suitable for creating distinct visual blocks of content on a page.
+// Use .section for general page divisions where you need consistent vertical spacing and a subtle visual separator.
+// It does not apply any background color or specific container styling beyond padding.
+.section {
+  position: relative;
+  padding: 2rem 0; // Default padding, can be overridden
+
+  // Decorative line at the bottom of the section
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: var(--accent-line-color, var(--accent-color)); // Use accent-line-color or fallback to accent-color
+    border-radius: 3px;
+  }
+}
+
+// Section title with underline
+// .section-title is typically used for headings (h1, h2, etc.) that introduce a section.
+// It includes a bottom accent line.
+// This class should be applied directly to the heading tag (e.g., <h2 class="section-title">...</h2>).
+// It can be used inside a .section, a .content-section, or standalone if needed.
+.section-title {
+  font-size: 2rem; // Default size, can be overridden by heading element styles or utility classes
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block; // Ensures ::after is positioned relative to the text content width
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px; // Adjust to position the line correctly below the text
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-color);
+  }
+
+  // Modifier for a centered section title
+  &--centered {
+    text-align: center;
+    display: block; // Or inline-block with text-align on parent
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+// Content section variants
+// .content-section is a more styled container, often with a background, border, and decorative pseudo-elements.
+// It's used for visually distinct content areas that need more emphasis than a simple .section.
+// It includes padding and a bottom margin.
+// Use .content-section when you want to wrap a block of content in a styled box, for example,
+// to highlight key information or to group related items with a shared background and border.
+// Variants like .primary-section and .info-section provide themed backgrounds and accents.
+.content-section {
+  position: relative; // For positioning ::before pseudo-elements
+  padding: 60px 30px; // Generous padding for content
+  margin: 50px 0; // Top and bottom margin to separate from other content
+  border-radius: 16px; // Consistent border-radius
+  overflow: hidden; // To contain pseudo-elements if they extend beyond borders
+  
+  // Variant for primary sections, using accent color highlights
+  &.primary-section {
+    background: linear-gradient(
+      to right,
+      rgba(var(--bg-color-rgb), 0.9) 0%,
+      rgba(var(--accent-color-rgb), 0.05) 100%
+    );
+    border: 1px solid rgba(var(--accent-color-rgb), 0.1);
+    
+    // Decorative ::before element for visual flair
+    &::before {
+      content: "";
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 60%;
+      height: 100%;
+      background: radial-gradient(
+        circle,
+        rgba(var(--accent-color-rgb), 0.15) 0%,
+        transparent 70%
+      );
+      border-radius: 50%;
+      z-index: -1; // Ensure it's behind the content
+    }
+  }
+  
+  // Variant for informational sections, using info color highlights
+  &.info-section {
+    background: linear-gradient(
+      to right,
+      rgba(var(--bg-color-rgb), 0.9) 0%,
+      rgba(var(--info-color-rgb), 0.05) 100%
+    );
+    border: 1px solid rgba(var(--info-color-rgb), 0.1);
+    
+    // Decorative ::before element for visual flair
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -30%;
+      left: -20%;
+      width: 60%;
+      height: 100%;
+      background: radial-gradient(
+        circle,
+        rgba(var(--info-color-rgb), 0.15) 0%,
+        transparent 70%
+      );
+      border-radius: 50%;
+      z-index: -1; // Ensure it's behind the content
+    }
+  }
+} 

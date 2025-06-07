@@ -4,3 +4,22 @@
 _site
 Gemfile.lock
 *.code-workspace
+.jekyll-cache/
+.jekyll-metadata
+.docker-metadata
+
+# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
+
+# node
+node_modules/
+
+# Mac bullshit
+.DS_Store

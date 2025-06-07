@@ -1,0 +1,324 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../components/cards' as *;
+
+/* About Page Styles
+-------------------------------------------------- */
+
+.about-container {
+  padding-bottom: 3rem;
+}
+
+.about-header {
+  background-color: var(--header-bg);
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--heading-color);
+  
+  &.gradient-text {
+    background: linear-gradient(45deg, var(--accent-color), var(--info-color));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+.page-subtitle {
+  font-size: 1.3rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 3rem;
+  
+  @media (width <= 992px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-sidebar {
+  .profile-image {
+    margin-bottom: 1.5rem;
+    
+    img {
+      width: 100%;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+    }
+  }
+}
+
+.contact-info,
+.skills-section,
+.certification-item,
+.education-item {
+  h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}
+
+.contact-info {
+  @extend %card-shared-styles;
+
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  
+  ul.contact-list {
+    list-style: none;
+    padding: 0;
+    
+    li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      
+      i {
+        color: var(--accent-color);
+        width: 20px;
+        margin-right: 10px;
+      }
+      
+      a {
+        color: var(--text-color);
+        text-decoration: none;
+
+        @include transition(color);
+        
+        &:hover {
+          color: var(--accent-color);
+        }
+      }
+    }
+  }
+}
+
+.skills-section {
+  @extend %card-shared-styles;
+
+  padding: 1.5rem;
+  
+  .skill-category {
+    margin-bottom: 1.25rem;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--primary-color);
+    }
+    
+    ul {
+      padding-left: 1.25rem;
+      list-style: disc;
+      
+      li {
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+}
+
+.certification-item {
+  @extend %card-shared-styles;
+
+  padding: 1.5rem;
+  text-align: center;
+  
+  h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .badge-container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.education-item {
+  @extend %card-shared-styles;
+
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  h4 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+  }
+  
+  .education-period {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+  }
+  
+  .education-description {
+    p {
+      line-height: 1.6;
+    }
+  }
+}
+
+.about-main {
+  .about-section {
+    margin-bottom: 3rem;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      
+      &.gradient-text {
+        background: linear-gradient(45deg, var(--accent-color), var(--info-color));
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        border-bottom: none;
+      }
+    }
+  }
+  
+  .about-bio {
+    margin-bottom: 2.5rem;
+    
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+  }
+}
+
+.certifications-section, 
+.experience-section,
+.education-section {
+  margin-bottom: 2.5rem;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.timeline {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 8px;
+    height: 100%;
+    width: 2px;
+    background-color: var(--border-color);
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 2rem;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    border: 3px solid var(--content-bg);
+  }
+  
+  .timeline-content {
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    h4 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--primary-color);
+      margin-bottom: 0.25rem;
+    }
+    
+    .timeline-period {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 0.75rem;
+    }
+    
+    .timeline-description {
+      p,
+      ul,
+      li {
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+      
+      p {
+        margin-bottom: 0.75rem;
+      }
+      
+      ul {
+        padding-left: 1.25rem;
+        margin-bottom: 0.75rem;
+        list-style: disc;
+        
+        li {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+.education-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+} 

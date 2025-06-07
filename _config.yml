@@ -1,145 +1,79 @@
 # Site
-repository: sproogen/resume-theme
-favicon: images/favicon.ico
+repository: dc-tec/portfolio
+favicon: assets/images/favicon.ico
 
 # Content configuration version
 version: 2
 
 # Personal info
-name: Roel de Cort
-title: Cloud Engineer
+title: deCort.tech
+first_name: Roel
+author: Roel de Cort
 email: roel@decort.tech
-website: decort.tech
 
-# Dark Mode (true/false/never)
-darkmode: true
+theme: null
 
 # Social links
 github_username: dc-tec
+gitlab_username: dc-tec
 linkedin_username: roel-de-cort
 
-# Additional icon links
-additional_links:
-  - title: Download CV as PDF
-    icon: fas fa-file-pdf
-    url: https://github.com/dc-tec/portfolio/releases/download/20241606/roelc-cv.pdf
+# Additiona# Blog settings
+show_excerpts: true
 
-# About Section
-# about_title: About Me
-about_profile_image: images/profile.png
-about_content: |
-  Hello, my name is Roel. I'm a 34-year-old Engineer based in the Netherlands, with a wide array of interests in technology. 
-  Over the years, I've progressed from a helpdesk employee to a system engineer, and now, a Cloud Engineer. 
-  During the day, I divide my time between automating and managing my company's private cloud stack, based on VMWare (Cloud Director & NSX). 
-  Primarily using Ansible and Terraform, and implementing a company-wide automation platform using Azure (DevOps), Kubernetes, Terraform, Ansible, and Packer.
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
 
-  In the evenings, I tinker with my Kubernetes homelab, NixOS config, Terraform, and other projects that spark my curiosity. 
-  This tinkering has led me to where I am today. Visit my Github to see what I'm currently working on. 
-  Apart from my passion for technology, I have a wonderful family with two children and a third on the way.
-
-content:
-  - title: Current Role
-    layout: list
-    content:
-      - layout: top-middle
-        title: Simac IT|NL
-        link: simac.com
-        sub_title: Cloud Engineer
-        caption: February 2020 - Present
-        description: |
-          As a Cloud Engineer at Simac IT|NL, I primarily focus on automating and enhancing Simac's Private Cloud stack (Cloud|NEXT), within an Agile team using Scrum(ban). 
-          I led the implementation of the Ansible Automation Platform in our environment, significantly improving our control over the automation landscape. 
-
-          I also trained our team on using Ansible (Automation Platform), ensuring its successful adoption and led the migration from Powershell based scheduled tasks on Windows servers to Ansible playbooks ran on Ansible Automation Platform. 
-
-          Currently, I'm working on introducing Terraform and further adopting Infrastructure as Code within our team and other teams within the organization under the Simac Automation Framework umbrella (see below). 
-
-          I personally developed a full set of Terraform modules that are used to completely manage customer tenants on our Cloud|NEXT platform. 
-          Besides automation, I also support the day-to-day operations needed to run our platform, including incident management or performing changes. 
-          This also helps me in identifying toil that could be automated away. 
-
-          The day-to-day operations consist of system administration (VMware, Windows, Linux), patch management, security management, lifecycle management, active directory/DNS, 
-          light network management using VMWare NSX-T, backup & restore, monitoring & reporting, and the creation & maintenance of documentation.
-
-  - title: Previous Role
-    layout: list
-    content:
-      - layout: top-middle
-        title: Simac IT|NL
-        link: simac.com
-        sub_title: System Engineer
-        caption: August 2018 - February 2020
-        description: |
-          As a System Engineer at Simac IT|NL, I served as a Lead Engineer for multiple retail, healthcare, and internal customers. 
-          I was their primary contact for (server) infrastructure inquiries and responsible for daily maintenance and improvement of systems/server infrastructure, including Windows, VMware, Azure(AD), and Office365 environments. 
-
-          My responsibilities included Windows system administration, patch management, backup, monitoring, and the implementation and configuration of new server infrastructure. I also assisted in customer migrations, both external and internal.
-
-  - title: Projects
-    layout: list
-    content:
-      - layout: top-middle
-        title: Simac Automation Framework
-        caption: October 2023 - Present
-        description: |
-          Simac is an organization aiming to mature its automation processes. We have formed a small internal team to design, implement, and support a company-wide automation platform. We make use of self-hosted agents in both Azure and on-premises on a Kubernetes stack.
-
-          From an engineering standpoint, I have developed the Docker and Azure Virtual Machine images using Packer and Ansible, containing all the required tooling and supported my colleagues on both the Azure and Kubernetes implementations.
-
-          Besides the engineering part of this project, a major part is ensuring adoption and usage of the product we have (and are) creating. Helping teams that are not yet familiar with automation and infrastructure as code to get up to speed and ensuring management stays focused on the importance of automation.
-
-  - title: Education
-    layout: list
-    content:
-      - layout: left
-        title: Fontys ICT Eindhoven
-        caption: 2016 - 2020
-        sub_title: BSc Computer Science (Management & Security)
-        description: |
-          I successfully completed my Bachelor's degree in Computer Science at Fontys, a full four-year study that I undertook alongside my full-time job.
-
-  - title: Other Experience
-    layout: list
-    content:
-      - layout: left
-        title: EasyPOS Software
-        link: https://www.easypos.nl/
-        sub_title: Support Engineer
-        caption: October 2016 - August 2018
-        description: |
-          In this role, I was responsible for supporting a software suite for retail shops and performing field engineering duties. I worked on incidents and troubleshooting a wide variety of computer issues and some very light server maintenance. This was my stepping stone to my first real IT job.
-
-      - layout: left
-        title: Sitel
-        link: https://www.sitel.com/
-        sub_title: Helpdesk employee
-        caption: January 2016 - October 2016
-        description: |
-          During my time at Sitel, I was responsible for troubleshooting HP computer-related issues in a retail customer-facing role, mainly in a queue-based inbound call fashion. I quickly realized I needed something better (this was also necessary because this is when I started my Bachelor in Computer Science).
-
-      - layout: left
-        title: Novadic Kentron
-        link: https://www.novadic-kentron.nl/
-        sub_title: Care / Support
-        caption: 2012 - 2015
-        description: |
-          During my time with Novadic Kentron, I worked with recovering addicts. I was trying to become a psychiatric nurse as this was a work/study arrangement. However, after a few years, I realized that this wasn't the direction I wanted to go in, and so my pursuit of becoming a system administrator began.
-
-      - layout: left
-        title: Royal Dutch Army
-        link: https://www.defensie.nl/
-        sub_title: Soldier (Engineer)
-        caption: 2008 - 2012
-        description: |
-          I served 4 years in the Dutch Army. The time serving has immensely helped me in shaping who I am today.
-
-footer_show_references: false
-
-remote_theme: sproogen/resume-theme
+# Build settings
+markdown: kramdown
+highlighter: rouge
 
 sass:
-  sass_dir: _sass
+  sass_dir: assets/scss
   style: compressed
+  load_paths:
+    - .
+    - assets/scss
+  sourcemap: development
+  quiet_deps: true
 
 plugins:
   - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-paginate
+
+# Navigation
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      permalink: /blog/:year/:month/:day/:title/
+
+# Blog pagination
+paginate: 9
+paginate_path: "/blog/page:num/"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - CNAME
+  - Dockerfile
+  - docker-compose.yml
+  - serve.sh
+  - ACTION_PLAN.md
+  - .devenv
+  - devenv.nix
+  - devenv.yaml
+  - devenv.lock
+  - .devenv.flake.nix
+  - .direnv
+  - backup

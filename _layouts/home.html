@@ -1,0 +1,428 @@
+---
+layout: default
+---
+
+<div class="{% if page.page_type == 'blog-home' %}blog-home{% else %}home-container{% endif %}">
+  <!-- Hero Section -->
+  <section class="hero-section {% if page.page_type == 'blog-home' %}hero-section--blog{% else %}hero-section--regular{% endif %}">
+    <div class="container">
+      <div class="hero-content">
+        {% if page.page_type == 'blog-home' %}
+          <!-- Blog Home: Terminal + Profile Layout -->
+          <div class="hero-image">
+            <div class="terminal-container">
+              <div class="terminal-header">
+                <div class="terminal-controls">
+                  <span class="terminal-button"></span>
+                  <span class="terminal-button"></span>
+                  <span class="terminal-button"></span>
+                </div>
+                <div class="terminal-title">~</div>
+                <div></div>
+              </div>
+              <div class="terminal-body">
+                <div class="terminal-line">blog on (main) | took 3s</div>
+                <div class="terminal-line">> neofetch</div>
+                <div class="terminal-content">
+                  <pre class="terminal-neofetch">
+<span class="neofetch-left">                     'c.           </span><span class="neofetch-right">roelc@darwin</span>
+<span class="neofetch-left">                 ,xNMM.            </span><span class="neofetch-right">-----------</span>
+<span class="neofetch-left">               .OMMMMo             </span><span class="neofetch-right">OS: macOS 15.3.2 24D81 arm64</span>
+<span class="neofetch-left">               OMMM0,              </span><span class="neofetch-right">Host: Mac16,8</span>
+<span class="neofetch-left">     .;loddo:' loolloddol;.        </span><span class="neofetch-right">Kernel: 24.3.0</span>
+<span class="neofetch-left">   cKMMMMMMMMMMNWMMMMMMMMMM0:      </span><span class="neofetch-right">Uptime: 2 days, 17 hours, 40 mins</span>
+<span class="neofetch-left"> .KMMMMMMMMMMMMMMMMMMMMMMMWd.      </span><span class="neofetch-right">Packages: 206 (brew), 173 (nix-system)</span>
+<span class="neofetch-left"> XMMMMMMMMMMMMMMMMMMMMMMMX.        </span><span class="neofetch-right">Shell: zsh 5.9</span>
+<span class="neofetch-left">;MMMMMMMMMMMMMMMMMMMMMMMM:         </span><span class="neofetch-right">Resolution: 1800x1169</span>
+<span class="neofetch-left">:MMMMMMMMMMMMMMMMMMMMMMMM:         </span><span class="neofetch-right">DE: Aqua</span>
+<span class="neofetch-left">.MMMMMMMMMMMMMMMMMMMMMMMMX.        </span><span class="neofetch-right">WM: yabai</span>
+<span class="neofetch-left"> kMMMMMMMMMMMMMMMMMMMMMMMMWd.      </span><span class="neofetch-right">Terminal: kitty</span>
+<span class="neofetch-left"> .XMMMMMMMMMMMMMMMMMMMMMMMMMMk     </span><span class="neofetch-right">CPU: Apple M4 Pro</span>
+<span class="neofetch-left">  .XMMMMMMMMMMMMMMMMMMMMMMMMK.     </span><span class="neofetch-right">GPU: Apple M4 Pro</span>
+<span class="neofetch-left">    kMMMMMMMMMMMMMMMMMMMMMMd       </span><span class="neofetch-right">Memory: 6270MiB / 49152MiB</span>
+<span class="neofetch-left">     ;KMMMMMMMWXXWMMMMMMMk.        </span>
+<span class="neofetch-left">       .cooc,.    .,coo:.          </span>
+                  </pre>
+                  <br>
+                  <div class="terminal-line cursor-line">></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hero-info">
+            <div class="profile-header">
+              <div class="profile-image-container">
+                {% include responsive-image.html src="assets/images/profile.png" alt=site.name class="profile-image" loading="eager" %}
+              </div>
+              <div class="profile-title">
+                <h1>Hi! I'm {{ site.first_name }} <span class="wave">👋</span></h1>
+                <p class="subtitle">DevOps · Open Source · Automation</p>
+              </div>
+            </div>
+            
+            <div class="hero-bio">
+              <p>I specialize in infrastructure automation, GitLab, GitOps, and OpenBao, helping teams build secure, scalable platforms with a strong focus on Infrastructure as Code. I thrive on simplifying complex systems, leveraging open-source tools, and adding just the right amount of Kubernetes magic.</p>
+            </div>
+            
+            <a href="{{ site.baseurl }}/blog" class="cta-button cta-button--hero">Explore My Blog</a>
+          </div>
+        {% else %}
+          <!-- Regular Home: Profile + Terminal Grid Layout -->
+          <div class="hero-grid">
+            <div class="hero-profile">
+              {% if site.about_profile_image %}
+              <div class="profile-image">
+                {% include responsive-image.html src=site.about_profile_image alt=site.name loading="eager" %}
+              </div>
+              {% endif %}
+              
+              <div class="profile-info">
+                <h1 class="hero-title">Hi! I'm {{ site.author }} <span class="wave">👋</span></h1>
+                <h2 class="hero-subtitle">{{ site.description }}</h2>
+                <p class="hero-description">{{ site.description }}</p>
+              </div>
+            </div>
+
+            <!-- Terminal Display for Regular Home -->
+            <div class="terminal-container">
+              <div class="terminal-header">
+                <div class="terminal-controls">
+                  <span class="terminal-button"></span>
+                  <span class="terminal-button"></span>
+                  <span class="terminal-button"></span>
+                </div>
+                <div class="terminal-title">neofetch</div>
+              </div>
+              <div class="terminal-body">
+                <div class="terminal-neofetch">
+                  <div class="neofetch-left">{{ site.terminal_art }}</div>
+                  <div class="neofetch-right">
+                    <strong>{{ site.name }}</strong>@<strong>{{ site.hostname }}</strong>
+                    ------------------------
+                    <strong>OS:</strong> {{ site.os }}
+                    <strong>Host:</strong> {{ site.host }}
+                    <strong>Kernel:</strong> {{ site.kernel }}
+                    <strong>Shell:</strong> {{ site.shell }}
+                    <strong>Terminal:</strong> {{ site.terminal }}
+                    <strong>Editor:</strong> {{ site.editor }}
+                    <strong>Languages:</strong> {{ site.languages }}
+                    <strong>Interests:</strong> {{ site.interests }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Post Section -->
+  <section class="{% if page.page_type == 'blog-home' %}latest-post-section{% else %}latest-post{% endif %}">
+    <div class="container">
+      <h2 class="section-title{% if page.page_type != 'blog-home' %} section-title--centered{% endif %}">
+        {% if page.page_type == 'blog-home' %}Latest Posts{% else %}Latest Post{% endif %}
+      </h2>
+      
+      {% if page.page_type == 'blog-home' %}
+        {% assign latest_posts = site.posts | where_exp:"post", "post.published != false" | limit: 3 %}
+        <div class="latest-posts-carousel-wrapper">
+          <div class="latest-posts-carousel-viewport">
+            <div class="latest-posts-carousel">
+              {% for latest_post in latest_posts %}
+                <div class="latest-post-slide">
+                  <div class="latest-post-container">
+                    <div class="latest-post-image">
+                      <a href="{{ latest_post.url | relative_url }}">
+                        {% if latest_post.image %}
+                          {% include responsive-image.html src=latest_post.image alt=latest_post.title loading="lazy" %}
+                        {% elsif latest_post.featured_image %}
+                          {% include responsive-image.html src=latest_post.featured_image alt=latest_post.title loading="lazy" %}
+                        {% else %}
+                          {% include responsive-image.html src="assets/images/default-post.png" alt=latest_post.title loading="lazy" %}
+                        {% endif %}
+                      </a>
+                      {% if latest_post.category %}
+                        <span class="post-category--top-right-badge">{{ latest_post.category }}</span>
+                      {% endif %}
+                    </div>
+                    <div class="latest-post-content">
+                      <div class="post-meta">
+                        <span class="post-date">
+                          <i class="far fa-calendar"></i>
+                          {{ latest_post.date | date: "%B %d, %Y" }}
+                        </span>
+                        {% if latest_post.author %}
+                          <span class="post-author">
+                            <i class="far fa-user"></i>
+                            {{ latest_post.author }}
+                          </span>
+                        {% endif %}
+                      </div>
+                      <h3 class="post-title"><a href="{{ latest_post.url | relative_url }}">{{ latest_post.title }}</a></h3>
+                      {% if latest_post.tags %}
+                        <div class="post-tags">
+                          {% for tag in latest_post.tags limit:3 %}
+                            <a href="{{ site.baseurl }}/blog/tags/#{{ tag | slugify }}" class="tag-simple tag-simple--post">{{ tag }}</a>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                      <p class="post-excerpt">{{ latest_post.content | strip_html | truncate: 750 }}</p>
+                      <a href="{{ latest_post.url | relative_url }}" class="cta-button">Read Full Post</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <button class="carousel-control prev" aria-label="Previous Post" disabled>&#10094;</button>
+          <button class="carousel-control next" aria-label="Next Post">&#10095;</button>
+        </div>
+      {% else %}
+        {% assign latest_post = site.posts | where_exp:"post", "post.published != false" | first %}
+        {% if latest_post %}
+          <time class="post-date" datetime="{{ latest_post.date | date_to_xmlschema }}">
+            {{ latest_post.date | date: "%B %d, %Y" }}
+          </time>
+          <h3 class="post-title">
+            <a href="{{ latest_post.url | relative_url }}">{{ latest_post.title }}</a>
+          </h3>
+          <p class="post-excerpt">{{ latest_post.excerpt | strip_html | truncatewords: 50 }}</p>
+          <a href="{{ latest_post.url | relative_url }}" class="read-more-btn">Read Full Post</a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </section>
+
+  {% if page.page_type == 'blog-home' %}
+    <!-- Featured Posts Section (Blog Home only) -->
+    <section class="featured-section journal">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Featured</h2>
+          <div class="view-toggle">
+            <button class="view-toggle-btn active" data-view="grid" aria-label="Grid view">
+              <i class="fas fa-th"></i>
+            </button>
+            <button class="view-toggle-btn" data-view="list" aria-label="List view">
+              <i class="fas fa-list"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="featured-posts" id="featured-posts">
+          {% assign featured_posts = site.posts | where: "featured", true | where_exp:"post", "post.published != false" | limit: 3 %}
+          {% for post in featured_posts %}
+            <article class="post-card post-card--featured post-card--image-fixed-md post-card--featured-hover">
+              <a href="{{ post.url | relative_url }}" class="post-card__image">
+                {% assign featured_image = post.image | default: "assets/images/default-post.png" %}
+                {% include responsive-image.html src=featured_image alt=post.title loading="lazy" %}
+                {% if post.category %}
+                  <span class="post-category--card-badge">{{ post.category }}</span>
+                {% endif %}
+              </a>
+              <div class="post-card__content">
+                <div class="post-card__meta">
+                  <span class="post-card__meta-item">
+                    <i class="far fa-calendar"></i>
+                    {{ post.date | date: "%B %d, %Y" }}
+                  </span>
+                  {% if post.author %}
+                    <span class="post-card__meta-item">
+                      <i class="far fa-user"></i>
+                      {{ post.author }}
+                    </span>
+                  {% endif %}
+                </div>
+                <h3 class="post-card__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                {% if post.tags %}
+                  <div class="post-card__tags">
+                    {% for tag in post.tags limit:3 %}
+                      <a href="{{ site.baseurl }}/blog/tags/#{{ tag | slugify }}" class="tag-simple tag-simple--post">{{ tag }}</a>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+                <p class="post-card__excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                <a href="{{ post.url | relative_url }}" class="post-card__read-more">Read Full Post</a>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Tags Section (Blog Home only) -->
+    <section class="tags-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Browse by Topic</h2>
+          <a href="{{ site.baseurl }}/blog/tags/" class="section-header__view-all">
+            View All Topics
+          </a>
+        </div>
+        
+        <div class="tag-cloud">
+          {% assign tags = site.tags | sort %}
+          {% for tag in tags limit:10 %}
+            {% assign tag_name = tag[0] %}
+            {% assign posts = tag[1] %}
+            <a href="{{ site.baseurl }}/blog/tags/#{{ tag_name | slugify }}" class="tag-bubble">
+              <span class="tag-name">{{ tag_name }}</span>
+              <span class="tag-count">{{ posts.size }}</span>
+            </a>
+          {% endfor %}
+          
+          {% if site.tags.size > 10 %}
+          <a href="{{ site.baseurl }}/blog/tags/" class="tag-bubble see-more">
+            <span class="tag-name">See All Topics</span>
+            <span class="tag-count">{{ site.tags.size }}</span>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Animate tag bubbles with staggered delay
+        const tagBubbles = document.querySelectorAll('.tag-bubble');
+        tagBubbles.forEach((bubble, index) => {
+          bubble.style.animationDelay = `${index * 0.05}s`;
+          bubble.classList.add('animate-in');
+        });
+        
+        // Featured posts view toggle functionality
+        const toggleButtons = document.querySelectorAll('.view-toggle-btn');
+        const featuredPostsContainer = document.getElementById('featured-posts');
+        
+        if (toggleButtons.length > 0 && featuredPostsContainer) {
+          toggleButtons.forEach(button => {
+            button.addEventListener('click', function() {
+              // Remove active class from all buttons
+              toggleButtons.forEach(btn => btn.classList.remove('active'));
+              
+              // Add active class to clicked button
+              this.classList.add('active');
+              
+              // Get the view type
+              const viewType = this.dataset.view;
+              
+              // Toggle the container class
+              if (viewType === 'list') {
+                featuredPostsContainer.classList.add('list-view');
+              } else {
+                featuredPostsContainer.classList.remove('list-view');
+              }
+              
+              // Store preference in localStorage
+              localStorage.setItem('featuredPostsView', viewType);
+            });
+          });
+          
+          // Load saved preference
+          const savedView = localStorage.getItem('featuredPostsView');
+          if (savedView === 'list') {
+            const listButton = document.querySelector('.view-toggle-btn[data-view="list"]');
+            const gridButton = document.querySelector('.view-toggle-btn[data-view="grid"]');
+            
+            if (listButton && gridButton) {
+              gridButton.classList.remove('active');
+              listButton.classList.add('active');
+              featuredPostsContainer.classList.add('list-view');
+            }
+          }
+        }
+        
+        // Latest Posts Carousel
+        const carouselWrapper = document.querySelector('.latest-posts-carousel-wrapper');
+        if (carouselWrapper) {
+          const carousel = carouselWrapper.querySelector('.latest-posts-carousel');
+          const prevBtn = carouselWrapper.querySelector('.carousel-control.prev');
+          const nextBtn = carouselWrapper.querySelector('.carousel-control.next');
+          
+          if (carousel && prevBtn && nextBtn) {
+            const slides = carousel.querySelectorAll('.latest-post-slide');
+            let currentIndex = 0;
+
+            const updateCarousel = () => {
+              if (slides.length > 0) {
+                const slideWidth = slides[0].clientWidth;
+                carousel.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+              }
+              prevBtn.disabled = currentIndex === 0;
+              nextBtn.disabled = currentIndex >= slides.length - 1;
+            };
+
+            nextBtn.addEventListener('click', () => {
+              if (currentIndex < slides.length - 1) {
+                currentIndex++;
+                updateCarousel();
+              }
+            });
+
+            prevBtn.addEventListener('click', () => {
+              if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+              }
+            });
+            
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+              clearTimeout(resizeTimer);
+              resizeTimer = setTimeout(() => {
+                carousel.style.transitionDuration = '0s';
+                updateCarousel();
+                carousel.offsetHeight; // Trigger reflow to apply transform instantly
+                carousel.style.transitionDuration = ''; // Re-enable animation
+              }, 250);
+            });
+
+            // Initial setup
+            updateCarousel();
+          }
+        }
+      });
+    </script>
+  {% else %}
+    <!-- Navigation Section instead of Portfolio Sections -->
+    <section class="navigation-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Explore</h2>
+        </div>
+        <div class="navigation-grid">
+          <a href="{{ site.baseurl }}/about/" class="nav-card">
+            <div class="nav-icon">
+              <i class="fas fa-user"></i>
+            </div>
+            <h3>About Me</h3>
+            <p>Learn more about my background, skills, and experience</p>
+          </a>
+          <a href="{{ site.baseurl }}/blog/" class="nav-card">
+            <div class="nav-icon">
+              <i class="fas fa-blog"></i>
+            </div>
+            <h3>Blog</h3>
+            <p>Read my latest thoughts and technical articles</p>
+          </a>
+          <a href="https://github.com/{{ site.github_username }}" target="_blank" class="nav-card">
+            <div class="nav-icon">
+              <i class="fab fa-github"></i>
+            </div>
+            <h3>Projects</h3>
+            <p>Check out my open source work and personal projects</p>
+          </a>
+          <a href="mailto:{{ site.email }}" class="nav-card">
+            <div class="nav-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h3>Contact</h3>
+            <p>Get in touch for collaborations or opportunities</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+</div> 
