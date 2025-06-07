@@ -7,29 +7,37 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: map.get(vars.$spacing-scale, 'md'); // Reduced for better cohesion
+  margin-bottom: map.get(vars.$spacing-scale, 'lg');
 
-  // Assumes .section-title from _sections.scss will be used for the title part
-  // e.g., <div class="section-header"><h2 class="section-title">Title</h2><a class="section-header__view-all">View All</a></div>
-
-  &__title {
-    // This class can be used if more specific styling than global .section-title is needed within a header
-    // Or, it can simply be a placeholder for where the .section-title element goes.
-    // For now, we assume global .section-title is sufficient.
+  .section-title {
+    margin-bottom: 0;
   }
 
   &__view-all {
-    color: var(--accent-color);
+    color: var(--secondary-color);
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
-    font-size: map.get(vars.$font-sizes, 'sm'); // A sensible default size
+    font-size: map.get(vars.$font-sizes, 'sm');
     opacity: 0.8;
+    display: inline-flex;
+    align-items: center;
 
     &:hover {
       color: var(--accent-color);
-      text-decoration: underline;
+      text-decoration: none;
       opacity: 1;
+      transform: translateY(-2px);
+
+      &::after {
+        transform: translateX(4px);
+      }
+    }
+
+    &::after {
+      content: '→';
+      margin-left: 8px;
+      transition: transform 0.3s ease;
     }
 
     // Alternative style if it should look more like a button

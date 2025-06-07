@@ -52,6 +52,7 @@ scss/
 - ♿️ Accessibility focused
 - 📏 **Enhanced spacing system** for better visual hierarchy
 - 🖼️ **Improved layout proportions** for desktop and mobile
+- ✨ **Smooth scroll effects** with parallax and entrance animations
 
 ## Layout System
 
@@ -81,7 +82,7 @@ $spacing-scale: (
   // 32px - Section separations
   "2xl": 3rem,
   // 48px - Major sections
-  "3xl": 4rem // 64px - Large section breaks,,,
+  "3xl": 4rem // 64px - Large section breaks,,,,,,,,,
 );
 ```
 
@@ -262,6 +263,35 @@ Available sizes: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`
    - Include focus styles
    - Use semantic HTML
    - Test with screen readers
+
+## Scroll Effects
+
+The portfolio includes smooth scroll effects that enhance the user experience when navigating the hero section:
+
+### Hero Section Effects
+
+- **Parallax Background**: Subtle background pattern that moves at different speeds during scroll
+- **Progressive Fade**: Hero content gradually fades and transforms as user scrolls down
+- **Advanced CSS Variables**: Uses `--scroll-progress` for smooth, performance-optimized animations
+- **Intersection Observer**: Uses modern browser APIs for efficient scroll detection
+
+### Accessibility Features
+
+- **Reduced Motion Support**: Automatically disables animations for users who prefer reduced motion
+- **Performance Optimized**: Uses `requestAnimationFrame` and passive event listeners
+- **Progressive Enhancement**: Works without JavaScript, enhanced with JavaScript
+
+### JavaScript Implementation
+
+The scroll effects are handled by `assets/js/scroll-effects.js` which includes:
+
+```javascript
+// Initialize scroll effects
+const scrollEffects = new ScrollEffects();
+
+// Respects user preferences
+scrollEffects.respectReducedMotion();
+```
 
 ## Contributing
 

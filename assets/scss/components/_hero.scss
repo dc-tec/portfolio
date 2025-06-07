@@ -8,16 +8,68 @@
   padding: map.get(vars.$spacing-scale, 'sm') 0 map.get(vars.$spacing-scale, '2xl');
   margin-bottom: map.get(vars.$spacing-scale, 'sm');
   overflow: hidden;
+  // Add scroll effect properties
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform, opacity;
   
   @media (width <= 768px) {
     padding: map.get(vars.$spacing-scale, 'sm') 0 map.get(vars.$spacing-scale, '2xl');
     margin-bottom: map.get(vars.$spacing-scale, 'sm');
+  }
+
+  // Subtle background pattern for parallax effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    right: -20%;
+    bottom: -20%;
+    background: 
+      radial-gradient(circle at 25% 25%, rgba(var(--accent-color-rgb), 0.03) 0%, transparent 70%),
+      radial-gradient(circle at 75% 75%, rgba(var(--info-color-rgb), 0.02) 0%, transparent 70%);
+    z-index: -1;
+    transition: transform 0.6s ease-out;
+    will-change: transform;
+  }
+
+  // Scroll effect states
+  &.hero-parallax {
+    &::before {
+      transform: translateY(-30px) scale(1.02);
+    }
+  }
+
+  &.hero-fade-out {
+    transform: translateY(-30px);
+    opacity: 0.3;
+    
+    .hero-content {
+      transform: translateY(-30px);
+    }
+  }
+
+  // Advanced scroll-based animations using custom properties
+  &[style*="--scroll-progress"] {
+    --scroll-transform: calc(var(--scroll-progress, 0) * -15px);
+    --scroll-opacity: calc(1 - var(--scroll-progress, 0) * 0.3);
+    
+    .hero-content {
+      transform: translateY(var(--scroll-transform));
+      opacity: var(--scroll-opacity);
+    }
+    
+    &::before {
+      transform: translateY(calc(var(--scroll-progress, 0) * -25px)) scale(calc(1 + var(--scroll-progress, 0) * 0.05));
+    }
   }
   
   .hero-content {
     width: 100%;
     position: relative;
     z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    will-change: transform;
   }
 
   // Regular Home Grid Layout
@@ -299,7 +351,7 @@
       }
 
       .subtitle {
-        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        font-size: clamp(1.0rem, 2.5vw, 1.2rem);
         color: var(--secondary-color);
         font-weight: 500;
         margin: 0;

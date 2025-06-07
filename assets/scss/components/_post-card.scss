@@ -18,13 +18,15 @@
   &__image {
     position: relative;
     overflow: hidden;
-    display: block; // Make it a block element for easier sizing
+    display: flex; // Make it a block element for easier sizing
+    align-items: center;
+    justify-content: center;
     aspect-ratio: 16 / 9; // Adding default aspect ratio
 
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover; // Common default
+      object-fit: contain; // Common default
       transition: transform 0.3s ease;
     }
 
