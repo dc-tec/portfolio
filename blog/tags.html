@@ -16,11 +16,13 @@ permalink: /blog/tags/
         {% assign tags = site.tags | sort %}
         {% for tag in tags %}
           {% assign tag_name = tag[0] %}
-          {% assign posts = tag[1] %}
-          <a href="#{{ tag_name | slugify }}" class="tag-bubble" data-tag="{{ tag_name | slugify }}" data-count="{{ posts.size }}">
-            <span class="tag-name">{{ tag_name }}</span>
-            <span class="tag-count">{{ posts.size }}</span>
-          </a>
+          {% assign published_posts = tag[1] | where_exp: "post", "post.published != false" %}
+          {% if published_posts.size > 0 %}
+            <a href="#{{ tag_name | slugify }}" class="tag-bubble" data-tag="{{ tag_name | slugify }}" data-count="{{ published_posts.size }}">
+              <span class="tag-name">{{ tag_name }}</span>
+              <span class="tag-count">{{ published_posts.size }}</span>
+            </a>
+          {% endif %}
         {% endfor %}
       </div>
     </div>
@@ -33,12 +35,15 @@ permalink: /blog/tags/
       
       <div class="tag-groups">
         {% for tag in tags %}
+          {% assign tag_name = tag[0] %}
+          {% assign published_posts = tag[1] | where_exp: "post", "post.published != false" %}
+          {% if published_posts.size > 0 %}
           <div class="tag-group" id="{{ tag[0] | slugify }}" data-tag="{{ tag[0] | slugify }}">
             <h2 class="tag-title">{{ tag[0] }}</h2>
-            <p class="tag-description">Exploring {{ tag[1].size }} post{% if tag[1].size > 1 %}s{% endif %} about {{ tag[0] }}</p>
+            <p class="tag-description">Exploring {{ published_posts.size }} post{% if published_posts.size > 1 %}s{% endif %} about {{ tag[0] }}</p>
             
             <div class="tag-posts-grid">
-              {% for post in tag[1] %}
+              {% for post in published_posts %}
                 <article class="post-card post-card--tag-page-hover post-card--tag-page-custom-bg">
                   <a href="{{ post.url | relative_url }}" class="post-card__image">
                     {% assign tag_post_image = post.image | default: "assets/images/default-post.png" %}
@@ -73,6 +78,7 @@ permalink: /blog/tags/
               {% endfor %}
             </div>
           </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>

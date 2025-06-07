@@ -125,7 +125,7 @@ function initializeHeaderSearch() {
         resultsContainer: searchResults,
         json: searchJsonUrl,
         searchResultTemplate: '<div class="search-result-item"><h4><a href="{url}">{title}</a></h4><p>{excerpt}</p><div class="search-date">{date}</div></div>',
-        noResultsText: '<div class="no-search-results">No results found</div>',
+        noResultsText: '<div class="no-search-results"><i class="fas fa-search"></i><p>No results found</p></div>',
         limit: 8,
         fuzzy: false,
         exclude: ['date']
@@ -271,17 +271,20 @@ function initializeMobileSearch() {
   // Initialize Simple Jekyll Search for mobile
   function initMobileSearch() {
     if (typeof SimpleJekyllSearch !== 'undefined' && !mobileSearchInstance) {
+      console.log('📱 Initializing Simple Jekyll Search for mobile...');
       const searchJsonUrl = (window.siteConfig?.baseurl || '') + '/blog/search.json';
       mobileSearchInstance = SimpleJekyllSearch({
         searchInput: mobileSearchInput,
         resultsContainer: mobileSearchResults,
         json: searchJsonUrl,
         searchResultTemplate: '<div class="search-result-item"><h4><a href="{url}">{title}</a></h4><p>{excerpt}</p><div class="search-date">{date}</div></div>',
-        noResultsText: '<div class="no-search-results">No results found</div>',
-        limit: 6,
+        noResultsText: '<div class="no-search-results"><i class="fas fa-search"></i><p>No results found</p></div>',
+        limit: 5,
         fuzzy: false,
         exclude: ['date']
       });
+    } else {
+      console.warn('🔍 SimpleJekyllSearch not available');
     }
   }
   

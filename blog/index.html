@@ -39,7 +39,8 @@ title: Blog
     </div>
     
     <div class="blog-grid posts-grid" id="blog-grid">
-      {% for post in site.posts %}
+      {% assign published_posts = site.posts | where_exp: "post", "post.published != false" %}
+      {% for post in published_posts %}
         <article class="post-card post-card--blog-hover">
           <a href="{{ post.url | relative_url }}" class="post-card__image">
             {% assign post_image = post.image | default: "assets/images/default-post.png" %}

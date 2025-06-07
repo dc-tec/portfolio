@@ -175,10 +175,22 @@
   }
 }
 
-// Message shown when there are no search results
-.search-no-results {
-  padding: 20px;
+// Message shown when there are no search results - updated
+.no-search-results {
+  padding: 40px 20px;
   text-align: center;
-  color: var(--search-no-results-color, var(--secondary-color));
-  font-style: italic;
+  color: var(--secondary-color);
+  
+  i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    color: var(--border-color);
+  }
+  
+  p {
+    margin: 0;
+    font-size: 1rem;
+    font-style: normal;
+  }
 } 
