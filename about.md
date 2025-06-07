@@ -15,9 +15,11 @@ Hey, I'm Roel, a 35-year-old DevOps engineer and consultant from the Netherlands
 
 My background spans everything from helpdesk support to managing private cloud environments, but these days I mainly focus on and with GitLab, Infra as Code, GitOps, secret management using OpenBao with a dash of Kubernetes. I work with a variety of clients to design and implement infrastructure-as-code, Software Development Lifecycle improvements, and automation workflows that actually make life easier and not more complicated.
 
-I spend a lot of time around Kubernetes (in all shapes and sizes), helping teams adopt GitOps, enforce security policies, and keep their platforms maintainable as they scale. I enjoy working across the stack, whether that's writing Opentofu modules, securly provisioning secrets with OpenBao, or setting up pipelines in GitLab.
+I spend time around Kubernetes (in all shapes and sizes), helping teams adopt GitOps, enforce security policies, and keep their platforms maintainable as they scale. I enjoy working across the stack, whether that's writing Opentofu modules, securly provisioning secrets with OpenBao, or setting up pipelines in GitLab.
 
-Outside of work, I like to stay hands-on by contributing to open source. Sharing knowledge and improving the tools I use every day is something I really value.
+Outside of work, I like to stay hands-on by contributing to open source and building my own projects. 
+
+Sharing knowledge and improving the tools I use every day is something I really value.
 
 When I'm not deep in YAML or testing something new in my homelab, I'm at home with my partner and our three amazing kids. Life's busy, but in the best way!
 
