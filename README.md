@@ -4,14 +4,14 @@ Personal portfolio website hosted at [decort.tech](https://decort.tech), featuri
 
 ## Features
 
-- 📱 **Responsive Design**: Modern, mobile-first portfolio layout
-- 📝 **Technical Blog**: Organized by categories and tags with search functionality
-- 🔍 **Search**: JSON-powered search through blog posts
-- 📡 **RSS Feed**: Automatic feed generation for blog posts
-- 🎯 **SEO Optimized**: Meta tags, structured data, and social media integration
-- 🖼️ **Image Optimization**: WebP conversion and automated compression
-- 🏷️ **Content Organization**: Categories, tags, and featured post support
-- 📄 **Pagination**: Clean pagination for blog listings (9 posts per page)
+- **Responsive Design**: Modern, mobile-first portfolio layout
+- **Technical Blog**: Organized by categories and tags with search functionality
+- **Search**: JSON-powered search through blog posts
+- **RSS Feed**: Automatic feed generation for blog posts
+- **SEO Optimized**: Meta tags, structured data, and social media integration
+- **Image Optimization**: WebP conversion and automated compression
+- **Content Organization**: Categories, tags, and featured post support
+- **Pagination**: Clean pagination for blog listings (9 posts per page)
 
 ## Development Environment
 
