@@ -17,4 +17,9 @@ devenv.local.nix
 
 # pre-commit
 .pre-commit-config.yaml
+
+# node
 node_modules/
+
+# Mac bullshit
+.DS_Store
