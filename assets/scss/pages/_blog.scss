@@ -764,3 +764,6 @@
   gap: map.get(vars.$spacing-scale, 'xl');
   margin-top: map.get(vars.$spacing-scale, 'xl');
 }
+
+// Remove old blog-card styles - now using post-card component
+// Legacy blog-card styles removed - use .post-card component instead

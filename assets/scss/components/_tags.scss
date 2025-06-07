@@ -111,6 +111,29 @@
   &.animate-in {
     animation: bubbleIn 0.5s forwards;
   }
+
+  /* Size modifiers */
+  &--sm {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    
+    .tag-count {
+      min-width: 16px;
+      height: 16px;
+      font-size: 0.7em;
+    }
+  }
+  
+  &--lg {
+    padding: 12px 20px;
+    font-size: 1rem;
+    
+    .tag-count {
+      min-width: 24px;
+      height: 24px;
+      font-size: 0.85em;
+    }
+  }
 }
 
 /* Common Tag Container Styles */

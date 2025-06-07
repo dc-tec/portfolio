@@ -11,7 +11,7 @@ title: Blog
       <!-- Search Bar -->
       <div class="search-container">
         <div class="search-wrapper">
-          <input type="text" id="search-input" placeholder="Search posts..." aria-label="Search blog posts">
+          <input type="text" class="search-input-field" id="search-input" placeholder="Search posts..." aria-label="Search blog posts">
           <i class="fas fa-search search-icon"></i>
           <button id="clear-search" class="clear-search" aria-label="Clear search" style="display: none;">
             <i class="fas fa-times"></i>
@@ -38,31 +38,37 @@ title: Blog
       </div>
     </div>
     
-    <div class="blog-grid" id="blog-grid">
+    <div class="blog-grid posts-grid" id="blog-grid">
       {% for post in site.posts %}
-        <div class="blog-card">
-          <a href="{{ post.url | relative_url }}" class="card-link" aria-label="Read {{ post.title }}"></a>
-          <div class="post-image">
+        <article class="post-card post-card--blog-hover">
+          <a href="{{ post.url | relative_url }}" class="post-card__image">
             {% assign post_image = post.image | default: "assets/images/default-post.png" %}
             {% include responsive-image.html src=post_image alt=post.title loading="lazy" %}
             {% if post.category %}
               <span class="post-category--top-right-badge">{{ post.category }}</span>
             {% endif %}
-          </div>
-          <div class="post-content">
-            <p class="post-date">{{ post.date | date: "%B %d, %Y" }}</p>
-            <h2 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          </a>
+          <div class="post-card__content">
+            <div class="post-card__meta">
+              <div class="post-card__meta-item">
+                <i class="fas fa-calendar"></i>
+                <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+              </div>
+            </div>
+            <h2 class="post-card__title">
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h2>
             {% if post.tags %}
-              <div class="post-mini-tags">
+              <div class="post-card__tags">
                 {% for tag in post.tags limit:3 %}
-                  <a href="{{ site.baseurl }}/blog/tags/#{{ tag | slugify }}" class="post-mini-tag">{{ tag }}</a>
+                  <a href="{{ site.baseurl }}/blog/tags/#{{ tag | slugify }}" class="tag-bubble tag-bubble--sm">{{ tag }}</a>
                 {% endfor %}
               </div>
             {% endif %}
-            <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
-            <a href="{{ post.url | relative_url }}" class="read-more">Read Full Post</a>
+            <p class="post-card__excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+            <a href="{{ post.url | relative_url }}" class="post-card__read-more read-more">Read Full Post</a>
           </div>
-        </div>
+        </article>
       {% endfor %}
     </div>
     
@@ -127,8 +133,8 @@ title: Blog
           searchInput: searchInput,
           resultsContainer: searchResults,
           json: '{{ site.baseurl }}/blog/search.json',
-          searchResultTemplate: '<div class="search-result-item"><h4><a href="{url}">{title}</a></h4><p>{excerpt}</p><div class="search-date">{date}</div></div>',
-          noResultsText: '<div class="no-search-results">No results found for your search.</div>',
+          searchResultTemplate: '<div class="search-result-item"><h4 class="search-result-item__title"><a href="{url}">{title}</a></h4><p class="search-result-item__excerpt">{excerpt}</p><div class="search-result-item__meta">{date}</div></div>',
+          noResultsText: '<div class="search-no-results">No results found for your search.</div>',
           limit: 10,
           fuzzy: false,
           exclude: ['date']
@@ -166,7 +172,7 @@ title: Blog
         // If we have search results, check if they're empty
         setTimeout(() => {
           const hasResults = searchResults.querySelector('.search-result-item');
-          const hasNoResultsMsg = searchResults.querySelector('.no-search-results');
+          const hasNoResultsMsg = searchResults.querySelector('.search-no-results');
           
           if (!hasResults && hasNoResultsMsg) {
             // Show custom no results message

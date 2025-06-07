@@ -39,34 +39,37 @@ permalink: /blog/tags/
             
             <div class="tag-posts-grid">
               {% for post in tag[1] %}
-                <div class="post-card">
-                  <div class="post-card-image">
-                    <a href="{{ post.url | relative_url }}">
-                      {% assign tag_post_image = post.image | default: "assets/images/default-post.png" %}
-                      {% include responsive-image.html src=tag_post_image alt=post.title loading="lazy" %}
-                    </a>
+                <article class="post-card post-card--tag-page-hover post-card--tag-page-custom-bg">
+                  <a href="{{ post.url | relative_url }}" class="post-card__image">
+                    {% assign tag_post_image = post.image | default: "assets/images/default-post.png" %}
+                    {% include responsive-image.html src=tag_post_image alt=post.title loading="lazy" %}
                     {% if post.category %}
-                      <span class="post-category">{{ post.category }}</span>
+                      <span class="post-category--top-right-badge">{{ post.category }}</span>
                     {% endif %}
-                  </div>
-                  <div class="post-card-content">
-                    <div class="post-meta">
-                      <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
-                      {% if post.tags %}
-                        <div class="post-mini-tags">
-                          {% for post_tag in post.tags limit:2 %}
-                            {% if post_tag != tag[0] %}
-                              <a href="{{ site.baseurl }}/blog/tags/#{{ post_tag | slugify }}" class="post-mini-tag">{{ post_tag }}</a>
-                            {% endif %}
-                          {% endfor %}
-                        </div>
-                      {% endif %}
+                  </a>
+                  <div class="post-card__content">
+                    <div class="post-card__meta">
+                      <div class="post-card__meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span class="post-date">{{ post.date | date: "%B %d, %Y" }}</span>
+                      </div>
                     </div>
-                    <h3 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-                    <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
-                    <a href="{{ post.url | relative_url }}" class="post-read-more">Read Full Post</a>
+                    <h3 class="post-card__title">
+                      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                    </h3>
+                    {% if post.tags %}
+                      <div class="post-card__tags">
+                        {% for post_tag in post.tags limit:2 %}
+                          {% if post_tag != tag[0] %}
+                            <a href="{{ site.baseurl }}/blog/tags/#{{ post_tag | slugify }}" class="tag-bubble tag-bubble--sm">{{ post_tag }}</a>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                    <p class="post-card__excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
+                    <a href="{{ post.url | relative_url }}" class="post-card__read-more read-more">Read Full Post</a>
                   </div>
-                </div>
+                </article>
               {% endfor %}
             </div>
           </div>
