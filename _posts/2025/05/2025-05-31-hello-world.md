@@ -7,6 +7,7 @@ last_modified_date: 2025-06-07
 category: welcome
 tags: []
 featured: true
+published: true
 image: /assets/images/default-post.webp
 excerpt: "Welcome to my blog!"
 ---
