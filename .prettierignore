@@ -10,7 +10,6 @@
 !astro.config.ts
 !astro-paper.config.ts
 !package.json
-!pnpm-lock.yaml
 !.prettierrc
 !.prettierignore
 !eslint.config.js
