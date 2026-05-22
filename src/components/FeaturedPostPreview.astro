@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from "astro:content";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import Datetime from "@/components/Datetime.astro";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { slugifyStr } from "@/utils/slugify";
+
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+
+const { post } = Astro.props;
+const { id, data, filePath } = post;
+const { title, description, ...dateProps } = data;
+const postUrl = getPostUrl(id, filePath, Astro.currentLocale);
+
+function cleanMarkdown(markdown: string): string {
+  return markdown
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[`*_~>#]/g, "")
+    .trim();
+}
+
+const postBody = (post as CollectionEntry<"posts"> & { body?: string }).body;
+const excerptParagraphs = (postBody ?? "")
+  .split(/\n{2,}/)
+  .map(paragraph => paragraph.trim())
+  .filter(
+    paragraph =>
+      paragraph &&
+      !paragraph.startsWith("#") &&
+      !paragraph.startsWith("```") &&
+      !paragraph.startsWith("- ")
+  )
+  .slice(0, 2)
+  .map(cleanMarkdown);
+---
+
+<article class="border-border border-t py-6">
+  <a
+    href={postUrl}
+    class="text-accent inline-block text-xl font-semibold decoration-dashed underline-offset-4 hover:underline focus-visible:no-underline"
+  >
+    <h3 transition:name={slugifyStr(title.replaceAll(".", "-"))}>
+      {title}
+    </h3>
+  </a>
+
+  <Datetime {...dateProps} />
+
+  <p class="text-muted-foreground mt-2 leading-7">{description}</p>
+
+  <div class="mt-5 max-w-3xl space-y-4 leading-7">
+    {excerptParagraphs.map(paragraph => <p>{paragraph}</p>)}
+  </div>
+
+  <a
+    href={postUrl}
+    class="text-accent mt-4 inline-flex items-center gap-1 font-medium decoration-dashed underline-offset-4 hover:underline focus-visible:no-underline"
+  >
+    Read more
+    <IconArrowRight class="inline-block rtl:-rotate-180" />
+  </a>
+</article>

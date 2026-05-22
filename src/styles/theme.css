@@ -1,0 +1,34 @@
+/* Register design tokens for Tailwind v4 */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --font-app: var(--font-google-sans-code);
+}
+
+/* Light theme values */
+:root,
+[data-theme="light"] {
+  --background: #eff1f5;
+  --foreground: #4c4f69;
+  --accent: #fe640b;
+  --accent-foreground: #eff1f5;
+  --muted: #e6e9ef;
+  --muted-foreground: #6c6f85;
+  --border: #bcc0cc;
+}
+
+/* Catppuccin Macchiato with peach/orange accent */
+[data-theme="dark"] {
+  --background: #24273a;
+  --foreground: #cad3f5;
+  --accent: #f5a97f;
+  --accent-foreground: #1e2030;
+  --muted: #363a4f;
+  --muted-foreground: #a5adcb;
+  --border: #494d64;
+}

@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import config from "@/config";
+
+type Props = {
+  title: string;
+  description: string;
+  topic: string;
+  matchTags: string[];
+};
+
+const { title, description, topic, matchTags } = Astro.props;
+
+const posts = await getCollection("posts");
+const normalizedTags = matchTags.map(tag => tag.toLowerCase());
+const topicPathSegment = `/posts/${topic}/`;
+
+const matchingPosts = getSortedPosts(posts).filter(post => {
+  const tags = post.data.tags.map(tag => tag.toLowerCase());
+  const isTagged = tags.some(tag => normalizedTags.includes(tag));
+  const isInTopicFolder = post.filePath?.includes(topicPathSegment) ?? false;
+
+  return isTagged || isInTopicFolder;
+});
+---
+
+<Layout title={`${title} | ${config.site.title}`} description={description}>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main pageTitle={title} pageDesc={description}>
+    {
+      matchingPosts.length > 0 ? (
+        <ul>
+          {matchingPosts.map(post => (
+            <Card {...post} />
+          ))}
+        </ul>
+      ) : (
+        <p class="text-muted-foreground leading-7">
+          No published notes in this area yet. Drafts stay out of the public
+          index until they are ready to read.
+        </p>
+      )
+    }
+  </Main>
+
+  <Footer />
+</Layout>

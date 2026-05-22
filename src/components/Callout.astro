@@ -1,0 +1,24 @@
+---
+type CalloutType = "note" | "warning" | "danger" | "tip";
+
+type Props = {
+  type?: CalloutType;
+  title?: string;
+};
+
+const { type = "note", title } = Astro.props;
+
+const styles: Record<CalloutType, string> = {
+  note: "border-accent/55 bg-muted/45",
+  warning: "border-yellow-600/55 bg-yellow-500/10",
+  danger: "border-red-700/60 bg-red-500/10",
+  tip: "border-emerald-700/55 bg-emerald-500/10",
+};
+---
+
+<aside class:list={["my-6 rounded-md border px-4 py-3", styles[type]]}>
+  {title && <p class="mb-2 font-semibold">{title}</p>}
+  <div class="leading-7">
+    <slot />
+  </div>
+</aside>

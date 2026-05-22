@@ -1,0 +1,24 @@
+---
+import TopicPostIndex from "@/components/TopicPostIndex.astro";
+import { topics, type Topic } from "@/data/topics";
+
+export function getStaticPaths() {
+  return topics.map(topic => ({
+    params: { topic: topic.slug },
+    props: { topic },
+  }));
+}
+
+type Props = {
+  topic: Topic;
+};
+
+const { topic } = Astro.props;
+---
+
+<TopicPostIndex
+  title={topic.title}
+  description={topic.description}
+  topic={topic.slug}
+  matchTags={topic.matchTags}
+/>

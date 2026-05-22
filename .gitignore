@@ -1,25 +1,27 @@
-*.gem
-.bundle
-.sass-cache
-_site
-Gemfile.lock
-*.code-workspace
-.jekyll-cache/
-.jekyll-metadata
-.docker-metadata
+# build output
+dist/
 
-# Devenv
-.devenv*
-devenv.local.nix
+# generated types
+.astro/
 
-# direnv
-.direnv
-
-# pre-commit
-.pre-commit-config.yaml
-
-# node
+# dependencies
 node_modules/
 
-# Mac bullshit
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
 .DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# pagefind
+public/pagefind

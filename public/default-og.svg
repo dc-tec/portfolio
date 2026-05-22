@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Roel de Cort</title>
+  <desc id="desc">Technical field notes on platform engineering, OpenBao, Kubernetes, GitLab, infrastructure automation, and open-source security tooling.</desc>
+  <rect width="1200" height="630" fill="#24273a"/>
+  <path d="M96 118h1008M96 512h1008" stroke="#494d64" stroke-width="2"/>
+  <text x="96" y="210" fill="#cad3f5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="72" font-weight="700">Roel de Cort</text>
+  <text x="96" y="284" fill="#f5a97f" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="30">technical portfolio / field notes</text>
+  <text x="96" y="368" fill="#b8c0e0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="28">Platform engineering · OpenBao · Kubernetes · GitLab</text>
+  <text x="96" y="414" fill="#b8c0e0" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="28">Infrastructure automation · Security · Virtualization</text>
+  <text x="96" y="548" fill="#a5adcb" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="24">decort.tech</text>
+</svg>
