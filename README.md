@@ -36,12 +36,22 @@ Build and preview the static site:
 
 ```bash
 pnpm build
+pnpm check:links
 pnpm local:start:preview
+```
+
+Run the same local quality gate as CI:
+
+```bash
+pnpm check
 ```
 
 ## Deployment
 
 The site deploys from `main` using `.github/workflows/deploy.yml`. Configure GitHub Pages with **GitHub Actions** as the source.
+
+Pull requests run `.github/workflows/ci.yml`, which checks linting, formatting, the production build, and internal links in `dist/`.
+Dependency updates are proposed weekly by Dependabot for pnpm packages and GitHub Actions.
 
 `public/CNAME` currently contains:
 

@@ -10,6 +10,7 @@ on:
       - edited
       - synchronize
       - reopened
+  workflow_dispatch:
   workflow_call:
 
 jobs:
@@ -44,3 +45,6 @@ jobs:
 
       - name: Build the project
         run: pnpm run build
+
+      - name: Check internal links
+        run: pnpm run check:links
