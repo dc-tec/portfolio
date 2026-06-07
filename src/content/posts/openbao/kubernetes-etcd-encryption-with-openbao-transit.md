@@ -1,7 +1,8 @@
 ---
 title: "Kubernetes Etcd Encryption With OpenBao Transit"
 description: "A practical walkthrough of Kubernetes envelope encryption, KMS v2 providers, and a runnable kind lab using OpenBao Transit."
-pubDatetime: 2026-06-07T10:00:00Z
+pubDatetime: 2026-06-07T00:00:00Z
+featured: true
 draft: false
 tags:
   - openbao
